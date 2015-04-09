@@ -100,13 +100,16 @@
          contextName = ":HistoryViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "user!.MemberID">
+            </PersistentString>
+            <PersistentString
+               value = "currentInfo">
+            </PersistentString>
+            <PersistentString
                value = "dele.isLogin ">
             </PersistentString>
             <PersistentString
                value = "user">
-            </PersistentString>
-            <PersistentString
-               value = "user!.MemberID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -160,6 +163,12 @@
       <ContextState
          contextName = ":movieDetailController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "currentInfo.Title">
+            </PersistentString>
+            <PersistentString
+               value = "currentInfo">
+            </PersistentString>
             <PersistentString
                value = "currentInfo.PicURL">
             </PersistentString>
