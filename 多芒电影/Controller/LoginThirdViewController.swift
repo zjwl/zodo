@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class LoginThirdViewController: CommonViewController,DataDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     @IBOutlet weak var btnFace: UIButton!
     @IBOutlet weak var lblNickname: UILabel!

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate {
+class DuViewController: CommonViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate {
 
     @IBOutlet var uiTableView: UITableView!
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表

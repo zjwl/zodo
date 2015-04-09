@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetialKanViewController: UIViewController {
+class DetialKanViewController: CommonViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDataSource, DataDelegate {
+class QaskDetailController: CommonViewController,UITableViewDelegate, UITableViewDataSource, DataDelegate {
     var qid:Int=0
     var askList:Array<Model.QASK> = []
     

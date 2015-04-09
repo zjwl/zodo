@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailYueViewController: UIViewController {
+class DetailYueViewController: CommonViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

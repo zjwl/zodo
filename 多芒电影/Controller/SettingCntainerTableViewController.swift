@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingCntainerTableViewController: UITableViewController,UIAlertViewDelegate,DataDelegate {
+class SettingCntainerTableViewController: CommonViewController,UITableViewController,UIAlertViewDelegate,DataDelegate {
 
     @IBOutlet var uiTableView: UITableView!
     override func viewDidLoad() {

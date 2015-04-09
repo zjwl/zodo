@@ -8,7 +8,7 @@
 
 import Foundation
 
-class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
+class movieDetailController: CommonViewController,UIWebViewDelegate,DataDelegate {
     
     
     @IBOutlet weak var mainContrainer: UIScrollView!

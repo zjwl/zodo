@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate {
+class HistoryViewController: CommonViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate {
 
     @IBOutlet var uiTableView: UITableView!
     var basicList:Array<Model.History> = [] //影片信息列表

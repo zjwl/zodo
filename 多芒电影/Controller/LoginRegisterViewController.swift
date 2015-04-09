@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginRegisterViewController: UIViewController,DataDelegate,UITextFieldDelegate{
+class LoginRegisterViewController: CommonViewController,DataDelegate,UITextFieldDelegate{
 
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!

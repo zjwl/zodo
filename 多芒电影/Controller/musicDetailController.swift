@@ -8,7 +8,7 @@
 
 import Foundation
 
-class musicDetailController:  UIViewController, UITableViewDelegate, UITableViewDataSource,DataDelegate {
+class musicDetailController:  CommonViewController, UITableViewDelegate, UITableViewDataSource,DataDelegate {
     @IBOutlet weak var mainContrainer: UIScrollView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var titleLbl: UILabel!

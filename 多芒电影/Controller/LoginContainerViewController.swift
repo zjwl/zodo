@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginContainViewController: UITableViewController {
+class LoginContainViewController: CommonViewController,UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

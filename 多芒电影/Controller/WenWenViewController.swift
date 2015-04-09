@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
+class WenWenViewController: CommonViewController,DataDelegate,UITextViewDelegate {
     var qid:Int?
     var uid:Int?
     var sourceid:Int=0

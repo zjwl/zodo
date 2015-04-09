@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class WanViewController: CommonViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var uiTableView: UITableView!
     var basicList:Array<Model.Game> = [] //影片信息列表
