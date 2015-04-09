@@ -11,17 +11,20 @@ import UIKit
 class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewProtocol{
     var imageName : String?
     var imageViewContent : UIImageView = UIImageView()
+    var titleLbl:UILabel=UILabel()
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.lightGrayColor()
         contentView.addSubview(imageViewContent)
+        contentView.addSubview(titleLbl)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageViewContent.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
+        imageViewContent.frame = CGRectMake(0, 0, frame.size.width, frame.size.height-25)
+        titleLbl.frame=CGRectMake(0,frame.height-25,frame.width,25)
+        titleLbl.font=UIFont(name: "ArialUnicodeMS", size: 13)
         self.imageViewContent.contentMode = UIViewContentMode.ScaleToFill
         //imageViewContent.image = UIImage(named: imageName!)
         println(imageName!)
@@ -33,8 +36,8 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
                 self.imageViewContent.image = image
                 
             }
-            
         }
+        
     }
     
     func snapShotForTransition() -> UIView! {
