@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = ":KanViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentTitle">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":DuViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentContent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":BaseAccess.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "singleResult">
+            </PersistentString>
+            <PersistentString
+               value = "mechodName">
+            </PersistentString>
+            <PersistentString
+               value = "parser">
+            </PersistentString>
+            <PersistentString
+               value = "soapMessage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":musicDetailController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.titlelbl.text">
+            </PersistentString>
+            <PersistentString
+               value = "titleLbl">
+            </PersistentString>
+            <PersistentString
+               value = "currentInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":ypDetailController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "content">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.backgroundColor">
+            </PersistentString>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "theTitle">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":HeJiSecondViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "descLbl.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":TingViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "refreshControl">
+            </PersistentString>
+            <PersistentString
+               value = "currentInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":HistoryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+            <PersistentString
+               value = "dele.isLogin ">
+            </PersistentString>
+            <PersistentString
+               value = "user!.MemberID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":CollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user!.MemberID">
+            </PersistentString>
+            <PersistentString
+               value = "cell.titlelbl">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
+            </PersistentString>
+            <PersistentString
+               value = "basicList">
+            </PersistentString>
+            <PersistentString
+               value = "dele.isLogin">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":NTHorizontalPageViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.imageView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":WoDeHuDongController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.uiTableView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":movieDetailController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentInfo.PicURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":WenWenViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "contentTextField">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":WenViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "askList">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "(cell! as daJiaShuoCellCode).replyIcon">
+            </PersistentString>
+            <PersistentString
+               value = "title_segment">
+            </PersistentString>
+            <PersistentString
+               value = "askList.count">
+            </PersistentString>
+            <PersistentString
+               value = "cell.replyBtn">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":GetQASKInfo.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataDelegate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":SettingCntainerTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
