@@ -93,7 +93,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         self.footerHeight = 0.0
         self.columnCount = 3
         self.minimumInteritemSpacing = 10
-        self.minimumColumnSpacing = 10
+        self.minimumColumnSpacing = 5
         self.sectionInset = UIEdgeInsetsZero
         self.itemRenderDirection =
         CHTCollectionViewWaterfallLayoutItemRenderDirection.CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst

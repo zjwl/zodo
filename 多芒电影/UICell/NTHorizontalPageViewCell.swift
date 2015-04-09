@@ -51,8 +51,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
     override init(frame: CGRect) {
         super.init(frame: frame)
         container.delegate = self
-        var gesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("doSaveImage"))
-        imageHodler.addGestureRecognizer(gesture)
+        
         downloadBt.addTarget(self, action: "doSaveImage", forControlEvents: UIControlEvents.TouchUpInside)
         self.container.addSubview(imageHodler)
         self.container.addSubview(self.titlelbl)
@@ -129,6 +128,10 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
                 }
                 self.imageHodler.addSubview(imageview)
                 self.container.contentSize = CGSizeMake(screenWidth, imageview.frame.height+190)
+                
+                var gesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("doSaveImage"))
+                gesture.minimumPressDuration=2
+                self.imageHodler.addGestureRecognizer(gesture)
             }
             
         }
