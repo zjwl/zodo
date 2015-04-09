@@ -22,12 +22,12 @@ class musicItem: UIView{
         colors.append(UIColor(red: 126/255, green: 114/255, blue: 100/255, alpha: 1))
         colors.append(UIColor(red: 246/255, green: 89/255, blue: 58/255, alpha: 1))
         
-        var bg:UIView = UIView(frame: CGRectMake(0, 0, frame.width-30, frame.width-30))
+        var bg:UIView = UIView(frame: CGRectMake(0, 0, frame.width-7.5, frame.width-7.5))
         image = UIImageView(frame: CGRectMake(0, 0, bg.frame.width, bg.frame.width))
         bg.addSubview(image!)
-        lbl = UILabel(frame: CGRectMake(0, bg.frame.width+5, bg.frame.width, 20))
+        lbl = UILabel(frame: CGRectMake(0, bg.frame.width, bg.frame.width, 25))
         lbl?.textAlignment = NSTextAlignment.Center
-        
+        lbl?.font=UIFont(name: "ArialUnicodeMS", size: 13)
         image!.layer.masksToBounds = true
         image!.layer.cornerRadius = image!.bounds.size.height / 2
         

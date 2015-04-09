@@ -34,7 +34,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         let collection :UICollectionView = collectionView!;
         collection.frame = screenBounds
         collection.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
-        collection.backgroundColor = UIColor.grayColor()
+        collection.backgroundColor = UIColor.yellowColor()
         collection.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
         //collection.reloadData()
         refreshData()
@@ -49,13 +49,14 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
 //        let image:UIImage! = UIImage(named: self.imageNameList[indexPath.row] as NSString)
 //        let imageHeight = image.size.height*gridWidth/image.size.width
-        return CGSizeMake(gridWidth, gridWidth*4/3)
+        return CGSizeMake(gridWidth, gridWidth*5/3)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as NTWaterfallViewCell
         //collectionCell.imageName = self.imageNameList[indexPath.row]
         collectionCell.imageName = self.basicList[indexPath.row].PicURL
+        collectionCell.titleLbl.text = self.basicList[indexPath.row].Title
         collectionCell.setNeedsLayout()
         return collectionCell;
     }
