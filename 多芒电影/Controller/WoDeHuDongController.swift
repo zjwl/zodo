@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WoDeHuDongController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
+class WoDeHuDongController: CommonViewController ,UITableViewDelegate, UITableViewDataSource {
     var tempAskList_L0:Array<Model.QASK> = []
     var askList:Array<Model.QASK> = []
     //重组后的数据，用于不同Cell的输出，及调整cell高度

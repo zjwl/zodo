@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class YiViewController: CommonViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var uiTableView: UITableView!
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表

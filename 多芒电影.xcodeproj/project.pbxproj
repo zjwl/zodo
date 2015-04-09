@@ -101,6 +101,7 @@
 		A97A25C61A8E043C0008CB92 /* LoginThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A25C51A8E043C0008CB92 /* LoginThirdViewController.swift */; };
 		A97A25C81A8E04580008CB92 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A25C71A8E04580008CB92 /* LoginRegisterViewController.swift */; };
 		A97A25CA1A8E046E0008CB92 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A25C91A8E046E0008CB92 /* CollectionViewController.swift */; };
+		A9D778DD1AD67FEA005C667A /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D778DC1AD67FEA005C667A /* CommonViewController.swift */; };
 		A9ECC84E1ABFE4D6007A3C40 /* MailConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82A1ABFE4D6007A3C40 /* MailConnection.framework */; };
 		A9ECC84F1ABFE4D6007A3C40 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82B1ABFE4D6007A3C40 /* QQConnection.framework */; };
 		A9ECC8501ABFE4D6007A3C40 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */; };
@@ -256,6 +257,7 @@
 		A97A25C51A8E043C0008CB92 /* LoginThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginThirdViewController.swift; path = Controller/LoginThirdViewController.swift; sourceTree = "<group>"; };
 		A97A25C71A8E04580008CB92 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginRegisterViewController.swift; path = Controller/LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		A97A25C91A8E046E0008CB92 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewController.swift; path = Controller/CollectionViewController.swift; sourceTree = "<group>"; };
+		A9D778DC1AD67FEA005C667A /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonViewController.swift; path = Controller/CommonViewController.swift; sourceTree = "<group>"; };
 		A9ECC82A1ABFE4D6007A3C40 /* MailConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MailConnection.framework; sourceTree = "<group>"; };
 		A9ECC82B1ABFE4D6007A3C40 /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 				A97A25A51A8E022D0008CB92 /* YuViewController.swift */,
 				A9F25E851ACD19D8006C88E4 /* SettingCntainerTableViewController.swift */,
 				A9F25E871ACD1C8F006C88E4 /* LoadWebViewController.swift */,
+				A9D778DC1AD67FEA005C667A /* CommonViewController.swift */,
 			);
 			name = Controler;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				A968F2FE1ABFF1AF005C2F7D /* movieDetailController.swift in Sources */,
 				A97A25BE1A8E037C0008CB92 /* DetailTingViewController.swift in Sources */,
 				A9EF58B11ACE6D0D00BB9A0B /* QaskDetailController.swift in Sources */,
+				A9D778DD1AD67FEA005C667A /* CommonViewController.swift in Sources */,
 				A97A25861A8E01260008CB92 /* DeleteVisitHistory.swift in Sources */,
 				A97A25811A8E01260008CB92 /* BaseAccess.swift in Sources */,
 				A97A25901A8E01260008CB92 /* SaveFile.swift in Sources */,

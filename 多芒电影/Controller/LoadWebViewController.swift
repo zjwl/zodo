@@ -8,13 +8,15 @@
 
 import UIKit
 
-class LoadWebViewController: UIViewController {
+class LoadWebViewController: CommonViewController {
 
     
 // @IBOutlet weak var uiWebView: UIWebView!
     var webAddress  = ""
     var titleText   = ""
     var activityIndicator : UIActivityIndicatorView!
+    var playInfoID = ""
+    var user:Model.LoginModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,9 @@ class LoadWebViewController: UIViewController {
             }
                        
             self.view.addSubview(uiWebView)
+            
+            
+            API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: playInfoID,memberid).loadData()
         }
         
         // Do any additional setup after loading the view.

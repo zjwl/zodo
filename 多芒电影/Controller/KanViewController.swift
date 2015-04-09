@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate{
+class KanViewController: CommonViewController ,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate{
     
     @IBOutlet var scwv: UIScrollView!
     @IBOutlet weak var uiTableView: UITableView!
@@ -148,7 +148,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             if item.InfoID == sender.tag {
                 loadWebController.titleText = item.Title
                 loadWebController.webAddress  = item.LinkUrl
-                API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: "\(item.InfoID)",memberid).loadData()
+                
             }
         }
         
@@ -156,11 +156,11 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func invoke(index:Int,StringResult result:String){
-        
+
     }
     //type:方法的标识（一个页面可能有多个方法回调，以此参数作为标识区分） object:返回的数据
     func invoke(type:String,object:NSObject){
-        
+
     }
     
     

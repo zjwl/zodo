@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
+class ypDetailController: CommonViewController,UIWebViewDelegate,DataDelegate {
     var colors:Array<UIColor> = []
     
     var currentInfo:Model.BasicInfo=Model.BasicInfo()

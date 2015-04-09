@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
+class LoginViewController: CommonViewController,UITextFieldDelegate,DataDelegate {
 
   
     @IBOutlet weak var lblThird: UILabel!

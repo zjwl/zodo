@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class HeJiSecondViewController: CommonViewController,UITableViewController, UITableViewDataSource, UITableViewDelegate {
     
 
     @IBOutlet weak var uiTableView: UITableView!

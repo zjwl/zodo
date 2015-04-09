@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
+class WenViewController: CommonViewController ,UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var title_segment: UISegmentedControl!
     @IBOutlet weak var uiTableView: UITableView!

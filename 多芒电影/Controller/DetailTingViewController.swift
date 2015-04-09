@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailTingViewController: UIViewController {
+class DetailTingViewController: CommonViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

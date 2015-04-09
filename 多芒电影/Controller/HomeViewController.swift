@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate {
+class HomeViewController: CommonViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate {
     
     @IBOutlet weak var uiTableView: UITableView!
     

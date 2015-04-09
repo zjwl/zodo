@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class HeJiFirstViewController: CommonViewController,UITableViewController, UITableViewDataSource, UITableViewDelegate {
     var hejiID=0
     var basicList:Array<Model.FilmAlbum> = [] //影片信息列表
     var currentInfo:Model.FilmAlbum=Model.FilmAlbum(),curPageIndex=0

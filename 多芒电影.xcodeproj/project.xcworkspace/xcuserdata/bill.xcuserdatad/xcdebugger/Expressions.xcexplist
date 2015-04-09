@@ -18,5 +18,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = ":HistoryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " user?.MemberID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

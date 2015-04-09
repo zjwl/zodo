@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
+class TingViewController:  CommonViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
     
     var collectionView : UICollectionView?  // Optional
     var screenSize : CGRect!
