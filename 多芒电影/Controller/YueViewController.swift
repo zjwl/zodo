@@ -32,7 +32,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         self.view.backgroundColor = UIColor.yellowColor()
         
         let collection :UICollectionView = collectionView!;
-        collection.frame = screenBounds
+        collection.frame = CGRectMake(5, 5, screenWidth-10, screenHeight)
         collection.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
         collection.backgroundColor = UIColor.yellowColor()
         collection.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)

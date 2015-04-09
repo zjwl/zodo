@@ -3,16 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = ":HomeViewController.swift">
+         contextName = ":SettingCntainerTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "basicList">
-            </PersistentString>
-            <PersistentString
-               value = "currentClickModel">
-            </PersistentString>
-            <PersistentString
-               value = "tap">
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,16 +27,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":HistoryViewController.swift">
+         contextName = ":BaseAccess.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user!.MemberID">
+               value = "singleResult">
             </PersistentString>
             <PersistentString
-               value = "user">
+               value = "mechodName">
             </PersistentString>
             <PersistentString
-               value = "dele.isLogin ">
+               value = "parser">
+            </PersistentString>
+            <PersistentString
+               value = "soapMessage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -69,10 +66,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":NTHorizontalPageViewCell.swift">
+         contextName = ":ypDetailController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cell.imageView">
+               value = "content">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.backgroundColor">
+            </PersistentString>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "theTitle">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -80,30 +86,27 @@
          contextName = ":TingViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "currentInfo">
+               value = "refreshControl">
             </PersistentString>
             <PersistentString
                value = "self.view">
             </PersistentString>
             <PersistentString
-               value = "refreshControl">
+               value = "currentInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":BaseAccess.swift">
+         contextName = ":HistoryViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "singleResult">
+               value = "dele.isLogin ">
             </PersistentString>
             <PersistentString
-               value = "mechodName">
+               value = "user">
             </PersistentString>
             <PersistentString
-               value = "parser">
-            </PersistentString>
-            <PersistentString
-               value = "soapMessage">
+               value = "user!.MemberID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -114,10 +117,10 @@
                value = "user!.MemberID">
             </PersistentString>
             <PersistentString
-               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
+               value = "cell.titlelbl">
             </PersistentString>
             <PersistentString
-               value = "cell.titlelbl">
+               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
             </PersistentString>
             <PersistentString
                value = "basicList">
@@ -139,19 +142,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":ypDetailController.swift">
+         contextName = ":NTHorizontalPageViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "content">
+               value = "cell.imageView">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":NTHorizontalPageViewController.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "self.view.backgroundColor">
-            </PersistentString>
-            <PersistentString
-               value = "self.view">
-            </PersistentString>
-            <PersistentString
-               value = "theTitle">
+               value = "self.basicList[indexPath.row].PicURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -172,22 +174,36 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = ":HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "basicList">
+            </PersistentString>
+            <PersistentString
+               value = "currentClickModel">
+            </PersistentString>
+            <PersistentString
+               value = "tap">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = ":WenViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cell.replyBtn">
+               value = "(cell! as daJiaShuoCellCode).replyIcon">
             </PersistentString>
             <PersistentString
-               value = "(cell! as daJiaShuoCellCode).replyIcon">
+               value = "cell.replyBtn">
             </PersistentString>
             <PersistentString
                value = "askList">
             </PersistentString>
             <PersistentString
-               value = "askList.count">
+               value = "title_segment">
             </PersistentString>
             <PersistentString
-               value = "title_segment">
+               value = "askList.count">
             </PersistentString>
             <PersistentString
                value = "dele.user">
@@ -202,14 +218,6 @@
          <PersistentStrings>
             <PersistentString
                value = "dataDelegate">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":SettingCntainerTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
