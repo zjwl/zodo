@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate {
+class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate {
     
     @IBOutlet weak var uiTableView: UITableView!
     
@@ -125,16 +125,38 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     func playTarget(sender:UIButton){
         var loadWebController = LoadWebViewController()
         
+        var memberid = "0"
+        
+        var userDefaults = NSUserDefaults.standardUserDefaults()
+        var obj:AnyObject? = userDefaults.objectForKey("myUser")
+        
+        if obj != nil {
+            //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as NSData) as Model.LoginModel
+            if  user.MemberID != "" && user.MemberID != "0" {
+                memberid = user.MemberID
+            }
+        }
+        
         for item in basicList {
             if item.InfoID == sender.tag {
                 loadWebController.titleText = item.Title
                 loadWebController.webAddress  = item.LinkUrl
+                 API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: "\(item.InfoID)",memberid).loadData()
             }
         }
-        
+
         self.navigationController?.pushViewController(loadWebController, animated: true)
+    }
+    
+    func invoke(index:Int,StringResult result:String){
         
     }
+    //type:方法的标识（一个页面可能有多个方法回调，以此参数作为标识区分） object:返回的数据
+    func invoke(type:String,object:NSObject){
+        
+    }
+    
     
     func goDetail(tap:UITapGestureRecognizer){
         

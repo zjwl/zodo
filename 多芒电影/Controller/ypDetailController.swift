@@ -46,6 +46,7 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         webView.scrollView.scrollEnabled = false
         tempContent = currentInfo.Content.stringByReplacingOccurrencesOfString("\"/ueditor", withString: "\"http://apk.zdomo.com/ueditor", options: NSStringCompareOptions.LiteralSearch, range: nil)
         webView.delegate = self
+        API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)","0").loadData()
     }
     
     override func viewWillAppear(animated: Bool) {
