@@ -29,16 +29,28 @@ class HistoryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         uiTableView.dataSource = self
         uiTableView.delegate = self
         //uiTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
-        user = dele.user
-        if ((dele.isLogin != nil) && dele.isLogin!) {
-            islogin=true
-            refreshData()
-        }
+       refreshData()
     }
     
     
     func refreshData() {
+        
+        if user == nil {
+            var dele = UIApplication.sharedApplication().delegate as AppDelegate
+            user = dele.user
+            if user != nil && dele.isLogin != nil && dele.isLogin! {
+                islogin=true
+            }else{
+                return
+            }
+        }
+        
+        if user?.MemberID == "" || user?.MemberID == "0"  && islogin {
+            refreshControl.endRefreshing()
+            return
+        }
+        
+        
         refreshControl.endRefreshing()
         basicList = UTIL.getHistory(客户id: user!.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
         uiTableView.reloadData()
