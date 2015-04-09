@@ -169,7 +169,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     func refreshData(){
         var dele = UIApplication.sharedApplication().delegate as AppDelegate
         var uid=0
-        if !(dele.user==nil){
+        if !(dele.user==nil) && (dele.user!.MemberID.length()>0){
             uid = dele.user!.MemberID.toInt()!
         }
         if title_segment.selectedSegmentIndex == 1{

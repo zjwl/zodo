@@ -99,8 +99,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         let model: Model.BasicInfo = basicList[indexPath.row]
         // cell?.frame = CGRect(x: 0, y: 0, width: 320, height: 100)
         cell!.configureCell(model)
-        
-        var gesture = UITapGestureRecognizer(target: self, action: Selector("goDetail"))
+        cell!.tag = indexPath.row
+        var gesture = UITapGestureRecognizer(target: self, action: Selector("goDetail:"))
         cell!.addGestureRecognizer(gesture)
         
         var playBtn = cell?.playBtn
@@ -109,7 +109,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             playBtn?.tag = model.InfoID
             playBtn?.addTarget(self, action: "playTarget:", forControlEvents: UIControlEvents.TouchDown)
         }
-        cell!.tag = indexPath.row
+        
         return cell!
     }
     
@@ -136,9 +136,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
     }
     
-    func goDetail(tap:UIView){
+    func goDetail(tap:UITapGestureRecognizer){
         
-        currentClickModel = basicList[tap.tag]
+        currentClickModel = basicList[tap.view!.tag]
         var identifier="home2dy"
         switch currentClickModel!.ColumnID {
         case 1:
@@ -148,7 +148,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         case 4:
             identifier="home2yy"
         case 5:
-            identifier="home2dp"
+            identifier="home2yp"
         case 6:
             identifier="home2yp"
         default:
@@ -181,7 +181,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         default:
             var tt=32
         }
-        
+        currentClickModel=nil
     }
     
     func setTableViewHeader(){

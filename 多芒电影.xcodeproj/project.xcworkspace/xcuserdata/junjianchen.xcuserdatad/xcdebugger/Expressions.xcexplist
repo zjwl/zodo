@@ -3,6 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = ":HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "basicList">
+            </PersistentString>
+            <PersistentString
+               value = "currentClickModel">
+            </PersistentString>
+            <PersistentString
+               value = "tap">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = ":KanViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -15,6 +29,64 @@
          <PersistentStrings>
             <PersistentString
                value = "currentContent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":HistoryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user!.MemberID">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+            <PersistentString
+               value = "dele.isLogin ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":musicDetailController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.titlelbl.text">
+            </PersistentString>
+            <PersistentString
+               value = "titleLbl">
+            </PersistentString>
+            <PersistentString
+               value = "currentInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":HeJiSecondViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "descLbl.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":NTHorizontalPageViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.imageView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":TingViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentInfo">
+            </PersistentString>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "refreshControl">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,16 +108,33 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":musicDetailController.swift">
+         contextName = ":CollectionViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cell.titlelbl.text">
+               value = "user!.MemberID">
             </PersistentString>
             <PersistentString
-               value = "titleLbl">
+               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
             </PersistentString>
             <PersistentString
-               value = "currentInfo">
+               value = "cell.titlelbl">
+            </PersistentString>
+            <PersistentString
+               value = "basicList">
+            </PersistentString>
+            <PersistentString
+               value = "dele.isLogin">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":WoDeHuDongController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.uiTableView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,81 +152,6 @@
             </PersistentString>
             <PersistentString
                value = "theTitle">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":HeJiSecondViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "descLbl.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":TingViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.view">
-            </PersistentString>
-            <PersistentString
-               value = "refreshControl">
-            </PersistentString>
-            <PersistentString
-               value = "currentInfo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":HistoryViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user">
-            </PersistentString>
-            <PersistentString
-               value = "dele.isLogin ">
-            </PersistentString>
-            <PersistentString
-               value = "user!.MemberID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":CollectionViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user!.MemberID">
-            </PersistentString>
-            <PersistentString
-               value = "cell.titlelbl">
-            </PersistentString>
-            <PersistentString
-               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
-            </PersistentString>
-            <PersistentString
-               value = "basicList">
-            </PersistentString>
-            <PersistentString
-               value = "dele.isLogin">
-            </PersistentString>
-            <PersistentString
-               value = "user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":NTHorizontalPageViewCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.imageView">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":WoDeHuDongController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.uiTableView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -161,22 +175,25 @@
          contextName = ":WenViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "askList">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath.row">
+               value = "cell.replyBtn">
             </PersistentString>
             <PersistentString
                value = "(cell! as daJiaShuoCellCode).replyIcon">
             </PersistentString>
             <PersistentString
-               value = "title_segment">
+               value = "askList">
             </PersistentString>
             <PersistentString
                value = "askList.count">
             </PersistentString>
             <PersistentString
-               value = "cell.replyBtn">
+               value = "title_segment">
+            </PersistentString>
+            <PersistentString
+               value = "dele.user">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -16,6 +16,7 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     var currentPage = 0
     var isScroll = false
     var refreshControl = UIRefreshControl()
+    var currentInfo:Model.BasicInfo=Model.BasicInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,9 +76,15 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.basicInfolistView
-        println(cell.infoID)
+        currentInfo = basicList[indexPath.row]
+        self.performSegueWithIdentifier("yu2yp", sender: self)
+        
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var theSegue = segue.destinationViewController as ypDetailController
+        theSegue.currentInfo = currentInfo
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if isScroll {
             return
