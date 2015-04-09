@@ -16,6 +16,8 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     @IBOutlet weak var bg: UIView!
     @IBOutlet weak var mainContrainer: UIScrollView!
     
+    @IBOutlet weak var collect_0: UIButton!
+    @IBOutlet weak var goodTimsLbl: UILabel!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var webView: UIWebView!
     
@@ -41,7 +43,9 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         var colorIndex = random() % colors.count
         bg.backgroundColor = colors[colorIndex]
         movieTitle.text = currentInfo.Title
-        
+        if currentInfo.GoodTimes>0{
+            goodTimsLbl.text = String(currentInfo.GoodTimes)
+        }
         
         webView.scrollView.scrollEnabled = false
         tempContent = currentInfo.Content.stringByReplacingOccurrencesOfString("\"/ueditor", withString: "\"http://apk.zdomo.com/ueditor", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -175,7 +179,15 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     }
     
     func invoke(index:Int,StringResult result:String){
-    
+        if index==0 {
+            isZanIng=false
+            goodTimsLbl.text = result
+        }
+        if index==1 {
+            println("collect result is:\(result)")
+            isCollecting = false
+            collect_0.setImage(UIImage(named: "collection_white_1.png"), forState: UIControlState.Normal)
+        }
     }
     func invoke(type:String,object:NSObject){
     

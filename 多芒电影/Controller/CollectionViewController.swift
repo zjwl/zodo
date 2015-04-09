@@ -88,14 +88,48 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        //var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.basicInfolistView
        currentInfo = basicList[indexPath.row]
-        self.performSegueWithIdentifier("collectionYPsegue", sender: self)
+        
+        var identifier="cc2dy"
+        switch currentInfo.ColumnID {
+        case 1:
+            identifier="cc2dy"
+        case 2:
+            identifier="cc2yp"
+        case 4:
+            identifier="cc2yy"
+        case 5:
+            identifier="cc2yp"
+        case 6:
+            identifier="cc2yp"
+        default:
+            identifier="cc2yp"
+        }
+        self.performSegueWithIdentifier(identifier, sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as ypDetailController
-        theSegue.currentInfo = currentInfo
+        
+        switch currentInfo.ColumnID {
+        case 1:
+            var theSegue = segue.destinationViewController as movieDetailController
+            theSegue.currentInfo = currentInfo
+        case 2:
+            var theSegue = segue.destinationViewController as ypDetailController
+            theSegue.currentInfo = currentInfo
+        case 4:
+            var theSegue = segue.destinationViewController as musicDetailController
+            theSegue.currentInfo = currentInfo
+        case 5:
+            var theSegue = segue.destinationViewController as ypDetailController
+            theSegue.currentInfo = currentInfo
+        case 6:
+            var theSegue = segue.destinationViewController as ypDetailController
+            theSegue.currentInfo = currentInfo
+        default:
+            var tt=32
+        }
+        
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

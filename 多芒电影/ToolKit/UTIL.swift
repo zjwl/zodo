@@ -11,6 +11,7 @@ import Foundation
 struct UTIL {
     
     static let  webJsonUrl = "http://apk.zdomo.com/api/"
+    static let domain = "http://apk.zdomo.com"
 
     static func getJsonData(link:String) -> AnyObject {
         var tmpL = link + "&witch=\(arc4random_uniform(1000))"
@@ -73,7 +74,7 @@ struct UTIL {
             
             basic.ColumnID = dict["ColumnID"] as Int
             basic.InfoID = dict["InfoID"] as Int
-            basic.PicURL =  "http://apk.zdomo.com"+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -153,7 +154,7 @@ struct UTIL {
             
             basic.ColumnID = dict["ColumnID"] as Int
             basic.InfoID = dict["InfoID"] as Int
-            basic.PicURL =  (dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -231,7 +232,7 @@ struct UTIL {
         
         basic.ColumnID = dict["ColumnID"] as Int
         basic.InfoID = dict["InfoID"] as Int
-        basic.PicURL =  "http://apk.zdomo.com"+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
         basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
         basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
         basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -295,7 +296,7 @@ struct UTIL {
             
             history.ColumnID = dict["ColumnID"] as Int
             history.InfoID = dict["InfoID"] as Int
-            history.PicURL =  (dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             history.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             history.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
             history.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")

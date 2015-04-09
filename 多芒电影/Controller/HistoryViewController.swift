@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate {
+class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate {
 
     @IBOutlet var uiTableView: UITableView!
     var basicList:Array<Model.History> = [] //影片信息列表
@@ -18,6 +18,7 @@ class HistoryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     var refreshControl = UIRefreshControl()
     var user:Model.LoginModel?
     var islogin=false
+    var currentInfo:Model.BasicInfo=Model.BasicInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,11 +94,15 @@ class HistoryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        //var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.basicInfolistView
-        println("click on \(indexPath)")
-        //historyMovieDetailSegue
-        self.performSegueWithIdentifier("historyMovieDetailSegue", sender: self)
+        currentInfo = basicList[indexPath.row]
+        self.performSegueWithIdentifier("jl2dy", sender: self)
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var theSegue = segue.destinationViewController as movieDetailController
+        theSegue.currentInfo = currentInfo
+        
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if isScroll {
             return
