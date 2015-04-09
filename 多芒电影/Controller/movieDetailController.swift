@@ -77,6 +77,9 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
                 
             }
         }
+        
+       API().exec(self, invokeIndex: 10, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)","0").loadData()
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -137,11 +140,25 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         
     }
     @IBAction func playAction(sender: AnyObject) {
+        
         var loadWebController = LoadWebViewController()
-        loadWebController.titleText = currentInfo.Title
-        loadWebController.webAddress  =  currentInfo.LinkUrl
+        var userDefaults = NSUserDefaults.standardUserDefaults()
+        var obj:AnyObject? = userDefaults.objectForKey("myUser")
+        if obj != nil {
+            //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as NSData) as Model.LoginModel
+            if  user.MemberID != "" && user.MemberID != "0" {
+                loadWebController.titleText = currentInfo.Title
+                loadWebController.webAddress  =  currentInfo.LinkUrl
+                API().exec(self, invokeIndex: 10, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)",user.MemberID).loadData()
+            }
+        }
+
         self.navigationController?.pushViewController(loadWebController, animated: true)
     }
+    
+    
+    
     @IBAction func collectionAction(sender: AnyObject) {
         var dele = UIApplication.sharedApplication().delegate as AppDelegate
         var user=dele.user
