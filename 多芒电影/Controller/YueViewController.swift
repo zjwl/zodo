@@ -12,7 +12,7 @@ let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
 
 
-class YueViewController:CommonViewController,UICollectionViewController,CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol{
+class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol{
     //    class var sharedInstance: NSInteger = 0 Are u kidding me?
     //var imageNameList : Array <NSString> = []
     

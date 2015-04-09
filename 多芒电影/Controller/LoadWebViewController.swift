@@ -16,7 +16,6 @@ class LoadWebViewController: CommonViewController {
     var titleText   = ""
     var activityIndicator : UIActivityIndicatorView!
     var playInfoID = ""
-    var user:Model.LoginModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

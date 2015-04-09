@@ -257,25 +257,25 @@ extension UIControl{
         
         override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            view = UIView(frame: CGRect(x: 100, y: 5, width: screenWidth-110, height: 100))
+            view = UIView(frame: CGRect(x: 100, y: 5, width: screenWidth-110, height: 133))
            // view.backgroundColor = UIColor.brownColor()
             
-            Title = UILabel(frame: CGRect(x: 5, y: 0, width: view.frame.width-10, height: 35))
+            Title = UILabel(frame: CGRect(x: 5, y: 30, width: view.frame.width-10, height: 35))
             Title.backgroundColor = UIColor.clearColor()
             Title.numberOfLines = 2
             Title.textColor = UIColor.whiteColor()
-            Title.font = UIFont.systemFontOfSize(13)
+            //Title.font = UIFont.systemFontOfSize(13)
             view.addSubview(Title)
-            
+        /*
             Description = UILabel(frame: CGRect(x: 5, y: 35,width: view.frame.width-10, height: 60))
             Description.numberOfLines = 4
             Description.font = UIFont.systemFontOfSize(11)
             Description.textColor = UIColor.whiteColor()
             view.addSubview(Description)
-            
+           */
             self.contentView.addSubview(view)
             
-            basicPicView = UIImageView(frame: CGRect(x: 10, y: 5, width: 85, height: 100))
+            basicPicView = UIImageView(frame: CGRect(x: 10, y: 5, width: 100, height: 133))
             basicPicView.contentMode = UIViewContentMode.ScaleToFill
             self.contentView.addSubview(basicPicView)
             
