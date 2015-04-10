@@ -90,31 +90,28 @@ extension UIControl{
         var index               :Int = 0
         var view                :UIView!
         
-        var colorArray:Array<UIColor> = [UIColor.grayColor(),UIColor.purpleColor(),UIColor.redColor(),UIColor.magentaColor(),UIColor.blackColor(),UIColor.blueColor(),UIColor.darkGrayColor(),UIColor.orangeColor(),UIColor.brownColor()]
+         var colorArray:Array<UIColor> = [ UIColor(red: 51.0 / 255.0, green: 170 / 255.0, blue: 138 / 255.0, alpha: 1.0),UIColor(red: 72.0 / 255.0, green: 147 / 255.0, blue: 205 / 255.0, alpha: 1.0),UIColor(red: 237.0 / 255.0, green: 126 / 255.0, blue: 1107 / 255.0, alpha: 1.0),UIColor(red: 230.0 / 255.0, green: 171 / 255.0, blue: 41 / 255.0, alpha: 1.0),UIColor(red: 161.0 / 255.0, green: 88 / 255.0, blue: 205 / 255.0, alpha: 1.0),UIColor(red: 116.0 / 255.0, green: 170 / 255.0, blue: 24 / 255.0, alpha: 1.0),UIColor(red: 126.0 / 255.0, green: 114 / 255.0, blue: 100 / 255.0, alpha: 1.0),UIColor(red: 246.0 / 255.0, green: 89 / 255.0, blue: 58 / 255.0, alpha: 1.0)]
         
 
         
         
         override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            view = UIView(frame: CGRect(x: 215, y: 5, width: screenWidth-220, height: 85))
-            //view.backgroundColor = UIColor.grayColor()
             
-            Title = UILabel(frame: CGRect(x: 5, y: 5, width: view.frame.width-10, height: 80))
-            Title.backgroundColor = UIColor.clearColor()
-            Title.numberOfLines = 4
-            Title.textColor = UIColor.whiteColor()
-            Title.font = UIFont.systemFontOfSize(11)
-            view.addSubview(Title)
-            
-            
-            self.contentView.addSubview(view)
-            
-            basicPicView = UIImageView(frame: CGRect(x: 5, y: 5, width: 210, height: 85))
+            basicPicView = UIImageView(frame: CGRect(x: 5, y: 5, width: screenWidth - 10, height: 133))
             basicPicView.contentMode = UIViewContentMode.ScaleToFill
             self.contentView.addSubview(basicPicView)
             
+            view = UIView(frame: CGRect(x: 5, y: 138, width: screenWidth - 10, height: 27))
+            //view.backgroundColor = UIColor.grayColor()
             
+            Title = UILabel(frame: view.bounds)
+            Title.backgroundColor = UIColor.clearColor()
+            Title.numberOfLines = 1
+            Title.textColor = UIColor.whiteColor()
+           // Title.font = UIFont.systemFontOfSize(11)
+            view.addSubview(Title)
+            self.contentView.addSubview(view)
             
         }
         
@@ -244,7 +241,7 @@ extension UIControl{
 
     
     class duInfoListView: UITableViewCell {
-        var Description     : UILabel!
+      //  var Description     : UILabel!
         var Title               : UILabel!
         var basicPicView        : UIImageView!
         var infoID              :Int = 0
@@ -252,34 +249,35 @@ extension UIControl{
         var roundV              :UInt32 = arc4random_uniform(10)
         var view                :UIView!
         
-        var colorArray:Array<UIColor> = [UIColor.grayColor(),UIColor.purpleColor(),UIColor.redColor(),UIColor.magentaColor(),UIColor.blackColor(),UIColor.blueColor(),UIColor.darkGrayColor(),UIColor.orangeColor(),UIColor.brownColor()]
-
+        
+        var colorArray:Array<UIColor> = [ UIColor(red: 51.0 / 255.0, green: 170 / 255.0, blue: 138 / 255.0, alpha: 1.0),UIColor(red: 72.0 / 255.0, green: 147 / 255.0, blue: 205 / 255.0, alpha: 1.0),UIColor(red: 237.0 / 255.0, green: 126 / 255.0, blue: 1107 / 255.0, alpha: 1.0),UIColor(red: 230.0 / 255.0, green: 171 / 255.0, blue: 41 / 255.0, alpha: 1.0),UIColor(red: 161.0 / 255.0, green: 88 / 255.0, blue: 205 / 255.0, alpha: 1.0),UIColor(red: 116.0 / 255.0, green: 170 / 255.0, blue: 24 / 255.0, alpha: 1.0),UIColor(red: 126.0 / 255.0, green: 114 / 255.0, blue: 100 / 255.0, alpha: 1.0),UIColor(red: 246.0 / 255.0, green: 89 / 255.0, blue: 58 / 255.0, alpha: 1.0)]
         
         override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            view = UIView(frame: CGRect(x: 100, y: 5, width: screenWidth-110, height: 100))
-           // view.backgroundColor = UIColor.brownColor()
+            view = UIView(frame: CGRect(x: 106, y: 5, width: screenWidth-111, height: 133))
+            // view.backgroundColor = UIColor.brownColor()
             
-            Title = UILabel(frame: CGRect(x: 5, y: 0, width: view.frame.width-10, height: 35))
+            Title = UILabel(frame: CGRect(x: 10, y: 0, width: view.frame.width-20, height: 133))
             Title.backgroundColor = UIColor.clearColor()
-            Title.numberOfLines = 2
+            Title.numberOfLines = 4
+            Title.alignmentRectForFrame(view.frame)
             Title.textColor = UIColor.whiteColor()
-            Title.font = UIFont.systemFontOfSize(13)
+            //Title.font = UIFont.systemFontOfSize(13)
             view.addSubview(Title)
-            
+            /*
             Description = UILabel(frame: CGRect(x: 5, y: 35,width: view.frame.width-10, height: 60))
             Description.numberOfLines = 4
             Description.font = UIFont.systemFontOfSize(11)
             Description.textColor = UIColor.whiteColor()
             view.addSubview(Description)
-            
+            */
             self.contentView.addSubview(view)
             
-            basicPicView = UIImageView(frame: CGRect(x: 10, y: 5, width: 85, height: 100))
+            basicPicView = UIImageView(frame: CGRect(x: 5, y: 5, width: 101, height: 133))
             basicPicView.contentMode = UIViewContentMode.ScaleToFill
             self.contentView.addSubview(basicPicView)
             
-
+            
             
         }
         
@@ -293,8 +291,8 @@ extension UIControl{
                 
                 var color = colorArray[ (Int(roundV) + index) % colorArray.count]
                 view.backgroundColor = color
- 
-                Description.text = model.Content.removeHtml().trim().stringByReplacingOccurrencesOfString("&nbsp;", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch)
+                
+             //   Description.text = model.Content.removeHtml().trim().stringByReplacingOccurrencesOfString("&nbsp;", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch)
                 Title.text = model.Introduction
                 if model.Introduction.isEmpty {
                     Title.text = model.Title
@@ -311,7 +309,7 @@ extension UIControl{
                 PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSize(width: 92, height: 133), contentMode: UIViewContentMode.ScaleToFill) { (image) -> Void in
                     //use image
                     if !(image == nil) {
-                     //   var timage = UTIL.squareImageFromImage(image!, scaledToSize: 70, isScale: true)
+                        //   var timage = UTIL.squareImageFromImage(image!, scaledToSize: 70, isScale: true)
                         self.basicPicView.image = image
                     }
                     
@@ -319,7 +317,7 @@ extension UIControl{
                 
             }
         }
-
+        
     }
     
     class basicInfolistView : UITableViewCell {
