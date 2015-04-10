@@ -107,7 +107,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         var playBtn = cell?.playBtn
         
         if (playBtn?.hidden != true) {
-            playBtn?.tag = model.InfoID
+            playBtn?.tag = indexPath.row
             playBtn?.addTarget(self, action: "playTarget:", forControlEvents: UIControlEvents.TouchDown)
         }
         
@@ -139,13 +139,10 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             }
         }
         
-        for item in basicList {
-            if item.InfoID == sender.tag {
-                loadWebController.titleText = item.Title
-                loadWebController.webAddress  = item.LinkUrl
-                 API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: "\(item.InfoID)",memberid).loadData()
-            }
-        }
+        var item = basicList[sender.tag]
+        loadWebController.titleText = item.Title
+        loadWebController.webAddress  = item.LinkUrl
+        API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
 
         self.navigationController?.pushViewController(loadWebController, animated: true)
     }

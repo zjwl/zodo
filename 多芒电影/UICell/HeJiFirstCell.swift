@@ -16,11 +16,11 @@ class HeJiFirstCell: UITableViewCell {
         
         container=UIView(frame:CGRectMake(0,0,screenWidth,200))
         cell=UIView(frame:CGRectMake(5,5,screenWidth-10,190))
-        cell?.backgroundColor=UIColor.grayColor()
         titleView=UIView(frame: CGRectMake(0, 150, cell!.frame.width, 40))
         imgLeft=UIImageView(frame: CGRectMake(10, 10, 35, 20))
         imgLeft?.image=UIImage(named: "album.png")
         titleLbl=UILabel(frame: CGRectMake(50, 0, cell!.frame.width-50, 40))
+        titleLbl?.textColor=UIColor.whiteColor()
         titleView?.backgroundColor=UIColor.greenColor()
         imgView=UIImageView()
         imgView?.frame=CGRectMake(0, 0, cell!.frame.width, 150)

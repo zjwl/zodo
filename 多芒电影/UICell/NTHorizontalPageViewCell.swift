@@ -38,7 +38,6 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
     var title : String?
     var container:UIScrollView = UIScrollView(frame: CGRectMake(0, navigationHeight-20, screenWidth, screenHeight))
     var titlelbl:UILabel = UILabel()
-    var downloadBt:UIButton = UIButton()
     var imageHodler:UIView = UIView()
     var pullAction : ((offset : CGPoint) -> Void)?
     var tappedAction : (() -> Void)?
@@ -52,11 +51,12 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
         super.init(frame: frame)
         container.delegate = self
         
-        downloadBt.addTarget(self, action: "doSaveImage", forControlEvents: UIControlEvents.TouchUpInside)
         self.container.addSubview(imageHodler)
         self.container.addSubview(self.titlelbl)
-        self.container.addSubview(self.downloadBt)
         self.contentView.addSubview(self.container)
+        
+        var gesture:UIGestureRecognizer=UILongPressGestureRecognizer(target: self, action: Selector("doSaveImage"))
+        self.container.addGestureRecognizer(gesture)
     }
     
     func doSaveImage(){
@@ -108,7 +108,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
     }
     
     func configCell(){
-        backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.yellowColor()
         
         var imgURL = NSURL(string: imageName!)
         PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (returnImage) -> Void in
@@ -119,19 +119,13 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
                 self.titlelbl.frame = CGRectMake(0, imageview.frame.height, screenWidth, 40)
                 self.titlelbl.text = self.title
                 self.titlelbl.textAlignment = NSTextAlignment.Center
-                self.titlelbl.backgroundColor = UIColor.grayColor()
-                self.downloadBt.frame = CGRectMake((screenWidth-screenWidth/3)/2, imageview.frame.height+40, screenWidth/3, 30)
-                self.downloadBt.setTitle("保存到相册", forState: UIControlState.Normal)
-                self.downloadBt.backgroundColor = UIColor.redColor()
                 for item in self.imageHodler.subviews{
                     item.removeFromSuperview()
                 }
                 self.imageHodler.addSubview(imageview)
-                self.container.contentSize = CGSizeMake(screenWidth, imageview.frame.height+190)
+                self.container.contentSize = CGSizeMake(screenWidth, imageview.frame.height+150)
                 
-                var gesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("doSaveImage"))
-                gesture.minimumPressDuration=2
-                self.imageHodler.addGestureRecognizer(gesture)
+                
             }
             
         }

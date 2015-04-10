@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, DataDelegate {
     
 
     @IBOutlet weak var uiTableView: UITableView!
@@ -40,7 +40,7 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         titleLbl.frame.size =  title_size
         titleLbl.numberOfLines=0
         departV.backgroundColor=UIColor.whiteColor()
-        
+        titleLbl.textColor=UIColor.whiteColor()
         
         var colorIndex = random() % colors.count
         
@@ -54,6 +54,8 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         titleLbl.text = self.titleString
         descLbl.text = self.descString
         descLbl.textAlignment = NSTextAlignment.Left
+        descLbl.textColor=UIColor.whiteColor()
+        descLbl.font = UIFont(name: "ArialUnicodeMS", size: 15)
         
         var headerView=UIView(frame: CGRectMake(0, 0, uiTableView.frame.width, departV.frame.height+descLbl.frame.height+30))
         headerView.backgroundColor = colors[colorIndex]
@@ -99,16 +101,57 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         cell!.displayLabel = false
         cell!.displayLink = true
         cell!.configureCell(model)
+        var playBtn = cell?.playBtn
         
+        if (playBtn?.hidden != true) {
+            playBtn?.tag = indexPath.row
+            playBtn?.addTarget(self, action: "playTarget:", forControlEvents: UIControlEvents.TouchDown)
+        }
         return cell!
     }
 
+    func playTarget(sender:UIButton){
+        var loadWebController = LoadWebViewController()
+        
+        var memberid = "0"
+        
+        var userDefaults = NSUserDefaults.standardUserDefaults()
+        var obj:AnyObject? = userDefaults.objectForKey("myUser")
+        
+        if obj != nil {
+            //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
+            if  user.MemberID != "" && user.MemberID != "0" {
+                memberid = user.MemberID
+            }
+        }
+        var item = basicList[sender.tag]
+        loadWebController.titleText = item.Title
+        loadWebController.webAddress  = item.LinkUrl
+        API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
+        
+        self.navigationController?.pushViewController(loadWebController, animated: true)
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
         return 100
     }
     
-    func goDetail(tap:UITapGestureRecognizer){
-        println("id is: \(tap.view?.tag)")
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        currentInfo = basicList[indexPath.row]
+        self.performSegueWithIdentifier("hj2dy", sender: self)
+        //println(cell.infoID)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var theSegue = segue.destinationViewController as! movieDetailController
+        theSegue.currentInfo = currentInfo
+    }
+    
+    func invoke(index:Int,StringResult result:String){
+    
+    }
+    func invoke(type:String,object:NSObject){
+    
     }
     
     /*
