@@ -20,6 +20,11 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         self.setBasicValue()
        self.checkLogin()
         // Do any additional setup after loading the view.
+
+        //self.navigationController?.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.title = "我的账户"
+        
     }
 
     override func didReceiveMemoryWarning() {

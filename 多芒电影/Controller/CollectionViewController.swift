@@ -32,20 +32,50 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         
         uiTableView.dataSource = self
         uiTableView.delegate = self
-        refreshData()
- 
         
+        println("viewDidLoad")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+         refreshData()
+         println("viewWillAppear")
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        println("viewDidDisappear")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        println("viewWillDisappear")
     }
     
     
+    
+    
     func refreshData() {
+        
+         var noData = UILabel(frame: self.view.bounds)
         
         refreshControl.endRefreshing()
         if user.IsLogin {
             basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             uiTableView.reloadData()
+            noData.hidden = true
+            uiTableView.hidden = false
+        } else {
+            uiTableView.hidden = true
+            
+            noData.text = "您未登录或尚未收藏信息"
+            noData.textAlignment = NSTextAlignment.Center
+            noData.alignmentRectForFrame(self.view.bounds)
+            noData.backgroundColor = UIColor.whiteColor()
+            self.view.addSubview(noData)
         }
     }
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
