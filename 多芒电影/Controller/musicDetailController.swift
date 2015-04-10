@@ -49,7 +49,16 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
         
         titleLbl.text = currentInfo.Title
         
-        
+        //判断是否已赞，及设置赞次数
+        if isBasicInfoZaned(currentInfo.InfoID) {
+            goodTimsLbl.text = String(currentInfo.GoodTimes+1)
+        }else if currentInfo.GoodTimes>0{
+            goodTimsLbl.text = String(currentInfo.GoodTimes)
+        }
+        //判断是否已收藏，及设置收藏 icon
+        if isBasicInfoCollected(currentInfo.InfoID) {
+            collect_0.setImage(UIImage(named: "collection_color_1.png"), forState: UIControlState.Normal)
+        }
         
         
         movieImageView.layer.masksToBounds = true
@@ -136,7 +145,11 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
         if user != nil {
             if !isCollecting {
                 isCollecting=true
-                API().exec(self, invokeIndex: 1, invokeType: "", methodName: "InsertCollection", params: String(currentInfo.InfoID),user!.MemberID).loadData()
+                if isBasicInfoCollected(currentInfo.InfoID) {
+                    API().exec(self, invokeIndex: 2, invokeType: "", methodName: "DeleteCollection", params: String(currentInfo.InfoID),user!.MemberID).loadData()
+                }else{
+                    API().exec(self, invokeIndex: 1, invokeType: "", methodName: "InsertCollection", params: String(currentInfo.InfoID),user!.MemberID).loadData()
+                }
             }
         }else{
             showAlert()
@@ -187,12 +200,18 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
         if index==0 {
             goodTimsLbl.text = String(currentInfo.GoodTimes+1)
             saveBasicZanInfoToLocal(currentInfo.InfoID)
-        }
-        if index==1 {
-            println("collect result is:\(result)")
+        } else if index==1 {
+            //添加收藏
             isCollecting = false
-            collect_0.setImage(UIImage(named: "collection_white_1.png"), forState: UIControlState.Normal)
+            collect_0.setImage(UIImage(named: "collection_color_1.png"), forState: UIControlState.Normal)
+            saveBasicCollectionInfoToLocal(currentInfo.InfoID)
+        } else if index==2 {
+            //取消收藏
+            isCollecting = false
+            collect_0.setImage(UIImage(named: "collection_color_0.png"), forState: UIControlState.Normal)
+            deleteBasicCollectionInfoToLocal(currentInfo.InfoID)
         }
+        
     }
     func invoke(type:String,object:NSObject){
         
