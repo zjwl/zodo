@@ -28,19 +28,32 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         uiTableView.dataSource = self
         uiTableView.delegate = self
         //uiTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-       refreshData()
+       
     }
     
+    override func viewWillAppear(animated: Bool) {
+           refreshData()
+    }
     
     func refreshData() {
+        var noData = UILabel(frame: self.view.bounds)
         refreshControl.endRefreshing()
-        
         if user.IsLogin {
             basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             uiTableView.reloadData()
+            noData.hidden = true
+            uiTableView.hidden = false
+        } else {
+            uiTableView.hidden = true
+            noData.text = "您未登录或尚未点播影视节目"
+            noData.textAlignment = NSTextAlignment.Center
+            noData.alignmentRectForFrame(self.view.bounds)
+            noData.backgroundColor = UIColor.whiteColor()
+            self.view.addSubview(noData)
         }
     }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

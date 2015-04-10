@@ -58,9 +58,13 @@ extension UIViewController{
             
             if obj != nil {
                 //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
-                self.user.IsLogin = true
-                return NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
-                
+               var user1 = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
+                if user1.MemberID != "" && user1.MemberID != "0" {
+                    user1.IsLogin = true
+                }else {
+                    user1.IsLogin = false
+                }
+               return user1
             }else {
                 return Model.LoginModel()
             }

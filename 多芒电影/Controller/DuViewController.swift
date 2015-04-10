@@ -72,7 +72,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 105
+        return 138
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
