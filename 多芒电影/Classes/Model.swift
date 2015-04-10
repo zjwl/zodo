@@ -114,6 +114,7 @@ extension Model{
         var IsActivation:String = ""
         var registrationTime:String = ""
         var LastVisitTime:String = ""
+        var IsLogin = false
         
         func encodeWithCoder(aCoder: NSCoder){
             aCoder.encodeObject(self.MemberID, forKey: "MemberID")
@@ -147,7 +148,6 @@ extension Model{
             self.IsActivation = aDecoder.decodeObjectForKey("IsActivation") as! String
             self.registrationTime = aDecoder.decodeObjectForKey("registrationTime") as! String
             self.LastVisitTime = aDecoder.decodeObjectForKey("LastVisitTime") as! String
-            
         }
     }
     

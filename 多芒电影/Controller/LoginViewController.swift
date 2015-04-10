@@ -20,7 +20,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtZhanhu: UITextField!
-    var isLogin = false
+
     //let  loginVieControl = LoginThirdViewController()
   
     override func viewDidLoad() {
@@ -33,8 +33,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        if dele.isLogin != nil && dele.isLogin == true {
+       
+        if  user.IsLogin  {
             self.performSegueWithIdentifier("UILoginMember", sender: self)
             //self.navigationController?.pushViewController(loginVieControl , animated: true)
             
@@ -76,7 +76,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
             alert.message = "您输入账号或密码不正确，不能登录！"
             alert.addButtonWithTitle("Ok")
             alert.show()
-            isLogin = false
             return
         }
    
@@ -93,15 +92,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         user.Identity = user.Identity.trim()
         user.registrationTime = user.registrationTime.trim()
         user.LastVisitTime = user.LastVisitTime.trim()
+        user.IsLogin = true
         
         var userDeFaults = NSUserDefaults.standardUserDefaults()
         userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: "myUser")
-        
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        dele.user = user
-        dele.isLogin = true
-        
-        isLogin = true
 
         self.performSegueWithIdentifier("UILoginMember", sender: self)
         
@@ -152,9 +146,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         var userDeFaults = NSUserDefaults.standardUserDefaults()
         userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: "myUser")
         
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        dele.user = user
-        dele.isLogin = true
         
        self.performSegueWithIdentifier("UILoginMember", sender: self)
        // self.navigationController?.pushViewController(loginVieControl, animated: true)

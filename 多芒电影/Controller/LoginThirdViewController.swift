@@ -12,17 +12,12 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
 
     @IBOutlet weak var btnFace: UIButton!
     @IBOutlet weak var lblNickname: UILabel!
-    var user:Model.LoginModel?
     var imageView:UIImageView?
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        user = dele.user
-
-       self.setBasicValue()
+       super.viewDidLoad()
+        self.setBasicValue()
        self.checkLogin()
         // Do any additional setup after loading the view.
     }
@@ -34,16 +29,12 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     
     
     @IBAction func logoutTapped(sender: AnyObject) {
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        user = Model.LoginModel()
-        user?.MemberID = ""
-        dele.user = nil
-        dele.isLogin = false
+       
         ShareSDK.cancelAuthWithType(ShareTypeSinaWeibo)
         ShareSDK.cancelAuthWithType(ShareTypeQQSpace)
         
         var userDeFaults = NSUserDefaults.standardUserDefaults()
-        userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user!), forKey: "myUser")
+        userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(Model.LoginModel()), forKey: "myUser")
         
         self.tabBarItem.image = UIImage(named: "login")
         self.tabBarController!.selectedViewController?.tabBarItem.title  = "登录"
@@ -52,11 +43,12 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     }
     
     func checkLogin(){
-        if user != nil  && user?.MemberID == "" {
-            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "GetUserID", params: user!.Identity,user!.NickName.trim()).loadData()
-        } else if user != nil && user?.MemberID != "" {
+        if user.IsLogin {
+            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "GetUserID", params: user.Identity,user.NickName.trim()).loadData()
+        }else {
             btnFace.addTarget(self, action: Selector("addPicEvent"), forControlEvents: UIControlEvents.TouchDown)
         }
+
     }
     
     
@@ -91,7 +83,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
                 self.dismissViewControllerAnimated(true, completion: nil)
                 self.tabBarItem.image = timage
                 var Imgdata = UIImagePNGRepresentation(timage)
-                API().exec(self, invokeIndex: 0, methodName: "SaveFile", params:Imgdata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength),String(Imgdata.length),"\(user!.MemberID).jpg").loadData()
+                API().exec(self, invokeIndex: 0, methodName: "SaveFile", params:Imgdata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength),String(Imgdata.length),"\(user.MemberID).jpg").loadData()
             }
         }
     }
@@ -118,7 +110,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         self.btnFace.addSubview(self.imageView!)
         self.dismissViewControllerAnimated(true, completion: nil)
         var Imgdata = UIImagePNGRepresentation(timage)
-        API().exec(self, invokeIndex: 0, methodName: "SaveFile", params:Imgdata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength),String(Imgdata.length),"\(user!.MemberID).jpg").loadData()      
+        API().exec(self, invokeIndex: 0, methodName: "SaveFile", params:Imgdata.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength),String(Imgdata.length),"\(user.MemberID).jpg").loadData()
         
     }
     
@@ -128,8 +120,8 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         switch index {
         case 0:
             var memberID = result
-            user?.MemberID = memberID
-             API().exec(self, invokeIndex:1, invokeType: "", methodName: "UpdateUserInfo", params: user!.MemberID,user!.NickName,user!.UserName,user!.Password,user!.WhereFrom,user!.Mail,user!.Identity,user!.HeadPhotoURL,user!.IsUsed,user!.IsActivation,user!.registrationTime,user!.LastVisitTime).loadData()
+            user.MemberID = memberID
+             API().exec(self, invokeIndex:1, invokeType: "", methodName: "UpdateUserInfo", params: user.MemberID,user.NickName,user.UserName,user.Password,user.WhereFrom,user.Mail,user.Identity,user.HeadPhotoURL,user.IsUsed,user.IsActivation,user.registrationTime,user.LastVisitTime).loadData()
         default:
             println("i am here")
         }
@@ -147,8 +139,8 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     
     func setBasicValue() {
       
-        self.lblNickname.text = user!.NickName
-        var icon = user!.HeadPhotoURL.trim().length()>10 ? user!.HeadPhotoURL : "http://apk.zdomo.com/ueditor/net/upload/face/0.jpg"
+        self.lblNickname.text = user.NickName
+        var icon = user.HeadPhotoURL.trim().length()>10 ? user.HeadPhotoURL : "http://apk.zdomo.com/ueditor/net/upload/face/0.jpg"
         var imgURL = NSURL(string: icon)
         imageView = UIImageView(frame: btnFace.bounds)
         btnFace.layer.masksToBounds = true

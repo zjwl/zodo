@@ -56,10 +56,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     override func viewWillAppear(animated: Bool) {
         if !isSetNickName {
-            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-            if dele.isLogin != nil && dele.isLogin == true {
+           if user.IsLogin {
                 self.tabBarController?.selectedIndex = 2
-                self.tabBarController!.selectedViewController?.tabBarItem.title = dele.user?.NickName
+                self.tabBarController!.selectedViewController?.tabBarItem.title = user.NickName
                 self.tabBarController?.selectedIndex = 0
             }
             isSetNickName = true
