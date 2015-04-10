@@ -19,7 +19,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         user = dele.user
 
        self.setBasicValue()
@@ -32,20 +32,11 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         // Dispose of any resources that can be recreated.
     }
     
-
-    func checkLogin(){
-        if user != nil  && user?.MemberID == "" {
-            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "GetUserID", params: user!.Identity,user!.NickName.trim()).loadData()
-        } else if user != nil && user?.MemberID != "" {
-            btnFace.addTarget(self, action: Selector("addPicEvent"), forControlEvents: UIControlEvents.TouchDown)
-        }
-    }
-    
     
     @IBAction func logoutTapped(sender: AnyObject) {
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         user = Model.LoginModel()
-        user?.MemberID=""
+        user?.MemberID = ""
         dele.user = nil
         dele.isLogin = false
         ShareSDK.cancelAuthWithType(ShareTypeSinaWeibo)
@@ -60,6 +51,13 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
        
     }
     
+    func checkLogin(){
+        if user != nil  && user?.MemberID == "" {
+            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "GetUserID", params: user!.Identity,user!.NickName.trim()).loadData()
+        } else if user != nil && user?.MemberID != "" {
+            btnFace.addTarget(self, action: Selector("addPicEvent"), forControlEvents: UIControlEvents.TouchDown)
+        }
+    }
     
     
     
@@ -83,7 +81,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         var image:UIImage
         for item in info {
             if item.0 == UIImagePickerControllerOriginalImage {
-                image = item.1 as UIImage
+                image = item.1 as! UIImage
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 
                 var timage = UTIL.squareImageFromImage(image, scaledToSize: 70, isScale: true)
@@ -113,7 +111,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         var timage = UTIL.squareImageFromImage(image!, scaledToSize: 70, isScale: true)
         self.imageView!.image = timage
         self.tabBarItem.image = timage

@@ -85,7 +85,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
             
             var okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.Default) {
                 (action: UIAlertAction!) -> Void in
-                var login = alertController.textFields?.first as UITextField
+                var login = alertController.textFields?.first as! UITextField
                 API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "SendFeedBack", params:login.text).loadData()
             }
             

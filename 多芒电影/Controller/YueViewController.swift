@@ -53,7 +53,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as NTWaterfallViewCell
+        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as! NTWaterfallViewCell
         //collectionCell.imageName = self.imageNameList[indexPath.row]
         collectionCell.imageName = self.basicList[indexPath.row].PicURL
         collectionCell.titleLbl.text = self.basicList[indexPath.row].Title

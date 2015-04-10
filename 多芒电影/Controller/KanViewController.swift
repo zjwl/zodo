@@ -138,7 +138,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         
         if obj != nil {
             //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
-            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as NSData) as Model.LoginModel
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
             if  user.MemberID != "" && user.MemberID != "0" {
                 memberid = user.MemberID
             }
@@ -223,7 +223,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.basicInfolistView
+        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as! UIControl.basicInfolistView
         println(cell.infoID)
         currentInfo = basicList[indexPath.row]
         
@@ -231,7 +231,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         //println(cell.infoID)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as movieDetailController
+        var theSegue = segue.destinationViewController as! movieDetailController
         
         theSegue.currentInfo = currentInfo
     }

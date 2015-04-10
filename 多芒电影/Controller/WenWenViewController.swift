@@ -28,7 +28,7 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
         var btnSpace:UIBarButtonItem=UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
         var doneButton:UIBarButtonItem=UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: Selector("dismissKeyBoard"))
         var buttonsArray:NSArray=NSArray(objects: btnSpace,doneButton)
-        topBar.setItems(buttonsArray, animated: false)
+        topBar.setItems(buttonsArray as [AnyObject], animated: false)
         contentTextField.inputAccessoryView=topBar
         
     }

@@ -56,7 +56,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     override func viewWillAppear(animated: Bool) {
         if !isSetNickName {
-            var dele = UIApplication.sharedApplication().delegate as AppDelegate
+            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
             if dele.isLogin != nil && dele.isLogin == true {
                 self.tabBarController?.selectedIndex = 2
                 self.tabBarController!.selectedViewController?.tabBarItem.title = dele.user?.NickName
@@ -118,7 +118,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.basicInfolistView
+        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as! UIControl.basicInfolistView
         
     }
     
@@ -132,7 +132,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         if obj != nil {
             //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
-            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as NSData) as Model.LoginModel
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
             if  user.MemberID != "" && user.MemberID != "0" {
                 memberid = user.MemberID
             }
@@ -186,19 +186,19 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         }
         switch currentClickModel!.ColumnID {
         case 1:
-            var theSegue = segue.destinationViewController as movieDetailController
+            var theSegue = segue.destinationViewController as! movieDetailController
             theSegue.currentInfo = currentClickModel!
         case 2:
-            var theSegue = segue.destinationViewController as ypDetailController
+            var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentClickModel!
         case 4:
-            var theSegue = segue.destinationViewController as musicDetailController
+            var theSegue = segue.destinationViewController as! musicDetailController
             theSegue.currentInfo = currentClickModel!
         case 5:
-            var theSegue = segue.destinationViewController as ypDetailController
+            var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentClickModel!
         case 6:
-            var theSegue = segue.destinationViewController as ypDetailController
+            var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentClickModel!
         default:
             var tt=32

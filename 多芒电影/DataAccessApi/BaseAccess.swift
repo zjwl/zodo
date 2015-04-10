@@ -41,7 +41,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         var theRequest = NSMutableURLRequest(URL: url!)
         
-        var msgLength = String(countElements(soapMessage))
+        var msgLength = String(count(soapMessage))
         
         theRequest.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         theRequest.addValue(msgLength, forHTTPHeaderField: "Content-Length")
@@ -130,31 +130,34 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     // NSXMLParserDelegate
     
     //not use for now
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String, qualifiedName qName: String, attributes attributeDict: NSDictionary) {
         //println("elementName:"+elementName)
     }
     
+    
+    
+    
     //all the same
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    func parser(parser: NSXMLParser, foundCharacters string: String?) {
         println("foundCharacters:\(string)")
-        currentValue = string
+        currentValue = string!
     }
     //to be override
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
     }
     
-    func parserDidStartDocument(parser: NSXMLParser!) {
+    func parserDidStartDocument(parser: NSXMLParser) {
         println("Beginnnn....")
     }
     
     //can be override
-    func parserDidEndDocument(parser: NSXMLParser!) {
+    func parserDidEndDocument(parser: NSXMLParser) {
         println("Endding...")
         dataDelegate.invoke(index, StringResult: singleResult)
         
     }
     //all the same
-    func parser(parser: NSXMLParser!, parseErrorOccurred parseError: NSError!) {
+    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
         println(parseError.description)
     }
 }

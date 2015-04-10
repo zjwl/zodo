@@ -64,7 +64,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         movieImageView.layer.masksToBounds = true
         movieImageView.layer.cornerRadius = movieImageView.bounds.size.height / 2
         movieImageView.layer.backgroundColor = UIColor.whiteColor().CGColor
-        if currentInfo.PicURL.length()>0 && ((currentInfo.PicURL as NSString).containsString("http")){
+        if currentInfo.PicURL.length()>0 && ((currentInfo.PicURL as  NSString).containsString("http")){
             var imgURL = NSURL(string: currentInfo.PicURL)
             PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
                 //use image
@@ -154,7 +154,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         var obj:AnyObject? = userDefaults.objectForKey("myUser")
         if obj != nil {
             //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
-            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as NSData) as Model.LoginModel
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
             if  user.MemberID != "" && user.MemberID != "0" {
                 loadWebController.titleText = currentInfo.Title
                 loadWebController.webAddress  =  currentInfo.LinkUrl
@@ -168,7 +168,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     
     
     @IBAction func collectionAction(sender: AnyObject) {
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         var user=dele.user
         if user != nil {
             if !isCollecting {

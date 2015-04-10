@@ -20,19 +20,19 @@ class GetQASKInfo: BaseAccess {
     }
     
     
-    override func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: NSDictionary!) {
+    override func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String, qualifiedName qName: String, attributes attributeDict: NSDictionary) {
         curElementName = elementName
     }
-    override func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    override func parser(parser: NSXMLParser, foundCharacters string: String!) {
         //println("foundCharacters in Override:\(string)")
         currentValue = string
         if curElementName=="Content" {
-            content = content+currentValue
+            content = content + (currentValue as String)
         }
     }
     
     // override
-    override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    override func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String!, qualifiedName qName: String!) {
         if elementName=="QaskWithMember"{
             qaskList.append(model)
             model = Model.QASK()
@@ -50,7 +50,7 @@ class GetQASKInfo: BaseAccess {
         
     }
     // override
-    override func parserDidEndDocument(parser: NSXMLParser!) {
+    override func parserDidEndDocument(parser: NSXMLParser) {
         dataDelegate.invoke("qaskList",object: qaskList)
     }
 }

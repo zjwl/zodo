@@ -36,7 +36,7 @@ class LoadWebViewController: UIViewController {
                 var request  = NSURLRequest(URL: url!)
                 var path = NSBundle.mainBundle().bundlePath
                 var baseURL = NSURL.fileURLWithPath(path)
-                uiWebView.loadHTMLString(htmlstring, baseURL:baseURL)
+                uiWebView.loadHTMLString(htmlstring?.stringByAppendingString(""), baseURL:baseURL)
             } else {
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))

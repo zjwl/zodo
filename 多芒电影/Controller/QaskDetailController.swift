@@ -87,14 +87,14 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
     func invoke(type:String,object:NSObject){
         println("askList.count:\(askList.count)")
         
-        askList = object as Array<Model.QASK>
+        askList = object as! Array<Model.QASK>
         refreshControl.endRefreshing()
         
         uiTableView.reloadData()
     }
     
     func goWenWenPageFromXbs(tap:UITapGestureRecognizer){
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         if ((dele.isLogin != nil) && dele.isLogin!) {
             self.performSegueWithIdentifier("wenwenFromDetail", sender: self)
         }else{
@@ -113,8 +113,8 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as WenWenViewController
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var theSegue = segue.destinationViewController as! WenWenViewController
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         var user=dele.user
         if user != nil {
             theSegue.uid = user!.MemberID.toInt()

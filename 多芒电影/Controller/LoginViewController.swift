@@ -33,7 +33,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         if dele.isLogin != nil && dele.isLogin == true {
             self.performSegueWithIdentifier("UILoginMember", sender: self)
             //self.navigationController?.pushViewController(loginVieControl , animated: true)
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     //type:方法的标识（一个页面可能有多个方法回调，以此参数作为标识区分） object:返回的数据
     func invoke(type: String, object: NSObject) {
         
-        var user = object as Model.LoginModel
+        var user = object as! Model.LoginModel
         
      
         if user.MemberID == "0"   {
@@ -97,7 +97,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         var userDeFaults = NSUserDefaults.standardUserDefaults()
         userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: "myUser")
         
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         dele.user = user
         dele.isLogin = true
         
@@ -152,7 +152,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         var userDeFaults = NSUserDefaults.standardUserDefaults()
         userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: "myUser")
         
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         dele.user = user
         dele.isLogin = true
         

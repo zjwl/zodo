@@ -34,7 +34,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         uiTableView.dataSource = self
         uiTableView.delegate = self
         
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         user = dele.user
         if ((dele.isLogin != nil) && dele.isLogin!) {
             islogin = true
@@ -66,10 +66,10 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         let collectionCellIdentifier: String = "collectionCell"
         var cell: CollectionAndHistoryCell?
         var cellTmp: AnyObject? = tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)
-        if cellTmp==nil {
+        if cellTmp == nil {
             cell = CollectionAndHistoryCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: collectionCellIdentifier)
         }else {
-            cell = (cellTmp as CollectionAndHistoryCell)
+            cell = ( cellTmp as! CollectionAndHistoryCell)
         }
         
        // var cell: CollectionAndHistoryCell = tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier) as CollectionAndHistoryCell
@@ -112,19 +112,19 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         
         switch currentInfo.ColumnID {
         case 1:
-            var theSegue = segue.destinationViewController as movieDetailController
+            var theSegue = segue.destinationViewController as! movieDetailController
             theSegue.currentInfo = currentInfo
         case 2:
-            var theSegue = segue.destinationViewController as ypDetailController
+            var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentInfo
         case 4:
-            var theSegue = segue.destinationViewController as musicDetailController
+            var theSegue = segue.destinationViewController as! musicDetailController
             theSegue.currentInfo = currentInfo
         case 5:
-            var theSegue = segue.destinationViewController as ypDetailController
+            var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentInfo
         case 6:
-            var theSegue = segue.destinationViewController as ypDetailController
+            var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentInfo
         default:
             var tt=32

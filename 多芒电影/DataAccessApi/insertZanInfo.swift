@@ -15,9 +15,9 @@ class insertZanInfo: BaseAccess {
     // NSXMLParserDelegate
     
     // override
-    override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    override func parser(parser: NSXMLParser!, didEndElement elementName: String, namespaceURI: String, qualifiedName qName: String) {
         if elementName=="insertZanInfoResult"{
-            singleResult = currentValue
+            singleResult = currentValue as String
         }
     }
 }

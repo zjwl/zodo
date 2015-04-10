@@ -36,7 +36,7 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var identifier="hejiFirstItem"
-        var cell: HeJiFirstCell? = tableView.dequeueReusableCellWithIdentifier(identifier) as HeJiFirstCell?
+        var cell: HeJiFirstCell? = tableView.dequeueReusableCellWithIdentifier(identifier) as! HeJiFirstCell?
         if cell==nil {
             cell = HeJiFirstCell(style: UITableViewCellStyle.Default, reuseIdentifier: identifier)
         }
@@ -76,7 +76,7 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as HeJiSecondViewController
+        var theSegue = segue.destinationViewController as! HeJiSecondViewController
         theSegue.hejiID=currentInfo.FilmAlbumID
         theSegue.titleString=currentInfo.Title
         theSegue.descString=currentInfo.Description

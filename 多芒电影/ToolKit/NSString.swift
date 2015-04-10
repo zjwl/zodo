@@ -11,11 +11,11 @@ extension NSString {
         var textSize:CGSize!
         if CGSizeEqualToSize(size, CGSizeZero) {
             let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
-            textSize = self.sizeWithAttributes(attributes)
+            textSize = self.sizeWithAttributes(attributes as [NSObject : AnyObject])
         } else {
             let option = NSStringDrawingOptions.UsesLineFragmentOrigin
             let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
-            let stringRect = self.boundingRectWithSize(size, options: option, attributes: attributes, context: nil)
+            let stringRect = self.boundingRectWithSize(size, options: option, attributes: attributes as [NSObject : AnyObject], context: nil)
             textSize = stringRect.size
         }
         return textSize

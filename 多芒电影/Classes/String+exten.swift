@@ -55,11 +55,11 @@ extension String{
     }
     //统计长度
     func length()->Int{
-        return countElements(self)
+        return count(self)
     }
     //统计长度(别名)
     func size()->Int{
-        return countElements(self)
+        return count(self)
     }
     
     //重复字符串
