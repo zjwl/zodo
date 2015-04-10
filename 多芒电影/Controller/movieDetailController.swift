@@ -21,6 +21,9 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     @IBOutlet weak var bgImg: UIImageView!
     @IBOutlet weak var descView: UIView!
     @IBOutlet weak var descTitleLbl: UILabel!
+    @IBOutlet weak var goodTimsLbl: UILabel!
+    @IBOutlet weak var collect_0: UIButton!
+    
     var descHeight:CGFloat=0
     var isZanIng:Bool=false,isCollecting=false
     
@@ -50,7 +53,12 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         webView.scrollView.scrollEnabled = false
         tempContent = currentInfo.Content.stringByReplacingOccurrencesOfString("\"/ueditor", withString: "\"http://apk.zdomo.com/ueditor", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
-        
+        //判断是否已赞，及设置赞次数
+        if isBasicInfoZaned(currentInfo.InfoID) {
+            goodTimsLbl.text = String(currentInfo.GoodTimes+1)
+        }else if currentInfo.GoodTimes>0{
+            goodTimsLbl.text = String(currentInfo.GoodTimes)
+        }
         
         //movieImageView.image=
         movieImageView.layer.masksToBounds = true
@@ -194,34 +202,18 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     }
     
     @IBAction func shareFunc(sender: AnyObject) {
-      
+        
         //构造分享内容
-        var publishContent = ShareSDK.content(currentInfo.Introduction, defaultContent: currentInfo.Introduction, image:ShareSDK.imageWithUrl(currentInfo.PicURL), title: currentInfo.Title, url:"http://apk.zdomo.com/frontpage/?id=\(currentInfo.InfoID)", description: currentInfo.Content, mediaType: SSPublishContentMediaTypeNews)
+        basicShareFunc(currentInfo)
         
-        
-        ShareSDK.showShareActionSheet(nil, shareList: nil, content: publishContent, statusBarTips: true, authOptions: nil, shareOptions: nil, result: { (shareType:ShareType, state:SSResponseState, info:ISSPlatformShareInfo!, error:ICMErrorInfo!, Bool) -> Void in
-            if state.value == SSResponseStateSuccess.value  {
-                NSLog("分享成功");
-            } else if state.value == SSPublishContentStateFail.value {
-                NSLog("分享失败,错误码:%d,错误描述:%@",error.errorCode(),error.errorDescription())
-            }})
     }
     
     @IBAction func goodFunc(sender: AnyObject) {
         println("good")
-        var userDefault = NSUserDefaults.standardUserDefaults()
-        var zanCollection:NSString? = userDefault.stringForKey("baseInfoZanCollection")
         
-        
-        
-        if !(zanCollection==nil){
-            var str:String=","+String(currentInfo.InfoID)+","
-            var isContains=zanCollection!.containsString(str)
-            if isContains {
-                UIAlertView(title: "", message: "已赞", delegate: nil, cancelButtonTitle: "确定").show()
-                
-                return
-            }
+        if isBasicInfoZaned(currentInfo.InfoID) {
+            UIAlertView(title: "", message: "已赞", delegate: nil, cancelButtonTitle: "确定").show()
+            return
         }
         
         if !isZanIng {
@@ -231,28 +223,18 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     }
     
     func invoke(index:Int,StringResult result:String){
-        switch index{
-        case 0:
-            isZanIng=false
-            //write to database
-            var userDefault = NSUserDefaults.standardUserDefaults()
-            var zanCollection:String? = userDefault.stringForKey("baseInfoZanCollection")
-            if zanCollection==nil{
-                userDefault.setValue(","+String(currentInfo.InfoID)+",", forKey: "baseInfoZanCollection")
-            }else{
-                userDefault.setValue(zanCollection!+String(currentInfo.InfoID)+",", forKey: "baseInfoZanCollection")
-            }
-            UIAlertView(title: "", message: "已赞", delegate: nil, cancelButtonTitle: "确定").show()
-        case 1:
-            println("collection action result is\(result)")
-            isCollecting=false
-            UIAlertView(title: "", message: "已收藏", delegate: nil, cancelButtonTitle: "确定").show()
-        default:
-            var t = 3
+        if index==0 {
+            goodTimsLbl.text = String(currentInfo.GoodTimes+1)
+            saveBasicZanInfoToLocal(currentInfo.InfoID)
+        }
+        if index==1 {
+            println("collect result is:\(result)")
+            isCollecting = false
+            collect_0.setImage(UIImage(named: "collection_white_1.png"), forState: UIControlState.Normal)
         }
     }
     func invoke(type:String,object:NSObject){
-    
+        
     }
     
 }
