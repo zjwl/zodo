@@ -130,11 +130,9 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     // NSXMLParserDelegate
     
     //not use for now
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String, qualifiedName qName: String, attributes attributeDict: NSDictionary) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]){
         //println("elementName:"+elementName)
     }
-    
-    
     
     
     //all the same

@@ -20,7 +20,7 @@ class GetQASKInfo: BaseAccess {
     }
     
     
-    override func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String, qualifiedName qName: String, attributes attributeDict: NSDictionary) {
+    override func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         curElementName = elementName
     }
     override func parser(parser: NSXMLParser, foundCharacters string: String!) {
