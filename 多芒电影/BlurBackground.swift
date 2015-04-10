@@ -42,7 +42,7 @@ class BlurBackground: UIView {
             self.BlurContentView!.clipsToBounds = true;
             self.addSubview(BlurContentView!)
             
-            let vibrancy = UIVibrancyEffect(forBlurEffect: blurView.effect as UIBlurEffect)
+            let vibrancy = UIVibrancyEffect(forBlurEffect: blurView.effect as! UIBlurEffect)
             let vibrancyView = UIVisualEffectView(effect: vibrancy)
             vibrancyView.frame = blurView.bounds
             vibrancyView.autoresizingMask = .FlexibleWidth | .FlexibleHeight

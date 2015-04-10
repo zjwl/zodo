@@ -78,7 +78,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         
         
         let TAG_CELL_LABEL = 1
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as musicCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as! musicCollectionViewCell
         
         var item:musicItem? = cell.contentView.viewWithTag(TAG_CELL_LABEL) as? musicItem
         if item == nil {
@@ -119,7 +119,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as musicDetailController
+        var theSegue = segue.destinationViewController as! musicDetailController
         //
         
         theSegue.currentInfo = currentInfo

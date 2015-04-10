@@ -16,8 +16,11 @@ class musicPlayItem: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-    override init(frame: CGRect) {
+    init(frame: CGRect) {
+        
         super.init(frame:frame)
+        
+        
         titlelbl = UILabel(frame:CGRectMake(10,10,screenWidth-60,20))
         playIcon = UIButton(frame:CGRectMake(titlelbl!.frame.width+10,10,20,20))
         playIcon?.setImage(UIImage(named: "music_listen.png"), forState: UIControlState.Normal)

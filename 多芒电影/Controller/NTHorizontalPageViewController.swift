@@ -39,7 +39,7 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as NTHorizontalPageViewCell
+        var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as! NTHorizontalPageViewCell
         collectionCell.parentVC = self
         collectionCell.imageName = self.basicList[indexPath.row].PicURL
         collectionCell.title = self.basicList[indexPath.row].Title

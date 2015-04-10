@@ -93,7 +93,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.wanInfoListView
+        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as! UIControl.wanInfoListView
         //println(cell.infoID)
         //currentInfo = basicList[indexPath.row]
         UIApplication.sharedApplication().openURL(NSURL(string: cell.address)!)

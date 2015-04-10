@@ -83,7 +83,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
         //println(cell.infoID)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as ypDetailController
+        var theSegue = segue.destinationViewController as! ypDetailController
         theSegue.currentInfo = currentInfo
     }
     

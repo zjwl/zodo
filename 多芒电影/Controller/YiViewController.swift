@@ -98,7 +98,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as UIControl.basicInfolistView
+        var cell = uiTableView.cellForRowAtIndexPath(indexPath) as! UIControl.basicInfolistView
         println(cell.infoID)
         currentInfo = basicList[indexPath.row]
         
@@ -106,7 +106,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         //println(cell.infoID)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as movieDetailController
+        var theSegue = segue.destinationViewController as! movieDetailController
         
         theSegue.currentInfo = currentInfo
     }

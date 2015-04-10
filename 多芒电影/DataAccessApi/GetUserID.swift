@@ -17,7 +17,7 @@ class GetUserID: BaseAccess{
     // override
     override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
         if elementName=="GetUserIDResult"{
-            singleResult = currentValue
+            singleResult = currentValue as String
         }
     }
 }

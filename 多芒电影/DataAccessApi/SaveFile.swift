@@ -27,7 +27,7 @@ class SaveFile: BaseAccess {
         
         var theRequest = NSMutableURLRequest(URL: url!)
         
-        var msgLength = String(countElements(soapMessage))
+        var msgLength = String(count(soapMessage))
         theRequest.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         theRequest.addValue(msgLength, forHTTPHeaderField: "Content-Length")
         theRequest.HTTPMethod = "POST"
@@ -51,7 +51,7 @@ class SaveFile: BaseAccess {
     // override
     override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
         if elementName=="SaveFileResult"{
-            singleResult = currentValue
+            singleResult = currentValue as String
         }
     }
 }

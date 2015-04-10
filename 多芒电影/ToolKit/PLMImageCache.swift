@@ -160,7 +160,7 @@ class PLMImageCache {
         var cachePath = self.pathToContainerDictionary[imagePath]
         //If the folder does not exist this means this is a new size
         if cachePath == nil {
-            cachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0].stringByAppendingPathComponent(NSString(format: "/images/resized/%0.fx%0.f", width, height))
+            cachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0].stringByAppendingPathComponent(NSString(format: "/images/resized/%0.fx%0.f", width, height) as String)
             
             self.ensureDirectoryAtPath(cachePath!)
             self.pathToContainerDictionary[imagePath] = cachePath
@@ -226,6 +226,6 @@ extension String {
             hash.appendFormat("%02x", result[i])
         }
         result.destroy()
-        return String(format: hash)
+        return String(format: hash as String)
     }
 }

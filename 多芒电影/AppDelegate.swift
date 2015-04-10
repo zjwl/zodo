@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if obj != nil {
             //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
-            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as NSData) as Model.LoginModel
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
             self.user = user
         }
         

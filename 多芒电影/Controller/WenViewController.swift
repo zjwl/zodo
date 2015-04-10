@@ -38,7 +38,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "updtae thie data")
         self.uiTableView.addSubview(refreshControl)
-        tempCell = NSBundle.mainBundle().loadNibNamed("daJiaShuoCell", owner: nil, options: nil).last as daJiaShuoCellCode
+        tempCell = NSBundle.mainBundle().loadNibNamed("daJiaShuoCell", owner: nil, options: nil).last as! daJiaShuoCellCode
         
        
         
@@ -85,7 +85,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     func goWenWenPageFromDjs(tap:UITapGestureRecognizer){
         println("comein")
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         if ((dele.isLogin != nil) && dele.isLogin!) {
             println("go wenwen,sender's tag:\(tap.view!.tag)")
             toQid=tap.view!.tag
@@ -97,7 +97,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func goWenWenPageFromXbs(tap:UITapGestureRecognizer){
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         if ((dele.isLogin != nil) && dele.isLogin!) {
             println("go wenwen,sender's tag:\(tap.view!.tag)")
             toQid=tap.view!.tag
@@ -117,11 +117,11 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier=="QaskDetail" {
-            var theSegue = segue.destinationViewController as QaskDetailController
+            var theSegue = segue.destinationViewController as! QaskDetailController
             theSegue.qid = toViewQid
         }else{
-            var theSegue = segue.destinationViewController as WenWenViewController
-            var dele = UIApplication.sharedApplication().delegate as AppDelegate
+            var theSegue = segue.destinationViewController as! WenWenViewController
+            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
             var user=dele.user
             if user != nil {
                 theSegue.uid = user!.MemberID.toInt()
@@ -138,7 +138,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         else{
             self.sourceID=1
         }
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         if ((dele.isLogin != nil) && dele.isLogin!) {
             self.toQid=0
             self.performSegueWithIdentifier("wenwen", sender: self)
@@ -167,7 +167,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func refreshData(){
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         var uid=0
         if !(dele.user==nil) && (dele.user!.MemberID.length()>0){
             uid = dele.user!.MemberID.toInt()!
@@ -276,7 +276,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
                 var nib:UINib = UINib(nibName:"daJiaShuoCell", bundle: nil)
                 tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
                 //从tableview中获取标识符为papercell的cell
-                cell = (tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as daJiaShuoCellCode)
+                cell = (tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! daJiaShuoCellCode)
                 
             }
             //println("indexPath in main:\(indexPath.row)")

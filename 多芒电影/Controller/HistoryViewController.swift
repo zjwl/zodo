@@ -37,7 +37,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     func refreshData() {
         
         if user == nil {
-            var dele = UIApplication.sharedApplication().delegate as AppDelegate
+            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
             user = dele.user
             if user != nil && dele.isLogin != nil && dele.isLogin! {
                 islogin=true
@@ -75,10 +75,10 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         if cellTmp==nil {
             cell = CollectionAndHistoryCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: collectionCellIdentifier)
         }else {
-            cell = (cellTmp as CollectionAndHistoryCell)
+            cell = (cellTmp as! CollectionAndHistoryCell)
         }
         
-        // var cell: CollectionAndHistoryCell = tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier) as CollectionAndHistoryCell
+        // var cell: CollectionAndHistoryCell = tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier) as! CollectionAndHistoryCell
         
         // var cell = CollectionAndHistoryCell(frame: tableView.frame)
         let model: Model.History? = basicList[indexPath.row]
@@ -98,7 +98,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         self.performSegueWithIdentifier("jl2dy", sender: self)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as movieDetailController
+        var theSegue = segue.destinationViewController as! movieDetailController
         theSegue.currentInfo = currentInfo
         
     }

@@ -109,7 +109,7 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         
     }
     @IBAction func collectionAction(sender: AnyObject) {
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         var user=dele.user
         if user != nil {
             if !isCollecting {

@@ -28,24 +28,24 @@ struct UTIL {
     //广告接口
    static func getApiAD(广告位id adplaceid:Int,每页数量 pageSize:Int,当前页码 pageNum:Int) ->Array<Model.AD> {
         var postStrig = webJsonUrl + "apiad/getAd?adplaceid=\(adplaceid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
-    var arrayData = getJsonData(postStrig) as NSArray
+    var arrayData = getJsonData(postStrig) as! NSArray
     var adList:Array<Model.AD> = []
     for item in arrayData{
-        var dict = item as  NSDictionary
+        var dict = item as!  NSDictionary
         
         var ad = Model.AD()
         
-        ad.AD_ID = dict["AD_ID"] as Int
-        ad.Ad_Name =  (dict["Ad_Name"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        ad.Photo_URL = (dict["Photo_URL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        ad.Ad_Type = (dict["Ad_Type"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        ad.AD_PLACE_ID = dict["AD_ID"] as Int
-        ad.ManagerID = dict["AD_ID"] as Int
-        ad.Descripton = dict["AD_ID"] as Int
-        ad.IsUsed = dict["IsUsed"] as Bool
-        ad.AD_TargetAddr = (dict["AD_TargetAddr"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        ad.StartTime = (dict["StartTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        ad.EndTime = (dict["EndTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+        ad.AD_ID = dict["AD_ID"] as! Int
+        ad.Ad_Name =  (dict["Ad_Name"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        ad.Photo_URL = (dict["Photo_URL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        ad.Ad_Type = (dict["Ad_Type"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        ad.AD_PLACE_ID = dict["AD_ID"] as! Int
+        ad.ManagerID = dict["AD_ID"] as! Int
+        ad.Descripton = dict["AD_ID"] as! Int
+        ad.IsUsed = dict["IsUsed"] as! Bool
+        ad.AD_TargetAddr = (dict["AD_TargetAddr"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        ad.StartTime = (dict["StartTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        ad.EndTime = (dict["EndTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
 
         
         adList.append(ad)
@@ -65,37 +65,37 @@ struct UTIL {
     static func getLlatestUpdate(栏目id columnid:Int,特殊标签id sid:Int, 每页数量 pageSize:Int,当前页码 pageNum:Int) -> Array<Model.BasicInfo> {
         var postStrig = webJsonUrl + "apibasic?columnid=\(columnid)&pageSize=\(pageSize)&pageNum=\(pageNum)&sid=\(sid)"
         //println(postStrig)
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var basicList:Array<Model.BasicInfo> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             
             var basic = Model.BasicInfo()
             
-            basic.ColumnID = dict["ColumnID"] as Int
-            basic.InfoID = dict["InfoID"] as Int
-            basic.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.GoodTimes = dict["GoodTimes"] as Int
-            basic.Content = dict["Content"] as String!
-            basic.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.ColumnID = dict["ColumnID"] as! Int
+            basic.InfoID = dict["InfoID"] as! Int
+            basic.PicURL =  domain+(dict["PicURL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.Title = (dict["Title"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.LinkUrl = (dict["LinkUrl"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.Introduction = (dict["Introduction"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.GoodTimes = dict["GoodTimes"] as! Int
+            basic.Content = dict["Content"] as! String
+            basic.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             
 
             
             if var auditID :AnyObject = dict["AuditID"] {
-                basic.AuditID =  auditID as Int
+                basic.AuditID =  auditID as! Int
             }
             
             if var isused :AnyObject = dict["IsUsed"] {
-                basic.IsUsed =  isused as Bool
+                basic.IsUsed =  isused as! Bool
             }
 
             if var auditState :AnyObject = dict["AuditID"] {
-                basic.AuditState =  auditState as Bool
+                basic.AuditState =  auditState as! Bool
             }
 
             
@@ -113,23 +113,23 @@ struct UTIL {
    static func getBasicInfo(信息id infoid:Int)->Model.BasicInfo {
         var postStrig = webJsonUrl + "apibasic?id=\(infoid)"
     
-        var dict = getJsonData(postStrig) as NSDictionary
+        var dict = getJsonData(postStrig) as! NSDictionary
         var basic = Model.BasicInfo()
         
-        basic.ColumnID = dict["ColumnID"] as Int
-        basic.InfoID = dict["InfoID"] as Int
-        basic.PicURL =  (dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.GoodTimes = dict["GoodTimes"] as Int
-        basic.AuditID = dict["AuditID"] as Int
-        basic.IsUsed = dict["IsUsed"] as Bool
-        basic.AuditState = dict["AuditState"] as Bool
-        basic.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.ColumnID = dict["ColumnID"] as! Int
+        basic.InfoID = dict["InfoID"] as! Int
+        basic.PicURL =  (dict["PicURL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Title = (dict["Title"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.LinkUrl = (dict["LinkUrl"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Introduction = (dict["Introduction"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.GoodTimes = dict["GoodTimes"] as! Int
+        basic.AuditID = dict["AuditID"] as! Int
+        basic.IsUsed = dict["IsUsed"] as! Bool
+        basic.AuditState = dict["AuditState"] as! Bool
+        basic.Content = (dict["Content"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
     
         return basic
 
@@ -145,29 +145,29 @@ struct UTIL {
     //获取收藏列表
     static func getCollection(客户id memberid:Int,每页数量 pageSize:Int,当前页码 pageNum:Int) ->Array<Model.Collection>{
         var postStrig = webJsonUrl + "apiCollection?memberid=\(memberid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var basicList:Array<Model.Collection> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             
             var basic = Model.Collection()
             
-            basic.ColumnID = dict["ColumnID"] as Int
-            basic.InfoID = dict["InfoID"] as Int
-            basic.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.GoodTimes = dict["GoodTimes"] as Int
+            basic.ColumnID = dict["ColumnID"] as! Int
+            basic.InfoID = dict["InfoID"] as! Int
+            basic.PicURL =  domain+(dict["PicURL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.Title = (dict["Title"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.LinkUrl = (dict["LinkUrl"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.Introduction = (dict["Introduction"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.GoodTimes = dict["GoodTimes"] as! Int
             //basic.AuditID = dict["AuditID"] as Int
             //basic.IsUsed = dict["IsUsed"] as Bool
             //basic.AuditState = dict["AuditState"] as Bool
-            basic.Content = (dict["Content"] as String!)
-            basic.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            basic.CollectID = dict["CollectID"] as Int
-            var tempTime = dict["CollectTime"] as String!
+            basic.Content = (dict["Content"] as! String)
+            basic.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.CollectID = dict["CollectID"] as! Int
+            var tempTime = dict["CollectTime"] as! String
             
             var timeFormat = NSDateFormatter()
             timeFormat.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
@@ -195,22 +195,22 @@ struct UTIL {
     //获取电影合集栏目板块
     static func getFilmAlbum(每页数量 pageSize:Int,当前页码 pageNum:Int)->Array<Model.FilmAlbum>{
         var postStrig = webJsonUrl + "apiFilmAlbum?pageSize=\(pageSize)&pageNum=\(pageNum)"
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var faList:Array<Model.FilmAlbum> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             
             var filmAlbum = Model.FilmAlbum()
-            filmAlbum.FilmAlbumID = dict["FilmAlbumID"] as Int
-            filmAlbum.ManagerID = dict["ManagerID"] as Int
-            filmAlbum.ThePhoto = (dict["ThePhoto"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            filmAlbum.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            filmAlbum.Description = (dict["Description"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            filmAlbum.InfoIDS = (dict["InfoIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            filmAlbum.FilmAlbumID = dict["FilmAlbumID"] as! Int
+            filmAlbum.ManagerID = dict["ManagerID"] as! Int
+            filmAlbum.ThePhoto = (dict["ThePhoto"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            filmAlbum.Title = (dict["Title"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            filmAlbum.Description = (dict["Description"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            filmAlbum.InfoIDS = (dict["InfoIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             
-            filmAlbum.IsUsed = dict["IsUsed"] as Bool
-            filmAlbum.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            filmAlbum.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            filmAlbum.IsUsed = dict["IsUsed"] as! Bool
+            filmAlbum.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            filmAlbum.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             
             faList.append(filmAlbum)
             
@@ -223,27 +223,27 @@ struct UTIL {
     //获取电影合集具体板块明细
    static  func getFilmAlbumDetail(电影合集板块id id:Int)->Array<Model.BasicInfo> {
         var postStrig = webJsonUrl + "apiFilmAlbum?id=\(id)"
-    var arrayData = getJsonData(postStrig) as NSArray
+    var arrayData = getJsonData(postStrig) as! NSArray
     var basicList:Array<Model.BasicInfo> = []
     for item in arrayData{
-        var dict = item as  NSDictionary
+        var dict = item as!  NSDictionary
         
         var basic = Model.BasicInfo()
         
-        basic.ColumnID = dict["ColumnID"] as Int
-        basic.InfoID = dict["InfoID"] as Int
-        basic.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.GoodTimes = dict["GoodTimes"] as Int
+        basic.ColumnID = dict["ColumnID"] as! Int
+        basic.InfoID = dict["InfoID"] as! Int
+        basic.PicURL =  domain+(dict["PicURL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Title = (dict["Title"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.LinkUrl = (dict["LinkUrl"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Introduction = (dict["Introduction"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.GoodTimes = dict["GoodTimes"] as! Int
         //basic.AuditID = dict["AuditID"] as Int
         //basic.IsUsed = dict["IsUsed"] as Bool
         //basic.AuditState = dict["AuditState"] as Bool
-        basic.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Content = (dict["Content"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
         
         basicList.append(basic)
         
@@ -255,21 +255,21 @@ struct UTIL {
     //获取游戏列表
     static func getGameList(每页数量 pageSize:Int,当前页码 pageNum:Int) -> Array<Model.Game> {
         var postStrig = webJsonUrl + "apiGame/?pageSize=\(pageSize)&pageNum=\(pageNum)&type=ios"
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var gameList:Array<Model.Game> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             
             var game = Model.Game()
-            game.GameID = dict["GameID"] as Int
-            game.ManagerID = dict["ManagerID"] as Int
-            game.GameName = (dict["GameName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            game.GameAddress = (dict["GameAddress"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            game.Description = (dict["Description"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            game.IsUsed = dict["IsUsed"] as Bool
-            game.ClassName = (dict["ClassName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            game.PackageName = (dict["PackageName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            game.GamePhoto = (dict["GamePhoto"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            game.GameID = dict["GameID"] as! Int
+            game.ManagerID = dict["ManagerID"] as! Int
+            game.GameName = (dict["GameName"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            game.GameAddress = (dict["GameAddress"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            game.Description = (dict["Description"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            game.IsUsed = dict["IsUsed"] as! Bool
+            game.ClassName = (dict["ClassName"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            game.PackageName = (dict["PackageName"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            game.GamePhoto = (dict["GamePhoto"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
       
             gameList.append(game)
             
@@ -287,31 +287,31 @@ struct UTIL {
     static func getHistory(客户id memberid:Int,每页数量 pageSize:Int,当前页码 pageNum:Int)->Array<Model.History> {
         var postStrig = webJsonUrl + "apiHistory?memberid=\(memberid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
         
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var histroyList:Array<Model.History> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             
             var history = Model.History()
             
-            history.ColumnID = dict["ColumnID"] as Int
-            history.InfoID = dict["InfoID"] as Int
-            history.PicURL =  domain+(dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.SpecilLabelIDS = (dict["SpecilLabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.GoodTimes = dict["GoodTimes"] as Int
+            history.ColumnID = dict["ColumnID"] as! Int
+            history.InfoID = dict["InfoID"] as! Int
+            history.PicURL =  domain+(dict["PicURL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.Title = (dict["Title"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.LinkUrl = (dict["LinkUrl"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.Introduction = (dict["Introduction"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.SpecilLabelIDS = (dict["SpecilLabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.GoodTimes = dict["GoodTimes"] as! Int
 //            history.AuditID = dict["AuditID"] as Int
 //            history.IsUsed = dict["IsUsed"] as Bool
 //            history.AuditState = dict["AuditState"] as Bool
-            history.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            history.HistoryID = dict["HistoryID"] as Int
+            history.Content = (dict["Content"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.HistoryID = dict["HistoryID"] as! Int
             
             
-            var tempTime = dict["HistoryTime"] as String!
+            var tempTime = dict["HistoryTime"] as! String
             
             var timeFormat = NSDateFormatter()
             timeFormat.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
@@ -344,16 +344,16 @@ struct UTIL {
     static func getSpecilLabel() ->Array<Model.SpecilLabel> {
         var postStrig = webJsonUrl + "apiSpecilLabel?1=1"
         
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var slabelList:Array<Model.SpecilLabel> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             
             var slabel = Model.SpecilLabel()
-            slabel.LabelID = dict["LabelID"] as Int
-            slabel.Sort = dict["Sort"] as Int
-            slabel.LabelName = (dict["LabelName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            slabel.Description = (dict["Description"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            slabel.LabelID = dict["LabelID"] as! Int
+            slabel.Sort = dict["Sort"] as! Int
+            slabel.LabelName = (dict["LabelName"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            slabel.Description = (dict["Description"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             
             slabelList.append(slabel)
             
@@ -367,27 +367,27 @@ struct UTIL {
     //获取电影合集栏目板块明细
    static func getLLatestUpdate(特殊标签id sid:Int, 每页数量 pageSize:Int,当前页码 pageNum:Int)->Array<Model.BasicInfo> {
         var postStrig = webJsonUrl + "apiSpecilLabel?sid＝\(sid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
-    var arrayData = getJsonData(postStrig) as NSArray
+    var arrayData = getJsonData(postStrig) as! NSArray
     var basicList:Array<Model.BasicInfo> = []
     for item in arrayData{
-        var dict = item as  NSDictionary
+        var dict = item as!  NSDictionary
         var basic = Model.BasicInfo()
         
-        basic.ColumnID = dict["ColumnID"] as Int
-        basic.ReadCount = dict["ReadCount"] as Int
-        basic.InfoID = dict["InfoID"] as Int
-        basic.PicURL =  (dict["PicURL"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.Title = (dict["Title"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.LinkUrl = (dict["LinkUrl"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.Introduction = (dict["Introduction"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.GoodTimes = dict["GoodTimes"] as Int
-        basic.AuditID = dict["AuditID"] as Int
-        basic.IsUsed = dict["IsUsed"] as Bool
-        basic.AuditState = dict["AuditState"] as Bool
-        basic.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.AddTime = (dict["AddTime"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        basic.LabelIDS = (dict["LabelIDS"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.ColumnID = dict["ColumnID"] as! Int
+        basic.ReadCount = dict["ReadCount"] as! Int
+        basic.InfoID = dict["InfoID"] as! Int
+        basic.PicURL =  (dict["PicURL"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Title = (dict["Title"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.LinkUrl = (dict["LinkUrl"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Introduction = (dict["Introduction"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.SpecilLabelIDS = (dict["SpecilLabelIDS"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.GoodTimes = dict["GoodTimes"] as! Int
+        basic.AuditID = dict["AuditID"] as! Int
+        basic.IsUsed = dict["IsUsed"] as! Bool
+        basic.AuditState = dict["AuditState"] as! Bool
+        basic.Content = (dict["Content"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.AddTime = (dict["AddTime"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.LabelIDS = (dict["LabelIDS"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
         
         basicList.append(basic)
         
@@ -401,25 +401,25 @@ struct UTIL {
     //获取大家说内容
     static func getEveryoneSayList(id:Int, 每页数量 pageSize:Int,当前页码 pageNum:Int,发送者id senderid:Int) ->Array<Model.QASK>{
         var postStrig = webJsonUrl + "apiQASK?pageSize=\(pageSize)&pageNum=\(pageNum)&id=\(id)&senderid=\(senderid)"
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var qaskList:Array<Model.QASK> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             var qask = Model.QASK()
             
-            qask.QASKID = dict["QASKID"] as Int
-            qask.ManagerID = dict["ManagerID"] as Int
-            qask.SourceID = dict["SourceID"] as Int
-            qask.SenderID = dict["SenderID"] as Int
-            qask.ReplyID = dict["ReplyID"] as Int
-            qask.AuditID = dict["AuditID"] as Int
-            qask.IS_Editor = dict["IS_Editor"] as Bool
-            qask.IsUsed = dict["IsUsed"] as Bool
-            qask.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            qask.NickName = (dict["NickName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            qask.iconFace = (dict["iconFace"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.QASKID = dict["QASKID"] as! Int
+            qask.ManagerID = dict["ManagerID"] as! Int
+            qask.SourceID = dict["SourceID"] as! Int
+            qask.SenderID = dict["SenderID"] as! Int
+            qask.ReplyID = dict["ReplyID"] as! Int
+            qask.AuditID = dict["AuditID"] as! Int
+            qask.IS_Editor = dict["IS_Editor"] as! Bool
+            qask.IsUsed = dict["IsUsed"] as! Bool
+            qask.Content = (dict["Content"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.NickName = (dict["NickName"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.iconFace = (dict["iconFace"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
             
-            var tempTime = dict["AddTmie"] as String!
+            var tempTime = dict["AddTmie"] as!  String
             
             var timeFormat = NSDateFormatter()
             timeFormat.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
@@ -437,25 +437,25 @@ struct UTIL {
     //获取最新问题
    static func getQASKList(是否小编主题 isEditor:Bool,主题下显示条数 subSize:Int,每页数量 pageSize:Int,当前页码 pageNum:Int,发送者id senderid:Int) ->Array<Model.QASK>{
         var postStrig = webJsonUrl + "apiQASK?isEditor=\(isEditor)&subSize=\(subSize)&pageSize=\(pageSize)&pageNum=\(pageNum)&senderid=\(senderid)"
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var qaskList:Array<Model.QASK> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             var qask = Model.QASK()
         
-            qask.QASKID = dict["QASKID"] as Int
-            qask.ManagerID = dict["ManagerID"] as Int
-            qask.SourceID = dict["SourceID"] as Int
-            qask.SenderID = dict["SenderID"] as Int
-            qask.ReplyID = dict["ReplyID"] as Int
-            qask.AuditID = dict["AuditID"] as Int
-            qask.IS_Editor = dict["IS_Editor"] as Bool
-            qask.IsUsed = dict["IsUsed"] as Bool
-            qask.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            qask.NickName = (dict["NickName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            qask.iconFace = (dict["iconFace"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.QASKID = dict["QASKID"] as! Int
+            qask.ManagerID = dict["ManagerID"] as! Int
+            qask.SourceID = dict["SourceID"] as! Int
+            qask.SenderID = dict["SenderID"] as! Int
+            qask.ReplyID = dict["ReplyID"] as! Int
+            qask.AuditID = dict["AuditID"] as! Int
+            qask.IS_Editor = dict["IS_Editor"] as! Bool
+            qask.IsUsed = dict["IsUsed"] as! Bool
+            qask.Content = (dict["Content"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.NickName = (dict["NickName"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.iconFace = (dict["iconFace"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
         
-            var tempTime = dict["AddTmie"] as String!
+            var tempTime = dict["AddTmie"] as!  String
             
             var timeFormat = NSDateFormatter()
             timeFormat.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
@@ -473,24 +473,24 @@ struct UTIL {
     //获取参与问题
    static func getQASKParticipant(主题下显示条数 subSize:Int,每页数量 pageSize:Int,当前页码 pageNum:Int,发送者id senderid:Int)->Array<Model.QASK>{
         var postStrig = webJsonUrl + "apiQASK/?senderid=\(senderid)&subSize＝\(subSize)&pageSize=\(pageSize)&pageNum=\(pageNum)"
-    var arrayData = getJsonData(postStrig) as NSArray
+    var arrayData = getJsonData(postStrig) as! NSArray
     var qaskList:Array<Model.QASK> = []
     for item in arrayData{
-        var dict = item as  NSDictionary
+        var dict = item as!  NSDictionary
         var qask = Model.QASK()
         
-        qask.QASKID = dict["QASKID"] as Int
-        qask.ManagerID = dict["ManagerID"] as Int
-        qask.SourceID = dict["SourceID"] as Int
-        qask.SenderID = dict["SenderID"] as Int
-        qask.ReplyID = dict["ReplyID"] as Int
-        qask.AuditID = dict["AuditID"] as Int
-        qask.IS_Editor = dict["IS_Editor"] as Bool
-        qask.IsUsed = dict["IsUsed"] as Bool
-        qask.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        qask.AddTmie = (dict["AddTmie"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        qask.NickName = (dict["NickName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-        qask.iconFace = (dict["iconFace"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+        qask.QASKID = dict["QASKID"] as! Int
+        qask.ManagerID = dict["ManagerID"] as! Int
+        qask.SourceID = dict["SourceID"] as! Int
+        qask.SenderID = dict["SenderID"] as! Int
+        qask.ReplyID = dict["ReplyID"] as! Int
+        qask.AuditID = dict["AuditID"] as! Int
+        qask.IS_Editor = dict["IS_Editor"] as! Bool
+        qask.IsUsed = dict["IsUsed"] as! Bool
+        qask.Content = (dict["Content"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        qask.AddTmie = (dict["AddTmie"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        qask.NickName = (dict["NickName"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        qask.iconFace = (dict["iconFace"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
         
         qaskList.append(qask)
         
@@ -503,25 +503,25 @@ struct UTIL {
     //获取问题
    static func getQASKInfo(问题id id:Int,每页数量 pageSize:Int,当前页码 pageNum:Int,发送者id senderid:Int)->Array<Model.QASK>{
         var postStrig = webJsonUrl + "apiQASK/getQASKInfo?senderid=\(senderid)&pageSize=\(pageSize)&pageNum=\(pageNum)&id=\(id)"
-        var arrayData = getJsonData(postStrig) as NSArray
+        var arrayData = getJsonData(postStrig) as! NSArray
         var qaskList:Array<Model.QASK> = []
         for item in arrayData{
-            var dict = item as  NSDictionary
+            var dict = item as!  NSDictionary
             var qask = Model.QASK()
         
-            qask.QASKID = dict["QASKID"] as Int
-            qask.ManagerID = dict["ManagerID"] as Int
-            qask.SourceID = dict["SourceID"] as Int
-            qask.SenderID = dict["SenderID"] as Int
-            qask.ReplyID = dict["ReplyID"] as Int
-            qask.AuditID = dict["AuditID"] as Int
-            qask.IS_Editor = dict["IS_Editor"] as Bool
-            qask.IsUsed = dict["IsUsed"] as Bool
-            qask.Content = (dict["Content"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            qask.NickName = (dict["NickName"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
-            qask.iconFace = (dict["iconFace"] as String!).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.QASKID = dict["QASKID"] as! Int
+            qask.ManagerID = dict["ManagerID"] as! Int
+            qask.SourceID = dict["SourceID"] as! Int
+            qask.SenderID = dict["SenderID"] as! Int
+            qask.ReplyID = dict["ReplyID"] as! Int
+            qask.AuditID = dict["AuditID"] as! Int
+            qask.IS_Editor = dict["IS_Editor"] as! Bool
+            qask.IsUsed = dict["IsUsed"] as! Bool
+            qask.Content = (dict["Content"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.NickName = (dict["NickName"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.iconFace = (dict["iconFace"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
         
-            var tempTime = dict["AddTmie"] as String!
+            var tempTime = dict["AddTmie"] as!  String
             
             var timeFormat = NSDateFormatter()
             timeFormat.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
@@ -596,7 +596,7 @@ struct UTIL {
         
         var exp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"
         var regextestemail = NSPredicate(format: "SELF MATCHES %@",exp)
-        if regextestemail?.evaluateWithObject(email) == true {
+        if regextestemail.evaluateWithObject(email) == true {
             return true
         } else {
             return false

@@ -87,11 +87,11 @@ class WoDeHuDongController: UIViewController ,UITableViewDelegate, UITableViewDa
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier=="QaskDetail" {
-            var theSegue = segue.destinationViewController as QaskDetailController
+            var theSegue = segue.destinationViewController as! QaskDetailController
             theSegue.qid = toViewQid
         }else{
-            var theSegue = segue.destinationViewController as WenWenViewController
-            var dele = UIApplication.sharedApplication().delegate as AppDelegate
+            var theSegue = segue.destinationViewController as! WenWenViewController
+            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
             var user=dele.user
             if user != nil {
                 theSegue.uid = user!.MemberID.toInt()
@@ -102,7 +102,7 @@ class WoDeHuDongController: UIViewController ,UITableViewDelegate, UITableViewDa
     }
     
     func refreshData(){
-        var dele = UIApplication.sharedApplication().delegate as AppDelegate
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         var uid=0
         if !(dele.user==nil){
             uid = dele.user!.MemberID.toInt()!

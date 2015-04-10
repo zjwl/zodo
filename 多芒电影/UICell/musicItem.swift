@@ -9,18 +9,20 @@
 class musicItem: UIView{
     var image:UIImageView?
     var lbl:UILabel?
-    let colors:Array<UIColor> = []
+    var colors:Array<UIColor> = []
     
     override init(frame: CGRect) {
         super.init(frame:frame)
-        colors.append(UIColor(red: 51/255, green: 170/255, blue: 138/255, alpha: 1))
-        colors.append(UIColor(red: 72/255, green: 147/255, blue: 205/255, alpha: 1))
-        colors.append(UIColor(red: 237/255, green: 126/255, blue: 1107/255, alpha: 1))
-        colors.append(UIColor(red: 230/255, green: 171/255, blue: 41/255, alpha: 1))
-        colors.append(UIColor(red: 161/255, green: 88/255, blue: 205/255, alpha: 1))
-        colors.append(UIColor(red: 116/255, green: 170/255, blue: 24/255, alpha: 1))
-        colors.append(UIColor(red: 126/255, green: 114/255, blue: 100/255, alpha: 1))
-        colors.append(UIColor(red: 246/255, green: 89/255, blue: 58/255, alpha: 1))
+        
+        colors.append(UIColor(red: 51.0 / 255.0, green: 170 / 255.0, blue: 138 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 72.0 / 255.0, green: 147 / 255.0, blue: 205 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 237.0 / 255.0, green: 126 / 255.0, blue: 1107 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 230.0 / 255.0, green: 171 / 255.0, blue: 41 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 161.0 / 255.0, green: 88 / 255.0, blue: 205 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 116.0 / 255.0, green: 170 / 255.0, blue: 24 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 126.0 / 255.0, green: 114 / 255.0, blue: 100 / 255.0, alpha: 1.0))
+        colors.append(UIColor(red: 246.0 / 255.0, green: 89 / 255.0, blue: 58 / 255.0, alpha: 1.0))
+        
         
         var bg:UIView = UIView(frame: CGRectMake(0, 0, frame.width-7.5, frame.width-7.5))
         image = UIImageView(frame: CGRectMake(0, 0, bg.frame.width, bg.frame.width))

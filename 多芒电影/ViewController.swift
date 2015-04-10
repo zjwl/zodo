@@ -53,7 +53,7 @@ class ViewController: UIViewController,DataDelegate {
         //        default:
         //            break
         //        }
-        var gameList:QaskList = object as QaskList
+        var gameList:QaskList = object as! QaskList
         var str:String = "type:\(type),"
         for item:Qask in gameList.list{
             str += item.NickName + ","

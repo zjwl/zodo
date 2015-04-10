@@ -135,18 +135,18 @@ extension Model{
         }
         
         required init(coder aDecoder: NSCoder){
-            self.NickName = aDecoder.decodeObjectForKey("NickName") as String
-            self.MemberID = aDecoder.decodeObjectForKey("MemberID") as String
-            self.UserName = aDecoder.decodeObjectForKey("UserName") as String
-            self.Password = aDecoder.decodeObjectForKey("Password") as String
-            self.WhereFrom = aDecoder.decodeObjectForKey("WhereFrom") as String
-            self.Mail = aDecoder.decodeObjectForKey("Mail") as String
-            self.Identity = aDecoder.decodeObjectForKey("Identity") as String
-            self.HeadPhotoURL = aDecoder.decodeObjectForKey("HeadPhotoURL") as String
-            self.IsUsed = aDecoder.decodeObjectForKey("IsUsed") as String
-            self.IsActivation = aDecoder.decodeObjectForKey("IsActivation") as String
-            self.registrationTime = aDecoder.decodeObjectForKey("registrationTime") as String
-            self.LastVisitTime = aDecoder.decodeObjectForKey("LastVisitTime") as String
+            self.NickName = aDecoder.decodeObjectForKey("NickName") as! String
+            self.MemberID = aDecoder.decodeObjectForKey("MemberID") as! String
+            self.UserName = aDecoder.decodeObjectForKey("UserName") as! String
+            self.Password = aDecoder.decodeObjectForKey("Password") as! String
+            self.WhereFrom = aDecoder.decodeObjectForKey("WhereFrom") as! String
+            self.Mail = aDecoder.decodeObjectForKey("Mail") as! String
+            self.Identity = aDecoder.decodeObjectForKey("Identity") as! String
+            self.HeadPhotoURL = aDecoder.decodeObjectForKey("HeadPhotoURL") as! String
+            self.IsUsed = aDecoder.decodeObjectForKey("IsUsed") as! String
+            self.IsActivation = aDecoder.decodeObjectForKey("IsActivation") as! String
+            self.registrationTime = aDecoder.decodeObjectForKey("registrationTime") as! String
+            self.LastVisitTime = aDecoder.decodeObjectForKey("LastVisitTime") as! String
             
         }
     }

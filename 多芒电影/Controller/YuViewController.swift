@@ -81,7 +81,7 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
         
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var theSegue = segue.destinationViewController as ypDetailController
+        var theSegue = segue.destinationViewController as! ypDetailController
         theSegue.currentInfo = currentInfo
     }
     

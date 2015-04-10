@@ -27,7 +27,7 @@ class GetQASKInfo: BaseAccess {
         //println("foundCharacters in Override:\(string)")
         currentValue = string
         if curElementName=="Content" {
-            content = content+currentValue
+            content = content + (currentValue as String)
         }
     }
     
