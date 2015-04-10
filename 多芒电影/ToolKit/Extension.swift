@@ -49,6 +49,8 @@ extension UICollectionView{
 }
 
 extension UIViewController{
+    
+    //检测是否已赞
     func isBasicInfoZaned(id:Int)->Bool{
         var userDefault = NSUserDefaults.standardUserDefaults()
         var zanCollection:NSString? = userDefault.stringForKey("baseInfoZanCollection")
