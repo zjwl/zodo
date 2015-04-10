@@ -19,7 +19,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     var currentPage = 0
     var isScroll = false
     var refreshControl = UIRefreshControl()
-
+    var noDataView:UILabel=UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         
         uiTableView.dataSource = self
         uiTableView.delegate = self
-        
+        self.view.addSubview(noDataView)
         println("viewDidLoad")
     }
     
@@ -54,23 +54,23 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     
     func refreshData() {
         
-         var noData = UILabel(frame: self.view.bounds)
+        noDataView.frame = self.view.bounds
         
         refreshControl.endRefreshing()
         if user.IsLogin {
             basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             uiTableView.reloadData()
-            noData.hidden = true
+            noDataView.hidden = true
             uiTableView.hidden = false
         } else {
             uiTableView.hidden = true
-            
-            noData.text = "您未登录或尚未收藏信息"
-            noData.textAlignment = NSTextAlignment.Center
-            noData.alignmentRectForFrame(self.view.bounds)
-            noData.backgroundColor = UIColor.whiteColor()
-            self.view.addSubview(noData)
+            noDataView.hidden = false
+            noDataView.text = "您未登录或尚未收藏信息"
+            noDataView.textAlignment = NSTextAlignment.Center
+            noDataView.alignmentRectForFrame(self.view.bounds)
+            noDataView.backgroundColor = UIColor.whiteColor()
         }
+        
     }
     
     

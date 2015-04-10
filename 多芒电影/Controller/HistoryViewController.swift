@@ -17,6 +17,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     var isScroll = false
     var refreshControl = UIRefreshControl()
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
+    var noDataView:UILabel=UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         uiTableView.dataSource = self
         uiTableView.delegate = self
         //uiTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.view.addSubview(noDataView)
        
     }
     
@@ -35,22 +37,26 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
            refreshData()
     }
     
+    
     func refreshData() {
-        var noData = UILabel(frame: self.view.bounds)
+        
+        noDataView.frame = self.view.bounds
+        
         refreshControl.endRefreshing()
         if user.IsLogin {
             basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             uiTableView.reloadData()
-            noData.hidden = true
+            noDataView.hidden = true
             uiTableView.hidden = false
         } else {
             uiTableView.hidden = true
-            noData.text = "您未登录或尚未点播影视节目"
-            noData.textAlignment = NSTextAlignment.Center
-            noData.alignmentRectForFrame(self.view.bounds)
-            noData.backgroundColor = UIColor.whiteColor()
-            self.view.addSubview(noData)
+            noDataView.hidden = false
+            noDataView.text = "您未登录或尚未点播影视节目"
+            noDataView.textAlignment = NSTextAlignment.Center
+            noDataView.alignmentRectForFrame(self.view.bounds)
+            noDataView.backgroundColor = UIColor.whiteColor()
         }
+        
     }
 
 
