@@ -16,8 +16,6 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     var currentPage = 0
     var isScroll = false
     var refreshControl = UIRefreshControl()
-    var user:Model.LoginModel?
-    var islogin=false
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     
     override func viewDidLoad() {
@@ -35,26 +33,12 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func refreshData() {
-        
-        if user == nil {
-            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-            user = dele.user
-            if user != nil && dele.isLogin != nil && dele.isLogin! {
-                islogin=true
-            }else{
-                return
-            }
-        }
-        
-        if user?.MemberID == "" || user?.MemberID == "0"  && islogin {
-            refreshControl.endRefreshing()
-            return
-        }
-        
-        
         refreshControl.endRefreshing()
-        basicList = UTIL.getHistory(客户id: user!.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
-        uiTableView.reloadData()
+        
+        if user.IsLogin {
+            basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            uiTableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,11 +91,11 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         if isScroll {
             return
         }
-        if islogin {
+        if user.IsLogin {
             if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
                 isScroll = true
                 currentPage = currentPage + 1
-                var  basicList1 = UTIL.getHistory(客户id: user!.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                var  basicList1 = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 basicList.extend(basicList1)
                 uiTableView.reloadData()
                 isScroll = false
@@ -130,7 +114,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         if(editingStyle == UITableViewCellEditingStyle.Delete) {
             //commit change to server
             var m:Model.History=basicList[indexPath.row]
-            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "DeleteVisitHistory", params: String(m.InfoID)+",",user!.MemberID).loadData()
+            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "DeleteVisitHistory", params: String(m.InfoID)+",",user.MemberID).loadData()
             basicList.removeAtIndex(indexPath.row)
             self.uiTableView.reloadData()
         }

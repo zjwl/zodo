@@ -94,8 +94,8 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
     }
     
     func goWenWenPageFromXbs(tap:UITapGestureRecognizer){
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        if ((dele.isLogin != nil) && dele.isLogin!) {
+       
+        if  user.IsLogin  {
             self.performSegueWithIdentifier("wenwenFromDetail", sender: self)
         }else{
             showAlert()

@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:Model.LoginModel?
-    var isLogin:Bool?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -131,17 +130,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if obj != nil {
             //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
-            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
-            self.user = user
+            var user1:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
+            user1.IsLogin = true
+            self.user = user1
         }
-        
-        if self.user != nil && self.user?.MemberID != "" && self.user?.MemberID != "0" {
-            self.isLogin = true         
-        } else {
-            self.isLogin = false
-        }
-       
-        
+
     }
     
     

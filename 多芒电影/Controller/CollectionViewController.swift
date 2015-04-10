@@ -19,8 +19,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     var currentPage = 0
     var isScroll = false
     var refreshControl = UIRefreshControl()
-    var user:Model.LoginModel?
-    var islogin=false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +32,8 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         
         uiTableView.dataSource = self
         uiTableView.delegate = self
-        
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        user = dele.user
-        if ((dele.isLogin != nil) && dele.isLogin!) {
-            islogin = true
-            refreshData()
-        }
+        refreshData()
+ 
         
     }
     
@@ -47,8 +41,10 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     func refreshData() {
         
         refreshControl.endRefreshing()
-        basicList = UTIL.getCollection(客户id: user!.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
-        uiTableView.reloadData()
+        if user.IsLogin {
+            basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            uiTableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -136,11 +132,11 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         if isScroll {
             return
         }
-        if islogin {
+        if user.IsLogin {
             if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
                 isScroll = true
                 currentPage = currentPage + 1
-                var  basicList1 = UTIL.getCollection(客户id: user!.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 basicList.extend(basicList1)
                 uiTableView.reloadData()    
                 isScroll = false
@@ -161,7 +157,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         if(editingStyle == UITableViewCellEditingStyle.Delete) {
             //commit change to server
             var m:Model.Collection=basicList[indexPath.row]
-            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "DeleteCollection", params: String(m.InfoID)+",",user!.MemberID).loadData()
+            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "DeleteCollection", params: String(m.InfoID)+",",user.MemberID).loadData()
             basicList.removeAtIndex(indexPath.row)
             self.uiTableView.reloadData()
         }

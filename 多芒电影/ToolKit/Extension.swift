@@ -52,6 +52,21 @@ let ZAN="baseInfoZanCollection",COLLECTION="baseInfoCollection"
 
 extension UIViewController{
     
+        var user:Model.LoginModel{
+            var userDefaults = NSUserDefaults.standardUserDefaults()
+            var obj:AnyObject? = userDefaults.objectForKey("myUser")
+            
+            if obj != nil {
+                //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
+                self.user.IsLogin = true
+                return NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
+                
+            }else {
+                return Model.LoginModel()
+            }
+        }
+    
+    
     //检测是否已赞
     func isBasicInfoZaned(id:Int)->Bool{
         var userDefault = NSUserDefaults.standardUserDefaults()
@@ -126,7 +141,6 @@ extension UIViewController{
                 NSLog("分享失败,错误码:%d,错误描述:%@",error.errorCode(),error.errorDescription())
             }})
     }
-    
     
     
     

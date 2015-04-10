@@ -85,8 +85,8 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     func goWenWenPageFromDjs(tap:UITapGestureRecognizer){
         println("comein")
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        if ((dele.isLogin != nil) && dele.isLogin!) {
+       
+        if  user.IsLogin {
             println("go wenwen,sender's tag:\(tap.view!.tag)")
             toQid=tap.view!.tag
             self.sourceID=1
@@ -97,8 +97,8 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func goWenWenPageFromXbs(tap:UITapGestureRecognizer){
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        if ((dele.isLogin != nil) && dele.isLogin!) {
+      
+        if   user.IsLogin  {
             println("go wenwen,sender's tag:\(tap.view!.tag)")
             toQid=tap.view!.tag
             self.sourceID=toQid
@@ -138,8 +138,8 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         else{
             self.sourceID=1
         }
-        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
-        if ((dele.isLogin != nil) && dele.isLogin!) {
+      
+        if   user.IsLogin  {
             self.toQid=0
             self.performSegueWithIdentifier("wenwen", sender: self)
         }else{
