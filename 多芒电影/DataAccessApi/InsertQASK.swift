@@ -15,7 +15,7 @@ class InsertQASK: BaseAccess {
     // NSXMLParserDelegate
     
     // override
-    override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    override func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String!, qualifiedName qName: String!) {
         if elementName=="InsertQASKResult"{
             singleResult = currentValue as String
         }

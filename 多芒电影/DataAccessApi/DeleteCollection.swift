@@ -16,7 +16,7 @@ class DeleteCollection : BaseAccess{
     // NSXMLParserDelegate
     
     // override
-    override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    override func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String!, qualifiedName qName: String!) {
         if elementName=="DeleteCollectionResult"{
             singleResult = currentValue as String
         }

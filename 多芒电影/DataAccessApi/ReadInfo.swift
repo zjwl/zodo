@@ -13,6 +13,6 @@ class ReadInfo: BaseAccess {
     }
     
     // override
-    override func parserDidEndDocument(parser: NSXMLParser!) {
+    override func parserDidEndDocument(parser: NSXMLParser) {
     }
 }

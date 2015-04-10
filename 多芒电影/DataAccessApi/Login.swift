@@ -18,7 +18,7 @@ class Login: BaseAccess {
     
     
     // override
-    override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    override func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String!, qualifiedName qName: String!) {
         var compareResult = nodeString.rangeOfString(","+elementName+",")
         if compareResult != nil {
             model.setValue(currentValue, forKey: elementName)
@@ -26,7 +26,7 @@ class Login: BaseAccess {
         
     }
     // override
-    override func parserDidEndDocument(parser: NSXMLParser!) {
+    override func parserDidEndDocument(parser: NSXMLParser) {
         dataDelegate.invoke("login",object: model)
     }
 }

@@ -16,7 +16,7 @@ class BlurBackground: UIView {
     
     
     // returns simple Blur cell of specified blur type
-    func setUpCell(#frame : CGRect,#blurStyle : UIBlurEffectStyle)
+    func setUpCell(#frame : CGRect,urStyle : UIBlurEffectStyle)
     {
         if (self.blurView == nil)
         {
@@ -31,7 +31,7 @@ class BlurBackground: UIView {
     
     
     // returns blur cell of specified blur type with Vibrancyview for displaying label on top of blurView
-    func setUpCellWithVibrancy(#frame : CGRect,#blurStyle : UIBlurEffectStyle)
+    func setUpCellWithVibrancy(#frame : CGRect,blurStyle : UIBlurEffectStyle)
     {
         if (self.blurView == nil)
         {

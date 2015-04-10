@@ -20,7 +20,7 @@ class GetGameList : BaseAccess{
     
     
     // override
-    override func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    override func parser(parser: NSXMLParser, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
         if elementName=="Game"{
             gameList.list.append(game)
             game = Game()
@@ -32,7 +32,7 @@ class GetGameList : BaseAccess{
         
     }
     // override
-    override func parserDidEndDocument(parser: NSXMLParser!) {
+    override func parserDidEndDocument(parser: NSXMLParser) {
         dataDelegate.invoke(invokeType,object: gameList)
     }
 }
