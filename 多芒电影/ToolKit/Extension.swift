@@ -48,18 +48,69 @@ extension UICollectionView{
     }
 }
 
+let ZAN="baseInfoZanCollection",COLLECTION="baseInfoCollection"
+
 extension UIViewController{
     
     //检测是否已赞
     func isBasicInfoZaned(id:Int)->Bool{
         var userDefault = NSUserDefaults.standardUserDefaults()
-        var zanCollection:NSString? = userDefault.stringForKey("baseInfoZanCollection")
+        var zanCollection:NSString? = userDefault.stringForKey(ZAN)
         if !(zanCollection==nil){
             var str:String=","+String(id)+","
             var isContains=zanCollection!.containsString(str)
             return isContains ? true : false
         }else{
             return false
+        }
+    }
+    
+    //检测是否已收藏
+    func isBasicInfoCollected(id:Int)->Bool{
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        var zanCollection:NSString? = userDefault.stringForKey(COLLECTION)
+        if !(zanCollection==nil){
+            var str:String=","+String(id)+","
+            var isContains=zanCollection!.containsString(str)
+            return isContains ? true : false
+        }else{
+            return false
+        }
+    }
+    
+    //写入赞信息到本地
+    func saveBasicZanInfoToLocal(id:Int){
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        var zanCollection:String? = userDefault.stringForKey(ZAN)
+        if zanCollection==nil || zanCollection==""{
+            userDefault.setValue(","+String(id)+",", forKey: ZAN)
+        }else{
+            userDefault.setValue(zanCollection!+String(id)+",", forKey: ZAN)
+        }
+    }
+    
+    //写入收藏信息到本地
+    func saveBasicCollectionInfoToLocal(id:Int){
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        
+        var zanCollection:String? = userDefault.stringForKey(COLLECTION)
+        if zanCollection==nil || zanCollection==""{
+            userDefault.setValue(","+String(id)+",", forKey: COLLECTION)
+        }else{
+            userDefault.setValue(zanCollection!+String(id)+",", forKey: COLLECTION)
+        }
+        var tt = userDefault.stringForKey(COLLECTION)
+        println("Collection String:\(tt)")
+    }
+    
+    //删除本地收藏信息
+    func deleteBasicCollectionInfoToLocal(id:Int){
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        var zanCollection:String? = userDefault.stringForKey(COLLECTION)
+        if !(zanCollection==nil){
+            var toReplaceString=",\(id),"
+            var toSaveString = zanCollection?.stringByReplacingOccurrencesOfString(toReplaceString, withString: "")
+            userDefault.setValue(toSaveString, forKey: COLLECTION)
         }
     }
     
@@ -76,16 +127,7 @@ extension UIViewController{
             }})
     }
     
-    //写入赞信息到本地
-    func saveBasicZanInfoToLocal(id:Int){
-        var userDefault = NSUserDefaults.standardUserDefaults()
-        var zanCollection:String? = userDefault.stringForKey("baseInfoZanCollection")
-        if zanCollection==nil{
-            userDefault.setValue(","+String(id)+",", forKey: "baseInfoZanCollection")
-        }else{
-            userDefault.setValue(zanCollection!+String(id)+",", forKey: "baseInfoZanCollection")
-        }
-    }
+    
     
     
 }

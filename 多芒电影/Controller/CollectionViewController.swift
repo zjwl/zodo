@@ -169,7 +169,8 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     
     
     func invoke(index:Int,StringResult result:String){
-        println(result)
+        println("item has deleted.\(result)")
+        deleteBasicCollectionInfoToLocal(currentInfo.InfoID)
     }
     func invoke(type:String,object:NSObject){
     
