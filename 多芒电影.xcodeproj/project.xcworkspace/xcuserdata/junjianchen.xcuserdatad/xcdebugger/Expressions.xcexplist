@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = ":SettingCntainerTableViewController.swift">
+         contextName = ":GetQASKInfo.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "dataDelegate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -27,19 +27,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":BaseAccess.swift">
+         contextName = ":HistoryViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "singleResult">
+               value = "user!.MemberID">
             </PersistentString>
             <PersistentString
-               value = "mechodName">
+               value = "currentInfo">
             </PersistentString>
             <PersistentString
-               value = "parser">
+               value = "dele.isLogin ">
             </PersistentString>
             <PersistentString
-               value = "soapMessage">
+               value = "user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -66,19 +66,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":ypDetailController.swift">
+         contextName = ":NTHorizontalPageViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "content">
-            </PersistentString>
-            <PersistentString
-               value = "self.view.backgroundColor">
-            </PersistentString>
-            <PersistentString
-               value = "self.view">
-            </PersistentString>
-            <PersistentString
-               value = "theTitle">
+               value = "cell.imageView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -86,30 +77,30 @@
          contextName = ":TingViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "currentInfo">
+            </PersistentString>
+            <PersistentString
                value = "refreshControl">
             </PersistentString>
             <PersistentString
                value = "self.view">
             </PersistentString>
-            <PersistentString
-               value = "currentInfo">
-            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":HistoryViewController.swift">
+         contextName = ":BaseAccess.swift">
          <PersistentStrings>
             <PersistentString
-               value = "user!.MemberID">
+               value = "singleResult">
             </PersistentString>
             <PersistentString
-               value = "currentInfo">
+               value = "mechodName">
             </PersistentString>
             <PersistentString
-               value = "dele.isLogin ">
+               value = "parser">
             </PersistentString>
             <PersistentString
-               value = "user">
+               value = "soapMessage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -120,10 +111,10 @@
                value = "user!.MemberID">
             </PersistentString>
             <PersistentString
-               value = "cell.titlelbl">
+               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
             </PersistentString>
             <PersistentString
-               value = "tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier)">
+               value = "cell.titlelbl">
             </PersistentString>
             <PersistentString
                value = "basicList">
@@ -145,10 +136,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":NTHorizontalPageViewCell.swift">
+         contextName = ":ypDetailController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cell.imageView">
+               value = "content">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.backgroundColor">
+            </PersistentString>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+            <PersistentString
+               value = "theTitle">
+            </PersistentString>
+            <PersistentString
+               value = "currentInfo.GoodTimes">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -167,10 +170,18 @@
                value = "currentInfo.Title">
             </PersistentString>
             <PersistentString
-               value = "currentInfo">
+               value = "currentInfo.PicURL">
             </PersistentString>
             <PersistentString
-               value = "currentInfo.PicURL">
+               value = "currentInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":SettingCntainerTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -209,24 +220,16 @@
                value = "askList">
             </PersistentString>
             <PersistentString
-               value = "title_segment">
+               value = "askList.count">
             </PersistentString>
             <PersistentString
-               value = "askList.count">
+               value = "title_segment">
             </PersistentString>
             <PersistentString
                value = "dele.user">
             </PersistentString>
             <PersistentString
                value = "indexPath.row">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":GetQASKInfo.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "dataDelegate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

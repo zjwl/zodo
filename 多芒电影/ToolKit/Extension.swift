@@ -47,3 +47,43 @@ extension UICollectionView{
         return NSIndexPath(forRow: index, inSection: 0)
     }
 }
+
+extension UIViewController{
+    func isBasicInfoZaned(id:Int)->Bool{
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        var zanCollection:NSString? = userDefault.stringForKey("baseInfoZanCollection")
+        if !(zanCollection==nil){
+            var str:String=","+String(id)+","
+            var isContains=zanCollection!.containsString(str)
+            return isContains ? true : false
+        }else{
+            return false
+        }
+    }
+    
+    //构造分享内容
+    func basicShareFunc(currentInfo:Model.BasicInfo){
+        var publishContent = ShareSDK.content(currentInfo.Title, defaultContent: currentInfo.Introduction, image:ShareSDK.imageWithUrl(currentInfo.PicURL), title: currentInfo.Title, url:"http://apk.zdomo.com/frontpage/?id=\(currentInfo.InfoID)", description: currentInfo.Content, mediaType: SSPublishContentMediaTypeNews)
+        
+        
+        ShareSDK.showShareActionSheet(nil, shareList: nil, content: publishContent, statusBarTips: true, authOptions: nil, shareOptions: nil, result: { (shareType:ShareType, state:SSResponseState, info:ISSPlatformShareInfo!, error:ICMErrorInfo!, Bool) -> Void in
+            if state.value == SSResponseStateSuccess.value  {
+                NSLog("分享成功");
+            } else if state.value == SSPublishContentStateFail.value {
+                NSLog("分享失败,错误码:%d,错误描述:%@",error.errorCode(),error.errorDescription())
+            }})
+    }
+    
+    //写入赞信息到本地
+    func saveBasicZanInfoToLocal(id:Int){
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        var zanCollection:String? = userDefault.stringForKey("baseInfoZanCollection")
+        if zanCollection==nil{
+            userDefault.setValue(","+String(id)+",", forKey: "baseInfoZanCollection")
+        }else{
+            userDefault.setValue(zanCollection!+String(id)+",", forKey: "baseInfoZanCollection")
+        }
+    }
+    
+    
+}
