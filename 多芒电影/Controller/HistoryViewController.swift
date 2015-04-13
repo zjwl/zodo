@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate {
+class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate,CommonAccessDelegate {
 
     @IBOutlet var uiTableView: UITableView!
     var basicList:Array<Model.History> = [] //影片信息列表
@@ -49,9 +49,13 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         
         refreshControl.endRefreshing()
         if user.IsLogin {
+
+            //basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             activityIndicator.startAnimating()
-            basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
-            uiTableView.reloadData()
+            CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            
+            
+
             noDataView.hidden = true
             uiTableView.hidden = false
         } else {
@@ -121,14 +125,10 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 isScroll = true
                 currentPage = currentPage + 1
                 activityIndicator.startAnimating()
-                var  basicList1 = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
-                basicList.extend(basicList1)
-                uiTableView.reloadData()
-                isScroll = false
+                CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+
             }
         }
-        
-        
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -151,6 +151,19 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     }
     func invoke(type:String,object:NSObject){
         
+    }
+    
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.History>
+        if currentPage == 0 {
+            basicList = basicList1
+            uiTableView.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            uiTableView.reloadData()
+            isScroll = false
+        }
     }
 
 }
