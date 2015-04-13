@@ -83,6 +83,7 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var theSegue = segue.destinationViewController as! ypDetailController
         theSegue.currentInfo = currentInfo
+        theSegue.title = "轻松一刻"
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

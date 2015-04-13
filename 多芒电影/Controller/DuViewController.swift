@@ -85,6 +85,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var theSegue = segue.destinationViewController as! ypDetailController
         theSegue.currentInfo = currentInfo
+        theSegue.title = "说说电影"
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

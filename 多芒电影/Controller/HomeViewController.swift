@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate {
+class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate,CommonAccessDelegate {
     
     @IBOutlet weak var uiTableView: UITableView!
     
@@ -70,10 +70,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func refreshData() {
-        basicList = UTIL.getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
-        uiTableView.reloadData()
-        refreshControl.endRefreshing()
-        
+        //basicList = UTIL.getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
+        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -186,18 +184,23 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         case 1:
             var theSegue = segue.destinationViewController as! movieDetailController
             theSegue.currentInfo = currentClickModel!
+            theSegue.title = "电影推荐"
         case 2:
             var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentClickModel!
+            theSegue.title = "说说电影"
         case 4:
             var theSegue = segue.destinationViewController as! musicDetailController
             theSegue.currentInfo = currentClickModel!
+            theSegue.title = "电影原声"
         case 5:
             var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentClickModel!
+            theSegue.title = "轻松一刻"
         case 6:
             var theSegue = segue.destinationViewController as! ypDetailController
             theSegue.currentInfo = currentClickModel!
+            theSegue.title = "多芒公益"
         default:
             var tt=32
         }
@@ -511,7 +514,11 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-
+    func setCallbackObject(flag: String, object: NSObject) {
+        basicList = object as! Array<Model.BasicInfo>
+        uiTableView.reloadData()
+        refreshControl.endRefreshing()
+    }
     
     /*
     func invoke(index:Int,StringResult result:String){

@@ -102,12 +102,12 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         println(cell.infoID)
         currentInfo = basicList[indexPath.row]
         
-        self.performSegueWithIdentifier("kanMovieSegue", sender: self)
+        self.performSegueWithIdentifier("yi2dy", sender: self)
         //println(cell.infoID)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var theSegue = segue.destinationViewController as! movieDetailController
-        
+        theSegue.title = "多芒公益"
         theSegue.currentInfo = currentInfo
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {

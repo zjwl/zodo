@@ -12,7 +12,7 @@ let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
 
 
-class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol{
+class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol,CommonAccessDelegate{
     //    class var sharedInstance: NSInteger = 0 Are u kidding me?
     //var imageNameList : Array <NSString> = []
     
@@ -25,7 +25,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
-        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+       // refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         collectionView?.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         //self.navigationController!.delegate = delegateHolder
@@ -37,12 +37,17 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         collection.backgroundColor = UIColor.yellowColor()
         collection.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
         //collection.reloadData()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         refreshData()
     }
     
     func refreshData() {
         refreshControl.endRefreshing()
-        basicList = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage)
+        //basicList = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         collectionView!.reloadData()
     }
     
@@ -113,25 +118,30 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         return collectionView
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        if isScroll {
-            return
-        }
-        
-        if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
-            isScroll = true
-            currentPage = currentPage + 1
-            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-            basicList.extend(basicList1)
-            collectionView?.reloadData()
-            isScroll = false
-        }
-    }
+//    override func scrollViewDidScroll(scrollView: UIScrollView) {
+//        if isScroll {
+//            return
+//        }
+//        
+//        if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
+//            isScroll = true
+//            currentPage = currentPage + 1
+//            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+//            basicList.extend(basicList1)
+//            collectionView?.reloadData()
+//            isScroll = false
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func setCallbackObject(flag: String, object: NSObject) {
+        basicList = object as! Array<Model.BasicInfo>
+        collectionView!.reloadData()
+        refreshControl.endRefreshing()
+    }
     
 }
