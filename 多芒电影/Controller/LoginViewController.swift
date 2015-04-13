@@ -67,38 +67,37 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     //type:方法的标识（一个页面可能有多个方法回调，以此参数作为标识区分） object:返回的数据
     func invoke(type: String, object: NSObject) {
         
-        var user = object as! Model.LoginModel
+        var user1 = object as! Model.LoginModel
+        
         
      
-        if user.MemberID == "0"   {
+        if  user1.MemberID == "" || user1.MemberID == "0"   {
             let alert = UIAlertView()
             alert.title = "登录信息"
             alert.message = "您输入账号或密码不正确，不能登录！"
             alert.addButtonWithTitle("Ok")
             alert.show()
-            return
+        }else {
+            user1.MemberID = user1.MemberID.trim()
+            user1.Mail = user1.Mail.trim()
+            user1.HeadPhotoURL = user1.HeadPhotoURL.trim()
+            user1.UserName = user1.UserName.trim()
+            user1.NickName = user1.NickName.trim()
+            user1.Password = user1.Password.trim()
+            user1.WhereFrom = user1.WhereFrom.trim()
+            user1.IsActivation = user1.IsActivation.trim()
+            user1.IsUsed =  "true"
+            user1.Identity = user1.Identity.trim()
+            user1.registrationTime = user1.registrationTime.trim()
+            user1.LastVisitTime = user1.LastVisitTime.trim()
+            user1.IsLogin = true
+            
+            var userDeFaults = NSUserDefaults.standardUserDefaults()
+            userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user1), forKey: "myUser")
+            self.performSegueWithIdentifier("UILoginMember", sender: self)
+            
         }
-   
-        
-        user.MemberID = user.MemberID.trim()
-        user.Mail = user.Mail.trim()
-        user.HeadPhotoURL = user.HeadPhotoURL.trim()
-        user.UserName = user.UserName.trim()
-        user.NickName = user.NickName.trim()
-        user.Password = user.Password.trim()
-        user.WhereFrom = user.WhereFrom.trim()
-        user.IsActivation = user.IsActivation.trim()
-        user.IsUsed = user.IsUsed.trim()
-        user.Identity = user.Identity.trim()
-        user.registrationTime = user.registrationTime.trim()
-        user.LastVisitTime = user.LastVisitTime.trim()
-        user.IsLogin = true
-        
-        var userDeFaults = NSUserDefaults.standardUserDefaults()
-        userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: "myUser")
 
-        self.performSegueWithIdentifier("UILoginMember", sender: self)
-        
         //self.navigationController?.pushViewController(loginVieControl , animated: true)
         
     }
@@ -130,21 +129,21 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         formatter.dateFormat = "yyyy-MM-dd- HH:mm:ss"
         var dateString = formatter.stringFromDate(date)
         
-        var user = Model.LoginModel()
-        user.UserName = userinfo.nickname()
-        user.NickName = userinfo.nickname()
-        user.IsUsed = "true"
-        user.IsActivation = "true"
-        user.WhereFrom = whereFrom
-        user.HeadPhotoURL = userinfo.profileImage()
-        user.Identity = userinfo.uid()
-        user.registrationTime =  dateString
-        user.LastVisitTime = dateString
-        user.Password = userinfo.uid()
-        user.Mail = ""
+        var user1 = Model.LoginModel()
+        user1.UserName = userinfo.nickname()
+        user1.NickName = userinfo.nickname()
+        user1.IsUsed = "true"
+        user1.IsActivation = "true"
+        user1.WhereFrom = whereFrom
+        user1.HeadPhotoURL = userinfo.profileImage()
+        user1.Identity = userinfo.uid()
+        user1.registrationTime =  dateString
+        user1.LastVisitTime = dateString
+        user1.Password = userinfo.uid()
+        user1.Mail = ""
      
         var userDeFaults = NSUserDefaults.standardUserDefaults()
-        userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: "myUser")
+        userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user1), forKey: "myUser")
         
         
        self.performSegueWithIdentifier("UILoginMember", sender: self)

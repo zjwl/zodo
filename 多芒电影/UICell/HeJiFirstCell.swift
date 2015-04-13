@@ -21,8 +21,8 @@ class HeJiFirstCell: UITableViewCell {
         imgLeft?.image=UIImage(named: "album.png")
         titleLbl=UILabel(frame: CGRectMake(50, 0, cell!.frame.width-50, 40))
         titleLbl?.textColor=UIColor.whiteColor()
-        titleView?.backgroundColor=UIColor.greenColor()
-        imgView=UIImageView()
+        titleView?.backgroundColor = UIColor(red: 116.0 / 255.0, green: 170 / 255.0, blue: 24 / 255.0, alpha: 1.0)
+        imgView = UIImageView()
         imgView?.frame=CGRectMake(0, 0, cell!.frame.width, 150)
         imgView?.contentMode=UIViewContentMode.ScaleAspectFill
         imgView?.clipsToBounds=true

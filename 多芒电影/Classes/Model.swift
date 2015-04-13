@@ -110,7 +110,7 @@ extension Model{
         var Mail:String = ""
         var Identity:String = ""
         var HeadPhotoURL:String = ""
-        var IsUsed:String = ""
+        var IsUsed:String = "true"
         var IsActivation:String = ""
         var registrationTime:String = ""
         var LastVisitTime:String = ""
