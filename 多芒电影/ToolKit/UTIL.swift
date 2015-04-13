@@ -190,9 +190,9 @@ struct UTIL {
 
     }
    
-    //获取电影合集
+    //获取电影合辑
     
-    //获取电影合集栏目板块
+    //获取电影合辑栏目板块
     static func getFilmAlbum(每页数量 pageSize:Int,当前页码 pageNum:Int)->Array<Model.FilmAlbum>{
         var postStrig = webJsonUrl + "apiFilmAlbum?pageSize=\(pageSize)&pageNum=\(pageNum)"
         var arrayData = getJsonData(postStrig) as! NSArray
@@ -220,8 +220,8 @@ struct UTIL {
 
     }
     
-    //获取电影合集具体板块明细
-   static  func getFilmAlbumDetail(电影合集板块id id:Int)->Array<Model.BasicInfo> {
+    //获取电影合辑具体板块明细
+   static  func getFilmAlbumDetail(电影合辑板块id id:Int)->Array<Model.BasicInfo> {
         var postStrig = webJsonUrl + "apiFilmAlbum?id=\(id)"
     var arrayData = getJsonData(postStrig) as! NSArray
     var basicList:Array<Model.BasicInfo> = []
@@ -364,7 +364,7 @@ struct UTIL {
 
     }
     
-    //获取电影合集栏目板块明细
+    //获取电影合辑栏目板块明细
    static func getLLatestUpdate(特殊标签id sid:Int, 每页数量 pageSize:Int,当前页码 pageNum:Int)->Array<Model.BasicInfo> {
         var postStrig = webJsonUrl + "apiSpecilLabel?sid＝\(sid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
     var arrayData = getJsonData(postStrig) as! NSArray
