@@ -188,7 +188,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         //uiTableView.reloadData()
-        
+        self.uiTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
     }
     
     
@@ -253,7 +253,6 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func setCallbackObject(flag:String,object:NSObject){
-        self.uiTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
         var  basicList1 = object as! Array<Model.BasicInfo>
         if currentPage == 0 {
             basicList = basicList1
