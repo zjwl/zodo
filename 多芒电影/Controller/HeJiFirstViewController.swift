@@ -8,10 +8,10 @@
 
 import UIKit
 
-class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, CommonAccessDelegate {
     var hejiID=0
     var basicList:Array<Model.FilmAlbum> = [] //影片信息列表
-    var currentInfo:Model.FilmAlbum=Model.FilmAlbum(),curPageIndex=0
+    var currentInfo:Model.FilmAlbum=Model.FilmAlbum(),currentPage=0
     var _loadingMore=false
     
     override func viewDidLoad() {
@@ -19,9 +19,8 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
         self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
         // Do any additional setup after loading the view.
         
-        
-        //load data
-        basicList = UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++)
+        CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
+        //basicList = UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++)
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,9 +102,8 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
             tableFooterActivityIndicator.startAnimating()
             self.tableView.addSubview(tableFooterActivityIndicator)
             
-            basicList.extend(UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++))
-            createTableFooter()
-            self.tableView.reloadData()
+            //basicList.extend(UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++))
+            CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
         }
     }
     
@@ -118,6 +116,20 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
         loadMoreText.font = UIFont(name: "Helvetica Neue", size: 14)
         tableFooterView.addSubview(loadMoreText)
         self.tableView.tableFooterView = tableFooterView
+    }
+    
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.FilmAlbum>
+        if currentPage == 0 {
+            basicList = basicList1
+            self.tableView.reloadData()
+            //refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            self.tableView.reloadData()
+            //isScroll = false
+        }
+        createTableFooter()
     }
     
     /*

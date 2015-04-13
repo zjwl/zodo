@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, DataDelegate {
+class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, DataDelegate, CommonAccessDelegate {
     
 
     @IBOutlet weak var uiTableView: UITableView!
@@ -67,7 +67,8 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         
         
         //load data
-        basicList = UTIL.getFilmAlbumDetail(电影合集板块id: hejiID)
+       // basicList = UTIL.getFilmAlbumDetail(电影合集板块id: hejiID)
+        CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合集板块id:hejiID)
         
     }
     
@@ -152,6 +153,11 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
     }
     func invoke(type:String,object:NSObject){
     
+    }
+    
+    func setCallbackObject(flag: String, object: NSObject) {
+        basicList = object as! Array<Model.BasicInfo>
+        self.tableView.reloadData()
     }
     
     /*
