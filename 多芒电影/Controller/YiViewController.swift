@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, CommonAccessDelegate {
 
     @IBOutlet weak var uiTableView: UITableView!
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表
@@ -39,10 +39,9 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     
     
     func refreshData() {
-        basicList = UTIL.getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-        uiTableView.reloadData()
-        refreshControl.endRefreshing()
+        //basicList = UTIL.getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         
+        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
     }
     
     override func didReceiveMemoryWarning() {
@@ -118,13 +117,24 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
             isScroll = true
             currentPage = currentPage + 1
-            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+            //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+            
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        }
+        
+    }
+    
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.BasicInfo>
+        if currentPage == 0 {
+            basicList = basicList1
+            uiTableView.reloadData()
+            refreshControl.endRefreshing()
+        }else {
             basicList.extend(basicList1)
             uiTableView.reloadData()
             isScroll = false
-            
         }
-        
     }
     
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate {
+class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,CommonAccessDelegate {
 
     @IBOutlet var uiTableView: UITableView!
       var basicList:Array<Model.BasicInfo> = [] //影片信息列表
@@ -40,8 +40,9 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     
     func refreshData() {
         refreshControl.endRefreshing()
-        basicList = UTIL.getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-        uiTableView.reloadData()
+//        basicList = UTIL.getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+//        uiTableView.reloadData()
+        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,16 +95,25 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
         if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
             isScroll = true
             currentPage = currentPage + 1
-            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-            basicList.extend(basicList1)
-            uiTableView.reloadData()
-            isScroll = false
+            //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             
         }
         
     }
 
-    
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.BasicInfo>
+        if currentPage == 0 {
+            basicList = basicList1
+            uiTableView.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            uiTableView.reloadData()
+            isScroll = false
+        }
+    }
 
     /*
     // MARK: - Navigation

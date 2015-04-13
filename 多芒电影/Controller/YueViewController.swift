@@ -48,7 +48,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         refreshControl.endRefreshing()
         CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage)
         //basicList = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-        collectionView!.reloadData()
+        //collectionView!.reloadData()
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
@@ -118,20 +118,19 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         return collectionView
     }
     
-//    override func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if isScroll {
-//            return
-//        }
-//        
-//        if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
-//            isScroll = true
-//            currentPage = currentPage + 1
-//            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-//            basicList.extend(basicList1)
-//            collectionView?.reloadData()
-//            isScroll = false
-//        }
-//    }
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        if isScroll {
+            return
+        }
+        
+        if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
+            isScroll = true
+            currentPage = currentPage + 1
+            //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -139,9 +138,16 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
-        basicList = object as! Array<Model.BasicInfo>
-        collectionView!.reloadData()
-        refreshControl.endRefreshing()
+        var  basicList1 = object as! Array<Model.BasicInfo>
+        if currentPage == 0 {
+            basicList = basicList1
+            collectionView!.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            collectionView!.reloadData()
+            isScroll = false
+        }
     }
     
 }

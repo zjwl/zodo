@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate  {
+class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate,CommonAccessDelegate  {
     
     var collectionView : UICollectionView?  // Optional
     var screenSize : CGRect!
@@ -56,8 +56,10 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
     
     func refreshData() {
         refreshControl.endRefreshing()
-        basicList = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-        collectionView!.reloadData()
+//        basicList = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+//        collectionView!.reloadData()
+        
+        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -138,13 +140,23 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
             isScroll = true
             currentPage = currentPage + 1
-            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-            basicList.extend(basicList1)
-            collectionView?.reloadData()
-            isScroll = false
+            //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         }
     }
     
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.BasicInfo>
+        if currentPage == 0 {
+            basicList = basicList1
+            collectionView!.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            collectionView!.reloadData()
+            isScroll = false
+        }
+    }
     
     /*
     // MARK: - Navigation

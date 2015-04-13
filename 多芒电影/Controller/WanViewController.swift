@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CommonAccessDelegate {
     
     @IBOutlet weak var uiTableView: UITableView!
     var basicList:Array<Model.Game> = [] //影片信息列表
@@ -37,9 +37,9 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     
     func refreshData() {
-        basicList = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
-        uiTableView.reloadData()
-        refreshControl.endRefreshing()
+        //basicList = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
+        
+        CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
         
     }
     
@@ -114,14 +114,24 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             }
             
             currentPage = currentPage + 1
-            var  basicList1 = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
-            basicList.extend(basicList1)
-            uiTableView.reloadData()
-            isScroll = false
+            //var  basicList1 = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
+            
+            CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
             
         }
         
     }
     
-    
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.Game>
+        if currentPage == 0 {
+            basicList = basicList1
+            uiTableView.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            uiTableView.reloadData()
+            isScroll = false
+        }
+    }
 }
