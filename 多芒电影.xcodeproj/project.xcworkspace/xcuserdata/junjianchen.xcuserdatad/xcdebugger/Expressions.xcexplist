@@ -68,6 +68,9 @@
          contextName = ":KanViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "currentPage">
+            </PersistentString>
+            <PersistentString
                value = "currentTitle">
             </PersistentString>
          </PersistentStrings>
