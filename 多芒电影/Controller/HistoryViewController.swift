@@ -18,7 +18,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     var refreshControl = UIRefreshControl()
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var noDataView:UILabel=UILabel()
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +30,11 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         uiTableView.delegate = self
         //uiTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.view.addSubview(noDataView)
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
        
     }
     
@@ -44,6 +49,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         
         refreshControl.endRefreshing()
         if user.IsLogin {
+            activityIndicator.startAnimating()
             basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             uiTableView.reloadData()
             noDataView.hidden = true
@@ -114,6 +120,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
                 isScroll = true
                 currentPage = currentPage + 1
+                activityIndicator.startAnimating()
                 var  basicList1 = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 basicList.extend(basicList1)
                 uiTableView.reloadData()

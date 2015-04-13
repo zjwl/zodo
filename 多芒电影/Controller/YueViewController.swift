@@ -20,7 +20,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     var refreshControl = UIRefreshControl()
     var currentPage = 0
     var isScroll = false
-    
+    var activityIndicator:UIActivityIndicatorView!
    // let delegateHolder = NavigationControllerDelegate()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +37,18 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         collection.backgroundColor = UIColor.yellowColor()
         collection.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
         //collection.reloadData()
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
         refreshData()
     }
     
+    
+    
     func refreshData() {
         refreshControl.endRefreshing()
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage)
         //basicList = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         //collectionView!.reloadData()
@@ -127,7 +130,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             isScroll = true
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-            
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         }
     }
@@ -138,6 +141,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.BasicInfo>
         if currentPage == 0 {
             basicList = basicList1

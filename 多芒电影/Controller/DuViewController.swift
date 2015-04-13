@@ -18,7 +18,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     var currentPage = 0
     var isScroll = false
     var refreshControl = UIRefreshControl()
-    
+    var activityIndicator :UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initConstraint()
@@ -28,6 +28,13 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
         uiTableView.dataSource = self
         uiTableView.delegate = self
         uiTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        
         refreshData()
     }
     
@@ -42,6 +49,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     func refreshData() {
          refreshControl.endRefreshing()
         //basicList = UTIL.getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         //uiTableView.reloadData()
     }
@@ -98,6 +106,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
             isScroll = true
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             //basicList.extend(basicList1)
             
@@ -107,6 +116,7 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.BasicInfo>
         if currentPage == 0 {
             basicList = basicList1

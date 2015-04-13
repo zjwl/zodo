@@ -17,7 +17,7 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var titleString:String?,descString:String?
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         colors.append(UIColor(red: 51/255, green: 170/255, blue: 138/255, alpha: 1))
@@ -68,6 +68,13 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         
         //load data
        // basicList = UTIL.getFilmAlbumDetail(电影合辑板块id: hejiID)
+        
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合辑板块id:hejiID)
         
     }
@@ -156,6 +163,7 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         basicList = object as! Array<Model.BasicInfo>
         self.tableView.reloadData()
     }

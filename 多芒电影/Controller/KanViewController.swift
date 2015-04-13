@@ -37,6 +37,13 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
+        
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        
         refreshData()
         
         uiTableView.dataSource = self

@@ -22,13 +22,19 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     
     var isScroll = false
     var refreshControl = UIRefreshControl()
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        
         refreshData()
         
         uiTableView.dataSource = self
@@ -40,7 +46,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     
     func refreshData() {
         //basicList = UTIL.getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-        
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
     }
     
@@ -118,13 +124,14 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
             isScroll = true
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-            
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         }
         
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.BasicInfo>
         if currentPage == 0 {
             basicList = basicList1

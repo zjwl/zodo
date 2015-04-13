@@ -18,7 +18,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     var isScroll = false
     var refreshControl = UIRefreshControl()
-    
+    var activityIndicator:UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +28,12 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         uiTableView.dataSource = self
         uiTableView.delegate = self
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        
         refreshData()
     }
     
@@ -38,7 +44,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func refreshData() {
         //basicList = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
-        
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
         
     }
@@ -115,7 +121,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
-            
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
             
         }
@@ -123,6 +129,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.Game>
         if currentPage == 0 {
             basicList = basicList1

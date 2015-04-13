@@ -19,7 +19,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
     var refreshControl = UIRefreshControl()
     var currentPage = 0
     var isScroll = false
-    
+    var activityIndicator:UIActivityIndicatorView!
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     
     override func viewDidLoad() {
@@ -51,6 +51,12 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         collectionView!.registerClass(musicCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         self.view.addSubview(collectionView!)
         self.collectionView?.backgroundColor = UIColor.whiteColor()
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        
         refreshData()
     }
     
@@ -58,7 +64,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         refreshControl.endRefreshing()
 //        basicList = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
 //        collectionView!.reloadData()
-        
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
     }
     
@@ -141,11 +147,13 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
             isScroll = true
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         }
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.BasicInfo>
         if currentPage == 0 {
             basicList = basicList1
