@@ -13,12 +13,16 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     var basicList:Array<Model.FilmAlbum> = [] //影片信息列表
     var currentInfo:Model.FilmAlbum=Model.FilmAlbum(),currentPage=0
     var _loadingMore=false
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
         // Do any additional setup after loading the view.
-        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
         //basicList = UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++)
     }
@@ -103,6 +107,7 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
             self.tableView.addSubview(tableFooterActivityIndicator)
             
             //basicList.extend(UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++))
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
         }
     }
@@ -119,6 +124,7 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.FilmAlbum>
         if currentPage == 0 {
             basicList = basicList1

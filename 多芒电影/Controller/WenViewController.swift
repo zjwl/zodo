@@ -14,7 +14,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var uiTableView: UITableView!
     @IBOutlet weak var askView: UIView!
     @IBOutlet weak var wenwenLbl: UILabel!
-    
+    var activityIndicator : UIActivityIndicatorView!
     var askList:Array<Model.QASK> = []
     var tempAskList_L0:Array<Model.QASK> = []
     //重组后的数据，用于不同Cell的输出，及调整cell高度
@@ -47,6 +47,13 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         // 设置tableView的委托
         self.uiTableView!.delegate = self
         self.uiTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+
+        
         refreshData()
     }
     

@@ -25,6 +25,12 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         uiWebView.opaque = false
         self.view.addSubview(uiWebView)
         // Do any additional setup after loading the view.
+        
+        //创建UIActivityIndicatorView背底半透明View
+        var view = UIView(frame: UIScreen.mainScreen().bounds)
+        view.tag = 103
+        self.view.addSubview(view)
+        
         if webAddress != "" {
             
             var baseURL:NSURL
@@ -36,19 +42,17 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 var path = NSBundle.mainBundle().bundlePath
                 var baseURL = NSURL.fileURLWithPath(path)
                 uiWebView.loadHTMLString(htmlstring?.stringByAppendingString(""), baseURL:baseURL)
+                self.view.backgroundColor = UIColor.whiteColor()
             } else {
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
+                view.backgroundColor = UIColor.grayColor()
+                view.alpha = 0.8
             }
 
         }
 
-        //创建UIActivityIndicatorView背底半透明View
-        var view = UIView(frame: UIScreen.mainScreen().bounds)
-        view.tag = 103
-        view.backgroundColor = UIColor.grayColor()
-        view.alpha = 0.8
-        self.view.addSubview(view)
+   
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
