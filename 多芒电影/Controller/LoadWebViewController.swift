@@ -8,27 +8,26 @@
 
 import UIKit
 
-class LoadWebViewController: UIViewController {
+class LoadWebViewController: UIViewController,UIWebViewDelegate {
 
     
 // @IBOutlet weak var uiWebView: UIWebView!
     var webAddress  = ""
     var titleText   = ""
     var activityIndicator : UIActivityIndicatorView!
-    
+    var uiWebView:UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
-        activityIndicator.center = self.view.center
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.White
-        self.view.addSubview(activityIndicator)
-
+       
+        self.navigationItem.title = titleText
+        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
+        uiWebView.delegate = self
+        uiWebView.opaque = false
+        self.view.addSubview(uiWebView)
+        // Do any additional setup after loading the view.
         if webAddress != "" {
-            self.navigationItem.title = titleText
-            var uiWebView = UIWebView(frame: self.view.bounds)
-            var baseURL:NSURL
             
+            var baseURL:NSURL
             if webAddress.length() == 7 {
                 var filepath = NSBundle.mainBundle().pathForResource(webAddress, ofType: "html")
                 var htmlstring = NSString(contentsOfFile: filepath!, encoding: NSUTF8StringEncoding, error: nil)
@@ -41,27 +40,42 @@ class LoadWebViewController: UIViewController {
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
             }
-                       
-            self.view.addSubview(uiWebView)
+
         }
+
+        //创建UIActivityIndicatorView背底半透明View
+        var view = UIView(frame: UIScreen.mainScreen().bounds)
+        view.tag = 103
+        view.backgroundColor = UIColor.grayColor()
+        view.alpha = 0.8
+        self.view.addSubview(view)
         
-        // Do any additional setup after loading the view.
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        view.addSubview(activityIndicator)
+
+    }
+    
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+         activityIndicator.startAnimating()
     }
     
 
-    func webViewDidStartLoad(webView:UIWebView){
-        activityIndicator.startAnimating()
-    }
-    
+
     func webViewDidFinishLoad(webView:UIWebView){
+
         activityIndicator.stopAnimating()
         var view = self.view.viewWithTag(103)
         view?.removeFromSuperview()
     }
     
     
-    func showWaiting () {
-        
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        var errorString = "<html><center><font size=+5 color='red' >页面加载出错了<br/>\(error.localizedDescription)</center></html>"
+        uiWebView.loadHTMLString(errorString, baseURL: nil)
     }
     
     override func didReceiveMemoryWarning() {
