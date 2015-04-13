@@ -41,7 +41,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
-        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
         
         refreshData()
