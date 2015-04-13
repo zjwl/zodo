@@ -318,7 +318,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             hjLbl.textColor = UIColor.whiteColor()//设置v_headerLab的字体颜色
             hjLbl.font =  UIFont(name: "Arial", size: 13) //设置v_headerLab的字体样式和大小
            // hjLbl.shadowColor = UIColor.grayColor()//设置v_headerLab的字体的投影
-            hjLbl.text = "   合集:\(hejiList[index].Title)"
+            hjLbl.text = "   合辑:\(hejiList[index].Title)"
             
             
             scwv!.addSubview(btn)

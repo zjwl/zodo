@@ -10,9 +10,20 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
+    @IBOutlet weak var version: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+        var infoDictionary:NSDictionary = NSBundle.mainBundle().infoDictionary!
+        var majorVersion :AnyObject? = infoDictionary ["CFBundleShortVersionString"]
+        let minorVersion :AnyObject? = infoDictionary ["CFBundleVersion"]
+        let appversion = majorVersion as! String
+       
+        version.text = "app版本号：V\(appversion)"
+        
+        
         // Do any additional setup after loading the view.
     }
 

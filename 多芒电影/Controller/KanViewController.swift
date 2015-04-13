@@ -14,6 +14,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var uiTableView: UITableView!
     
     var specalLabes:Array<Model.SpecilLabel> = [] //特殊标签列表
+    var activityIndicator : UIActivityIndicatorView!
     
     @IBOutlet var columnName: UILabel!
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表
@@ -55,6 +56,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     func refreshData() {
         //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
 //        uiTableView.reloadData()
 //        refreshControl.endRefreshing()
@@ -184,7 +186,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             }
         }
         columnName.text = labelName
-        
+        activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         //uiTableView.reloadData()
@@ -242,6 +244,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
             isScroll = true
             currentPage = currentPage + 1
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
 //            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
 //            basicList.extend(basicList1)
@@ -254,6 +257,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     func setCallbackObject(flag:String,object:NSObject){
         var  basicList1 = object as! Array<Model.BasicInfo>
+        activityIndicator.stopAnimating()
         if currentPage == 0 {
             basicList = basicList1
             uiTableView.reloadData()
