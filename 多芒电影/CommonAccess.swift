@@ -472,17 +472,17 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
         setConnectionWithUrl(url)
     }
     
-    //获取电影合集
+    //获取电影合辑
     
-    //获取电影合集栏目板块
+    //获取电影合辑栏目板块
     func getFilmAlbum(每页数量 pageSize:Int,当前页码 pageNum:Int){
         var url = webJsonUrl + "apiFilmAlbum?pageSize=\(pageSize)&pageNum=\(pageNum)"
         methodName = "getFilmAlbum"
         setConnectionWithUrl(url)
     }
     
-    //获取电影合集具体板块明细
-    func getFilmAlbumDetail(电影合集板块id id:Int) {
+    //获取电影合辑具体板块明细
+    func getFilmAlbumDetail(电影合辑板块id id:Int) {
         var url = webJsonUrl + "apiFilmAlbum?id=\(id)"
         methodName = "getFilmAlbumDetail"
         setConnectionWithUrl(url)

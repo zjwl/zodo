@@ -67,8 +67,8 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         
         
         //load data
-       // basicList = UTIL.getFilmAlbumDetail(电影合集板块id: hejiID)
-        CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合集板块id:hejiID)
+       // basicList = UTIL.getFilmAlbumDetail(电影合辑板块id: hejiID)
+        CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合辑板块id:hejiID)
         
     }
     
