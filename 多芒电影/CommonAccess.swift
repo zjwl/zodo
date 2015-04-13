@@ -368,7 +368,7 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
                 var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 var jsonData = json as! NSDictionary
                 setBasicInfo(jsonData)
-            case "getUpdateCount","getCollectionIDS","getGameList":
+            case "getUpdateCount","getCollectionIDS":
                 var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 self.delegate.setCallbackObject(flag, object: json as! NSObject)
             case "getCollection":

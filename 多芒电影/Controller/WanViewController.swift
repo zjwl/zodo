@@ -25,10 +25,10 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
-        refreshData()
         
         uiTableView.dataSource = self
         uiTableView.delegate = self
+        refreshData()
     }
     
     override func viewWillAppear(animated: Bool) {
