@@ -46,7 +46,8 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     func refreshData() {
         refreshControl.endRefreshing()
-        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage)
+        println("loadding page is:\(currentPage)")
+        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage++)
         //basicList = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         //collectionView!.reloadData()
     }
@@ -125,10 +126,9 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         
         if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
             isScroll = true
-            currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-            
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            println("loadding page is:\(currentPage)")
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage++)
         }
     }
     

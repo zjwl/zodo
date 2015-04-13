@@ -9,7 +9,7 @@
 import UIKit
 
 
-class CollectionViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate {
+class CollectionViewController: UIViewController,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate, DataDelegate,CommonAccessDelegate {
 
     @IBOutlet var uiTableView: UITableView!
     var basicList:Array<Model.Collection> = [] //影片信息列表
@@ -58,8 +58,8 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         
         refreshControl.endRefreshing()
         if user.IsLogin {
-            basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
-            uiTableView.reloadData()
+            //basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             noDataView.hidden = true
             uiTableView.hidden = false
         } else {
@@ -166,10 +166,8 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
             if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
                 isScroll = true
                 currentPage = currentPage + 1
-                var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
-                basicList.extend(basicList1)
-                uiTableView.reloadData()    
-                isScroll = false
+                //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
             }
         }
         
@@ -201,6 +199,20 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     func invoke(type:String,object:NSObject){
     
     }
+    
+    func setCallbackObject(flag: String, object: NSObject) {
+        var  basicList1 = object as! Array<Model.Collection>
+        if currentPage == 0 {
+            basicList = basicList1
+            uiTableView.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            uiTableView.reloadData()
+            isScroll = false
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
