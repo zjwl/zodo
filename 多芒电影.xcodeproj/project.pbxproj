@@ -22,6 +22,8 @@
 		5BCB0FBF1AAD899E00C45EDC /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FB11AAD899E00C45EDC /* 7.jpg */; };
 		5BCB0FC01AAD899E00C45EDC /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FB21AAD899E00C45EDC /* 8.jpg */; };
 		5BCB0FC11AAD899E00C45EDC /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FB31AAD899E00C45EDC /* 9.jpg */; };
+		5BF831191ADB4A6600FD81CC /* CommonAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF831181ADB4A6600FD81CC /* CommonAccess.swift */; };
+		5BF8311B1ADB4B2300FD81CC /* CommonAccessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8311A1ADB4B2300FD81CC /* CommonAccessDelegate.swift */; };
 		A91329A41AD4F97E009A1042 /* SendFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91329A31AD4F97E009A1042 /* SendFeedBack.swift */; };
 		A968F2D71ABFF047005C2F7D /* NTTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968F2D61ABFF047005C2F7D /* NTTransition.swift */; };
 		A968F2D91ABFF054005C2F7D /* NTTransitionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968F2D81ABFF054005C2F7D /* NTTransitionProtocol.swift */; };
@@ -171,6 +173,8 @@
 		5BCB0FB11AAD899E00C45EDC /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
 		5BCB0FB21AAD899E00C45EDC /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
 		5BCB0FB31AAD899E00C45EDC /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
+		5BF831181ADB4A6600FD81CC /* CommonAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAccess.swift; sourceTree = "<group>"; };
+		5BF8311A1ADB4B2300FD81CC /* CommonAccessDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAccessDelegate.swift; sourceTree = "<group>"; };
 		A91329A31AD4F97E009A1042 /* SendFeedBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendFeedBack.swift; path = DataAccessApi/SendFeedBack.swift; sourceTree = "<group>"; };
 		A968F2D61ABFF047005C2F7D /* NTTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NTTransition.swift; path = Transition/NTTransition.swift; sourceTree = "<group>"; };
 		A968F2D81ABFF054005C2F7D /* NTTransitionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NTTransitionProtocol.swift; path = Transition/Protocol/NTTransitionProtocol.swift; sourceTree = "<group>"; };
@@ -459,6 +463,8 @@
 				A97A257C1A8E01260008CB92 /* UpdateUserFaceAndNickName.swift */,
 				A97A257D1A8E01260008CB92 /* UpdateUserInfo.swift */,
 				A91329A31AD4F97E009A1042 /* SendFeedBack.swift */,
+				5BF831181ADB4A6600FD81CC /* CommonAccess.swift */,
+				5BF8311A1ADB4B2300FD81CC /* CommonAccessDelegate.swift */,
 			);
 			name = DataAccessAPI;
 			sourceTree = "<group>";
@@ -815,6 +821,7 @@
 				A9EF58B81ACE6D5100BB9A0B /* HeJiFirstCell.swift in Sources */,
 				A97A25871A8E01260008CB92 /* GetGameList.swift in Sources */,
 				A97A25921A8E01260008CB92 /* UpdateUserInfo.swift in Sources */,
+				5BF8311B1ADB4B2300FD81CC /* CommonAccessDelegate.swift in Sources */,
 				A968F2E41ABFF11D005C2F7D /* CHTCollectionViewWaterfallLayout.swift in Sources */,
 				A97A25C81A8E04580008CB92 /* LoginRegisterViewController.swift in Sources */,
 				A97A259B1A8E016C0008CB92 /* String Extention.swift in Sources */,
@@ -866,6 +873,7 @@
 				A97A25AC1A8E025C0008CB92 /* YiViewController.swift in Sources */,
 				A97A259A1A8E016C0008CB92 /* Qask.swift in Sources */,
 				A97A25B21A8E02CC0008CB92 /* LoginViewController.swift in Sources */,
+				5BF831191ADB4A6600FD81CC /* CommonAccess.swift in Sources */,
 				A97A25831A8E01260008CB92 /* CheckUserName.swift in Sources */,
 				A97A25BC1A8E036B0008CB92 /* DetialKanViewController.swift in Sources */,
 				A968F2EC1ABFF11D005C2F7D /* NTWaterfallViewCell.swift in Sources */,

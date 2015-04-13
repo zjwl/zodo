@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate{
+class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate,DataDelegate,CommonAccessDelegate{
     
     @IBOutlet var scwv: UIScrollView!
     @IBOutlet weak var uiTableView: UITableView!
@@ -54,9 +54,10 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func refreshData() {
-        basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-        uiTableView.reloadData()
-        refreshControl.endRefreshing()
+        //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+//        uiTableView.reloadData()
+//        refreshControl.endRefreshing()
         
     }
     
@@ -184,9 +185,10 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         }
         columnName.text = labelName
         
-        basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-        uiTableView.reloadData()
-        self.uiTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
+        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        //uiTableView.reloadData()
+        
     }
     
     
@@ -229,7 +231,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var theSegue = segue.destinationViewController as! movieDetailController
-        
+        theSegue.title = "电影推荐"
         theSegue.currentInfo = currentInfo
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -240,13 +242,28 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         if scrollView.contentOffset.y + scrollView.frame.size.height > scrollView.contentSize.height * 0.8 {
             isScroll = true
             currentPage = currentPage + 1
-            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-            basicList.extend(basicList1)
-            uiTableView.reloadData()
-            isScroll = false
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+//            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+//            basicList.extend(basicList1)
+//            uiTableView.reloadData()
+//            isScroll = false
             
         }
         
+    }
+    
+    func setCallbackObject(flag:String,object:NSObject){
+        self.uiTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
+        var  basicList1 = object as! Array<Model.BasicInfo>
+        if currentPage == 0 {
+            basicList = basicList1
+            uiTableView.reloadData()
+            refreshControl.endRefreshing()
+        }else {
+            basicList.extend(basicList1)
+            uiTableView.reloadData()
+            isScroll = false
+        }
     }
     
     
