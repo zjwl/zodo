@@ -344,19 +344,52 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         //v_headerLab.shadowColor = UIColor.whiteColor()//设置v_headerLab的字体的投影
         v_headerLab.text = "最新更新";
         
-        var currentTime = UILabel(frame:  CGRect(x: (UIScreen.mainScreen().bounds.size.width - 120 ) / 2  ,y: 0,width: 120.0 ,height: 30.0))
-        var dateformat = NSDateFormatter()
-        dateformat.dateFormat = "yyyy年MM月dd日"
-        currentTime.text =  dateformat.stringFromDate(NSDate())
+        var currentTime = UILabel(frame:  CGRect(x: (UIScreen.mainScreen().bounds.size.width - 160 ) / 2   ,y: 0,width: 160.0 ,height: 30.0))
+        
         currentTime.textColor = UIColor.grayColor()//设置v_headerLab的字体颜色
         currentTime.font =  UIFont(name: "Arial", size: 13) //设置字体样式和大小
+        
+        var year = 0, month = 0, day = 0, week = 0
+        var weekStr:NSString!
+        
+        var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        var now = NSDate()
+        var comps =  calendar?.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday, fromDate: now)
+        year = comps!.year
+        week = comps!.weekday
+        month = comps!.month
+        day = comps!.day
+        
+        switch week {
+        case 1:
+            weekStr="星期天"
+        case 2:
+            weekStr="星期一"
+        case 3:
+            weekStr="星期二";
+        case 4:
+             weekStr="星期三"
+        case 5:
+             weekStr="星期四";
+        case 6:
+             weekStr="星期五";
+        case 7:
+            weekStr="星期六";
+        default:
+            NSLog("error!")
+        }
+        
+        currentTime.text =  "\(year)年\(month)月\(day)日 \(weekStr)"
+        
+        
         v_headerLab.addSubview(currentTime)
         
+       /*
         var rightImageBtn = UIButton(frame: CGRect(x: UIScreen.mainScreen().bounds.size.width - 40 , y: 5, width: 20, height: 20))
         rightImageBtn.setImage(UIImage(named: "refresh"), forState: UIControlState.Normal)
         rightImageBtn.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.TouchDown)
          v_headerLab.addSubview(rightImageBtn)
-        
+        */
         
         v_headerView.addSubview(v_headerLab)//将标题v_headerLab添加到创建的视图（v_headerView）中
         

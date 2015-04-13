@@ -3,6 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = ":CollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":BaseAccess.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ps[8]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = ":HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -19,8 +43,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":CollectionViewController.swift">
+         contextName = ":KanViewController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "specalLabes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":LoginThirdViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.MemberID">
+            </PersistentString>
+            <PersistentString
+               value = "user.IsUsed">
+            </PersistentString>
+            <PersistentString
+               value = "user.NickName">
+            </PersistentString>
             <PersistentString
                value = "user">
             </PersistentString>
@@ -31,14 +72,6 @@
          <PersistentStrings>
             <PersistentString
                value = " user?.MemberID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":KanViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "specalLabes">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

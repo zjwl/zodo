@@ -90,7 +90,14 @@ extension UIControl{
         var index               :Int = 0
         var view                :UIView!
         
-         var colorArray:Array<UIColor> = [ UIColor(red: 51.0 / 255.0, green: 170 / 255.0, blue: 138 / 255.0, alpha: 1.0),UIColor(red: 72.0 / 255.0, green: 147 / 255.0, blue: 205 / 255.0, alpha: 1.0),UIColor(red: 237.0 / 255.0, green: 126 / 255.0, blue: 1107 / 255.0, alpha: 1.0),UIColor(red: 230.0 / 255.0, green: 171 / 255.0, blue: 41 / 255.0, alpha: 1.0),UIColor(red: 161.0 / 255.0, green: 88 / 255.0, blue: 205 / 255.0, alpha: 1.0),UIColor(red: 116.0 / 255.0, green: 170 / 255.0, blue: 24 / 255.0, alpha: 1.0),UIColor(red: 126.0 / 255.0, green: 114 / 255.0, blue: 100 / 255.0, alpha: 1.0),UIColor(red: 246.0 / 255.0, green: 89 / 255.0, blue: 58 / 255.0, alpha: 1.0)]
+         var colorArray:Array<UIColor> = [  UIColor(red: 51.0 / 255.0, green: 170 / 255.0, blue: 138 / 255.0, alpha: 1.0),
+                                            UIColor(red: 72.0 / 255.0, green: 147 / 255.0, blue: 205 / 255.0, alpha: 1.0),
+                                            UIColor(red: 237.0 / 255.0, green: 126 / 255.0, blue: 1107 / 255.0, alpha: 1.0),
+                                            UIColor(red: 230.0 / 255.0, green: 171 / 255.0, blue: 41 / 255.0, alpha: 1.0),
+                                            UIColor(red: 161.0 / 255.0, green: 88 / 255.0, blue: 205 / 255.0, alpha: 1.0),
+                                            UIColor(red: 116.0 / 255.0, green: 170 / 255.0, blue: 24 / 255.0, alpha: 1.0),
+                                            UIColor(red: 126.0 / 255.0, green: 114 / 255.0, blue: 100 / 255.0, alpha: 1.0),
+                                            UIColor(red: 246.0 / 255.0, green: 89 / 255.0, blue: 58 / 255.0, alpha: 1.0)]
         
 
         
@@ -338,13 +345,14 @@ extension UIControl{
             
             columnNameLabel = UILabel(frame: CGRect(x: 95, y: 15, width: 200, height: 17))
             columnNameLabel.backgroundColor = UIColor.clearColor()
-            columnNameLabel.font = UIFont.systemFontOfSize(14)
+            columnNameLabel.font = UIFont.systemFontOfSize(15)
+            columnNameLabel.textColor =  UIColor.grayColor()
             self.contentView.addSubview(columnNameLabel)
             
-            Title = UILabel(frame: CGRect(x: 90, y: 30,width: screenWidth-100, height: 40))
+            Title = UILabel(frame: CGRect(x: 90, y: 30,width: screenWidth-95, height: 40))
             Title.numberOfLines = 2
             Title.backgroundColor = UIColor.clearColor()
-            Title.font = UIFont.systemFontOfSize(11)
+            Title.font = UIFont.systemFontOfSize(13)
            // Title.lineBreakMode = lin
             self.contentView.addSubview(Title)
             
@@ -354,7 +362,7 @@ extension UIControl{
             
             playBtn = UIButton(frame: CGRect(x: screenWidth-70, y: 70, width: 32, height: 20))
             self.contentView.addSubview(playBtn)
-            playBtn.addTarget(self, action: "playTarget:", forControlEvents: UIControlEvents.TouchDown)
+           // playBtn.addTarget(self, action: "playTarget:", forControlEvents: UIControlEvents.TouchDown)
 
         }
 
@@ -425,9 +433,9 @@ extension UIControl{
             }
         }
 
-        func playTarget(sender:UIButton){
+      /*  func playTarget(sender:UIButton){
             println(playUrl)
-        }
+        }*/
         
     }
 }

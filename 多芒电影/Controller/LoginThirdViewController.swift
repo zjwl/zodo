@@ -122,6 +122,8 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     
     func invoke(index:Int,StringResult result:String){
 
+        println("this is niclnkkk \(user.NickName)")
+        
         switch index {
         case 0:
             var memberID = result
@@ -145,7 +147,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     func setBasicValue() {
       
         self.lblNickname.text = user.NickName
-        var icon = user.HeadPhotoURL.trim().length()>10 ? user.HeadPhotoURL : "http://apk.zdomo.com/ueditor/net/upload/face/0.jpg"
+        var icon = user.HeadPhotoURL.trim().length() > 10 ? user.HeadPhotoURL.trim() : "http://apk.zdomo.com/ueditor/net/upload/face/0.jpg"
         var imgURL = NSURL(string: icon)
         imageView = UIImageView(frame: btnFace.bounds)
         btnFace.layer.masksToBounds = true
