@@ -18,12 +18,12 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     var uiWebView:UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+       
         self.navigationItem.title = titleText
-        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 64.0,width: self.view.bounds.width,height: self.view.bounds.height))
+        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
         uiWebView.delegate = self
         uiWebView.opaque = false
+        self.view.addSubview(uiWebView)
         // Do any additional setup after loading the view.
         if webAddress != "" {
             
@@ -46,7 +46,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         //创建UIActivityIndicatorView背底半透明View
         var view = UIView(frame: UIScreen.mainScreen().bounds)
         view.tag = 103
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.grayColor()
         view.alpha = 0.8
         self.view.addSubview(view)
         
@@ -54,21 +54,18 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
         view.addSubview(activityIndicator)
-        self.view.addSubview(uiWebView)
-        
-        println("viewDidLoad")
+
     }
     
     
     func webViewDidStartLoad(webView: UIWebView) {
-        println("webViewDidStartLoad")
          activityIndicator.startAnimating()
     }
     
 
 
     func webViewDidFinishLoad(webView:UIWebView){
-        println("webViewDidFinishLoad")
+
         activityIndicator.stopAnimating()
         var view = self.view.viewWithTag(103)
         view?.removeFromSuperview()
@@ -76,7 +73,6 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        println("didFailLoadWithError")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         var errorString = "<html><center><font size=+5 color='red' >页面加载出错了<br/>\(error.localizedDescription)</center></html>"
         uiWebView.loadHTMLString(errorString, baseURL: nil)
