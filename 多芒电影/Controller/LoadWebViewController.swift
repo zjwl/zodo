@@ -26,6 +26,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
         uiWebView.delegate = self
         uiWebView.opaque = false
+        uiWebView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(uiWebView)
         // Do any additional setup after loading the view.
         
@@ -45,14 +46,11 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 var path = NSBundle.mainBundle().bundlePath
                 var baseURL = NSURL.fileURLWithPath(path)
                 uiWebView.loadHTMLString(htmlstring?.stringByAppendingString(""), baseURL:baseURL)
-                self.view.backgroundColor = UIColor.whiteColor()
-                view1.backgroundColor = UIColor.whiteColor()
             } else {
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
                 view1.backgroundColor = UIColor.grayColor()
                 view1.alpha = 0.8
-                
             }
 
         }
