@@ -165,6 +165,10 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
         refreshControl?.endRefreshing()
+        
+        uiTableView!.contentOffset = CGPointMake(0, 0);
+        
+        
         basicList = object as! Array<Model.BasicInfo>
         self.tableView.reloadData()
     }
