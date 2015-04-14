@@ -10,10 +10,9 @@ import UIKit
 
 class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate,CommonAccessDelegate  {
     
-    var collectionView : UICollectionView?  // Optional
-    var screenSize : CGRect!
-    var screenWidth : CGFloat!
-    var screenHeight : CGFloat!
+    //var collectionView : UICollectionView?  // Optional
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var basicList:Array<Model.BasicInfo> = []
     var refreshControl = UIRefreshControl()
@@ -28,29 +27,25 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         
-        
-        //    screenSize = UIScreen.mainScreen().bounds
-        screenSize = self.view.frame
-        
-        screenWidth = screenSize.width
-        screenHeight = screenSize.height
+        self.automaticallyAdjustsScrollViewInsets=false
         
         // Do any additional setup after loading the view, typically from a nib.
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 64, left: 0, bottom: 48, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 48, right: 0)
         layout.itemSize = CGSize(width: screenWidth/2, height: screenWidth/2+20)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView?.addSubview(refreshControl)
+        //collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.collectionViewLayout = layout
+        collectionView.addSubview(refreshControl)
         
         println(collectionView?.frame.width)
-        collectionView!.dataSource = self
-        collectionView!.delegate = self
-        collectionView!.registerClass(musicCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(musicCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         self.view.addSubview(collectionView!)
-        self.collectionView?.backgroundColor = UIColor.whiteColor()
+        self.collectionView.backgroundColor = UIColor.whiteColor()
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center

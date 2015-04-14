@@ -8,22 +8,23 @@
 
 import UIKit
 
-class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, CommonAccessDelegate {
+class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommonAccessDelegate {
     var hejiID=0
     var basicList:Array<Model.FilmAlbum> = [] //影片信息列表
     var currentInfo:Model.FilmAlbum=Model.FilmAlbum(),currentPage=0
     var _loadingMore=false,_isDataLoadOver=false
     var activityIndicator : UIActivityIndicatorView!
     var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
-    
+    var refreshControl =  UIRefreshControl()
+    @IBOutlet weak var uiTableView: UITableView!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
-        self.refreshControl = UIRefreshControl()
-        refreshControl!.attributedTitle = NSAttributedString(string: "松开更新信息")
-        refreshControl!.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableView.addSubview(refreshControl!)
+        self.uiTableView.separatorStyle=UITableViewCellSeparatorStyle.None
+        refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        self.uiTableView.addSubview(refreshControl)
         
         // Do any additional setup after loading the view.
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
@@ -33,6 +34,9 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
         activityIndicator.startAnimating()
         refreshData()
         tableFooterActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        
+        uiTableView.delegate = self
+        uiTableView.dataSource = self
     }
     
     func refreshData(){
@@ -46,11 +50,11 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     }
     
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return basicList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var identifier="hejiFirstItem"
         var cell: HeJiFirstCell? = tableView.dequeueReusableCellWithIdentifier(identifier) as! HeJiFirstCell?
         if cell==nil {
@@ -98,11 +102,11 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
         theSegue.descString=currentInfo.Description
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
         return 200
     }
     
-    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool){
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool){
         // 下拉到最底部时显示更多数据
         if(!_loadingMore && scrollView.contentOffset.y > ((scrollView.contentSize.height - scrollView.frame.size.height)))
         {
@@ -126,10 +130,10 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     
     // 创建表格底部
     func createTableFooter(){
-        self.tableView.tableFooterView = nil
-        var tableFooterView = UIView(frame: CGRectMake(0.0, 0.0, tableView.bounds.size.width, 40.0))
-        tableFooterActivityIndicator.frame = CGRectMake((tableView.bounds.size.width-160)/2, 10.0, 20.0, 20.0)
-        var loadMoreText = UILabel(frame: CGRectMake((tableView.bounds.size.width-120)/2, 5, 120, 30))
+        self.uiTableView.tableFooterView = nil
+        var tableFooterView = UIView(frame: CGRectMake(0.0, 0.0, uiTableView.bounds.size.width, 40.0))
+        tableFooterActivityIndicator.frame = CGRectMake((uiTableView.bounds.size.width-160)/2, 10.0, 20.0, 20.0)
+        var loadMoreText = UILabel(frame: CGRectMake((uiTableView.bounds.size.width-120)/2, 5, 120, 30))
         if _isDataLoadOver {
             loadMoreText.text = "已加载完所有数据"
         }else{
@@ -140,20 +144,20 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
         loadMoreText.textAlignment = NSTextAlignment.Center
         tableFooterView.addSubview(loadMoreText)
         tableFooterView.addSubview(tableFooterActivityIndicator)
-        self.tableView.tableFooterView = tableFooterView
+        self.uiTableView.tableFooterView = tableFooterView
         tableFooterActivityIndicator.stopAnimating()
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
-        refreshControl?.endRefreshing()
+        refreshControl.endRefreshing()
         var  basicList1 = object as! Array<Model.FilmAlbum>
         if basicList1.count==0 {
             _isDataLoadOver = true
         }
         if currentPage == 0 {
             basicList = basicList1
-            self.tableView.reloadData()
+            self.uiTableView.reloadData()
             //refreshControl.endRefreshing()
         }else {
             if flag=="refresh"{
@@ -161,7 +165,7 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
             }else{
                 basicList.extend(basicList1)
             }
-            self.tableView.reloadData()
+            self.uiTableView.reloadData()
             //isScroll = false
         }
         _loadingMore=false
