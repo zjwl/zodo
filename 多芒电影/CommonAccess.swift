@@ -354,6 +354,32 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
         self.delegate.setCallbackObject(flag, object: qaskList)
     }
     
+    func setQASKParticipant(arrayData:NSArray){
+        var qaskList:Array<Model.QASK> = []
+        for item in arrayData{
+            var dict = item as!  NSDictionary
+            var qask = Model.QASK()
+            
+            qask.QASKID = dict["QASKID"] as! Int
+            qask.ManagerID = dict["ManagerID"] as! Int
+            qask.SourceID = dict["SourceID"] as! Int
+            qask.SenderID = dict["SenderID"] as! Int
+            qask.ReplyID = dict["ReplyID"] as! Int
+            qask.AuditID = dict["AuditID"] as! Int
+            qask.IS_Editor = dict["IS_Editor"] as! Bool
+            qask.IsUsed = dict["IsUsed"] as! Bool
+            qask.Content = (dict["Content"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.AddTmie = (dict["AddTmie"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.NickName = (dict["NickName"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            qask.iconFace = (dict["iconFace"] as!  String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            
+            qaskList.append(qask)
+            
+        }
+        self.delegate.setCallbackObject(flag, object: qaskList)
+    }
+    
+    
     func connectionDidFinishLoading(connection: NSURLConnection) {
         switch methodName {
             case "getLlatestUpdate":
@@ -407,7 +433,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
                 var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 var arrayData = json as! NSArray
                 setQASKInfo(arrayData)
-            
+            case "getQASKParticipant":
+                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+                var arrayData = json as! NSArray
+                setQASKParticipant(arrayData)
             default:
                 var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
                 var arrayData = json as! NSArray
@@ -541,7 +570,8 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     
     //获取参与问题
      func getQASKParticipant(主题下显示条数 subSize:Int,每页数量 pageSize:Int,当前页码 pageNum:Int,发送者id senderid:Int){
-        var url = webJsonUrl + "apiQASK/?senderid=\(senderid)&subSize＝\(subSize)&pageSize=\(pageSize)&pageNum=\(pageNum)"
+        //var url = webJsonUrl + "apiQASK/?senderid=\(senderid)&subSize＝\(subSize)&pageSize=\(pageSize)&pageNum=\(pageNum)"
+        var url = webJsonUrl + "apiQASK/?senderid=\(senderid)&subSize=\(subSize)&pageSize=\(pageSize)&pageNum=\(pageNum)"
         methodName = "getQASKParticipant"
         setConnectionWithUrl(url)
     }

@@ -8,22 +8,23 @@
 
 import UIKit
 
-class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
+class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource, CommonAccessDelegate {
     
     @IBOutlet weak var title_segment: UISegmentedControl!
     @IBOutlet weak var uiTableView: UITableView!
     @IBOutlet weak var askView: UIView!
     @IBOutlet weak var wenwenLbl: UILabel!
-    var activityIndicator : UIActivityIndicatorView!
     var askList:Array<Model.QASK> = []
     var tempAskList_L0:Array<Model.QASK> = []
     //重组后的数据，用于不同Cell的输出，及调整cell高度
-    var arraylist:Array<Array<Model.QASK>> = [[]]
+    var arraylistForXBS:Array<Array<Model.QASK>> = [[]]
     var tempArray:Array<Model.QASK> = []
     var refreshControl = UIRefreshControl()
+    var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
+    
     var tempCell:daJiaShuoCellCode = daJiaShuoCellCode()  //[self.tableView dequeueReusableCellWithIdentifier:@"C1"];
     var toQid:Int=0,sourceID:Int=1,toViewQid=0,dajiashuoPageIndex=0,xbShuoPageIndex=0
-    var _loadingMore=false
+    var _loadingMore=false,_isXBdataLoadOver=false,_isDJSdataLoadOver=false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets=false
@@ -36,24 +37,18 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         
         
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "updtae thie data")
+        refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         self.uiTableView.addSubview(refreshControl)
         tempCell = NSBundle.mainBundle().loadNibNamed("daJiaShuoCell", owner: nil, options: nil).last as! daJiaShuoCellCode
         
-       
+       tableFooterActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         
         // 设置tableView的数据源
         self.uiTableView!.dataSource=self
         // 设置tableView的委托
         self.uiTableView!.delegate = self
         self.uiTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
-        activityIndicator.center = view.center
-        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
-        view.addSubview(activityIndicator)
-
-        
+        createTableFooter()
         refreshData()
     }
     
@@ -69,10 +64,12 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     func loadDataBegin(){
         if !_loadingMore {
             _loadingMore = true
-            var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(75, 10, 20, 20))
-            tableFooterActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+//            var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(75, 10, 20, 20))
+//            tableFooterActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+//            tableFooterActivityIndicator.startAnimating()
+//            uiTableView.addSubview(tableFooterActivityIndicator)
+            
             tableFooterActivityIndicator.startAnimating()
-            uiTableView.addSubview(tableFooterActivityIndicator)
             refreshData()
         }
     }
@@ -82,11 +79,30 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     func createTableFooter(){
         uiTableView.tableFooterView = nil
         var tableFooterView = UIView(frame: CGRectMake(0.0, 0.0, uiTableView.bounds.size.width, 40.0))
-        var loadMoreText = UILabel(frame: CGRectMake(0, 0, 116, 40))
-        loadMoreText.text = "上拉显示更多数据"
+        tableFooterActivityIndicator.frame = CGRectMake((uiTableView.bounds.size.width-160)/2, 10.0, 20.0, 20.0)
+        var loadMoreText = UILabel(frame: CGRectMake((uiTableView.bounds.size.width-120)/2, 5, 120, 30))
+        
+        if title_segment.selectedSegmentIndex == 0{
+            if _isDJSdataLoadOver {
+                loadMoreText.text = "已加载完所有数据"
+            }else{
+                loadMoreText.text = "上拉显示更多数据"
+            }
+        }else{
+            if _isXBdataLoadOver {
+                loadMoreText.text = "已加载完所有数据"
+            }else{
+                loadMoreText.text = "上拉显示更多数据"
+            }
+        }
+        
+        loadMoreText.textColor = UIColor.grayColor()
+        loadMoreText.textAlignment = NSTextAlignment.Center
         loadMoreText.font = UIFont(name: "Helvetica Neue", size: 14)
+        tableFooterView.addSubview(tableFooterActivityIndicator)
         tableFooterView.addSubview(loadMoreText)
         uiTableView.tableFooterView = tableFooterView
+        tableFooterActivityIndicator.stopAnimating()
     }
     
     
@@ -180,44 +196,11 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             uid = dele.user!.MemberID.toInt()!
         }
         if title_segment.selectedSegmentIndex == 1{
-            if(xbShuoPageIndex==0){
-                askList = UTIL.getQASKList(是否小编主题: false, 主题下显示条数: 2, 每页数量: 10, 当前页码: xbShuoPageIndex++, 发送者id: uid)//小编说
-            }else {
-                askList.extend(UTIL.getQASKList(是否小编主题: false, 主题下显示条数: 2, 每页数量: 10, 当前页码: xbShuoPageIndex++, 发送者id: uid))
-            }
+            CommonAccess(delegate: self, flag: "xbs").getQASKList(是否小编主题: false, 主题下显示条数: 2, 每页数量: 10, 当前页码: xbShuoPageIndex++, 发送者id: uid)//小编说
+            
         }else{
-            if dajiashuoPageIndex==0 {
-                askList=UTIL.getEveryoneSayList(1, 每页数量: 10, 当前页码: dajiashuoPageIndex++, 发送者id: uid)
-            }else{
-                askList.extend(UTIL.getEveryoneSayList(1, 每页数量: 10, 当前页码: dajiashuoPageIndex++, 发送者id: uid))
-            }
+            CommonAccess(delegate: self, flag: "djs").getEveryoneSayList(1, 每页数量: 10, 当前页码: dajiashuoPageIndex++, 发送者id: uid)
         }
-        _loadingMore = false
-        createTableFooter()
-        
-        refreshControl.endRefreshing()
-    
-        arraylist.removeAll(keepCapacity: false)
-        tempArray.removeAll(keepCapacity: false)
-        //数据分组处理
-        var count = 0
-        for item in askList {
-            if item.SourceID == 0 {
-                tempAskList_L0.append(item)
-                count++
-            }
-        }
-        for item in tempAskList_L0 {
-            tempArray.append(item)
-            for li in askList {
-                if li.SourceID == item.QASKID {
-                    tempArray.append(li)
-                }
-            }
-            arraylist.append(tempArray)
-            tempArray.removeAll(keepCapacity: false)
-        }
-        uiTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -227,7 +210,9 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     func segmentAction(sender:NSObject){
         println("index is:\(title_segment.selectedSegmentIndex)")
-       
+        tableFooterActivityIndicator.startAnimating()
+        dajiashuoPageIndex=0
+        xbShuoPageIndex=0
         self.uiTableView.setContentOffset(CGPointMake(0, 0), animated: false)
         if title_segment.selectedSegmentIndex == 1 {
             wenwenLbl.text="问问小编"
@@ -255,6 +240,13 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             self.uiTableView.tableHeaderView?.frame = CGRectMake(0, 0, 1, 1)
             self.uiTableView.tableHeaderView?.hidden = true
         }
+        askList.removeAll(keepCapacity: false)
+        arraylistForXBS.removeAll(keepCapacity: false)
+        tempArray.removeAll(keepCapacity: false)
+        
+        self.uiTableView.reloadData()
+        //self.uiTableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        //arraylistForXBS.removeAll(keepCapacity: false)
         refreshData()
     }
     
@@ -263,7 +255,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         if  self.title_segment.selectedSegmentIndex == 0{
             return askList.count
         }else{
-            return arraylist.count
+            return arraylistForXBS.count
         }
         
     }
@@ -299,41 +291,17 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             cell!.selectionStyle = UITableViewCellSelectionStyle.None
             return cell!
         }else{
-            // may be no value, so use optional
-            //            var cell: daJiaShuoCellCode? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? daJiaShuoCellCode
-            //
-            //            if cell == nil { // no value
-            //                //注册自定义cell到tableview中，并设置cell标识符为indentifier（nibName对应UItableviewcell xib的名字）
-            //                var nib:UINib = UINib(nibName:"daJiaShuoCell", bundle: nil)
-            //                tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
-            //                //从tableview中获取标识符为papercell的cell
-            //                cell = (tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as daJiaShuoCellCode)
-            //
-            //            }
-            
-            //            var cell: daJiaShuoCellCode? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? daJiaShuoCellCode
-            //            //注册自定义cell到tableview中，并设置cell标识符为indentifier（nibName对应UItableviewcell xib的名字）
-            //            var nib:UINib = UINib(nibName:"daJiaShuoCell", bundle: nil)
-            //            tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
-            //            //从tableview中获取标识符为papercell的cell
-            //            cell = (tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as daJiaShuoCellCode)
-            
-            
-            
-            //println("indexPath in main:\(indexPath.row)")
-            //let model: Model.QASK? = tempAskList_L0[indexPath.row]
-            
             var cell = xbShuoCell(frame:CGRectMake(0, 0, tableView.frame.width, 80))
             
             //println("Cellll width~~~~~:\(cell!.frame.width)")
-            cell.configureCell(arraylist[indexPath.row])
+            cell.configureCell(arraylistForXBS[indexPath.row])
             var replyGesture = UITapGestureRecognizer(target: self, action: Selector("goWenWenPageFromXbs:"))
             cell.replyBtn.userInteractionEnabled=true
             cell.replyBtn.addGestureRecognizer(replyGesture)
-            cell.replyBtn.tag=arraylist[indexPath.row][0].QASKID
+            cell.replyBtn.tag=arraylistForXBS[indexPath.row][0].QASKID
             
             if !(cell.replyBtn2==nil){
-                cell.replyBtn2!.tag=arraylist[indexPath.row][0].QASKID
+                cell.replyBtn2!.tag=arraylistForXBS[indexPath.row][0].QASKID
                 cell.replyBtn2!.addTarget(self, action: Selector("goQaskDetail:"), forControlEvents: UIControlEvents.TouchUpInside)
             }
             
@@ -361,18 +329,18 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             
             var content0_H:CGFloat=0,content1_H:CGFloat=0,content2_H:CGFloat=0
             content0_H = content0_size.height + 141 //10+60+10+1+10+contentH+10+30+10
-            if arraylist[indexPath.row].count==2 {
-                var content1:NSString = arraylist[indexPath.row][1].Content
+            if arraylistForXBS[indexPath.row].count==2 {
+                var content1:NSString = arraylistForXBS[indexPath.row][1].Content
                 var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
                 content1_H = content1_size.height + 50 //10+20+10+ContentH+10
             }
             
-            if arraylist[indexPath.row].count==3 {
-                var content1:NSString = arraylist[indexPath.row][1].Content
+            if arraylistForXBS[indexPath.row].count==3 {
+                var content1:NSString = arraylistForXBS[indexPath.row][1].Content
                 var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
                 content1_H = content1_size.height + 50
                 
-                var content2:NSString = arraylist[indexPath.row][2].Content
+                var content2:NSString = arraylistForXBS[indexPath.row][2].Content
                 var content2_size:CGSize = content2.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
                 content2_H = content2_size.height + 50 + 11 //5+departViewHeight+5
             }
@@ -386,7 +354,7 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             //var size:CGSize = lbl.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
             //println("size.height:\(content0_size.height)")
             var tempH = 0
-            if arraylist[indexPath.row].count == 3 {
+            if arraylistForXBS[indexPath.row].count == 3 {
                 tempH = 20  //查看所有的高度
             }
             var tempTotalHeight=content0_H+content1_H+content2_H+CGFloat(tempH)
@@ -404,6 +372,67 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         
     }
     
+    func setCallbackObject(flag: String, object: NSObject) {
+        var asklistTemp = object as! Array<Model.QASK>
+        
+        if flag == "xbs"{
+            if asklistTemp.count==0 {
+                _isXBdataLoadOver = true
+            }else{
+                _isXBdataLoadOver = false
+            }
+            if(xbShuoPageIndex==0){
+                askList = asklistTemp //小编说
+            }else {
+                if asklistTemp.count>0{
+                    askList.extend(asklistTemp)
+                }
+            }
+        }else{
+            if asklistTemp.count==0 {
+                _isDJSdataLoadOver = true
+            }else{
+                _isDJSdataLoadOver = false
+            }
+            if(dajiashuoPageIndex==0){
+                askList = asklistTemp //大家说
+            }else {
+                if asklistTemp.count>0{
+                    askList.extend(asklistTemp)
+                }
+            }
+        }
+        arraylistForXBS.removeAll(keepCapacity: false)
+        tempArray.removeAll(keepCapacity: false)
+        
+        
+        //数据分组处理
+        var count = 0
+        for item in askList {
+            if item.SourceID == 0 {
+                tempAskList_L0.append(item)
+                count++
+            }
+        }
+        for item in tempAskList_L0 {
+            tempArray.append(item)
+            for li in askList {
+                if li.SourceID == item.QASKID {
+                    tempArray.append(li)
+                }
+            }
+            arraylistForXBS.append(tempArray)
+            tempArray.removeAll(keepCapacity: false)
+        }
+        if asklistTemp.count>0{
+            uiTableView.reloadData()
+        }
+        
+       
+        _loadingMore = false
+        createTableFooter()
+        refreshControl.endRefreshing()
+    }
     
     
     /*

@@ -95,7 +95,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
         
         lblTime.font=UIFont(name: "ArialUnicodeMS", size: 14)
         lblTime.textColor=UIColor.lightGrayColor()
-        
+        println("当前nickname:\(model.NickName) 的 iconFace :\(model.iconFace)")
         var imgURL = NSURL(string: model.iconFace)
         PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
             //use image
