@@ -20,18 +20,16 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.frame = UIScreen.mainScreen().bounds
+       
+         println(shouldRound)
+        
         self.navigationItem.title = titleText
-        uiWebView = UIWebView(frame: UIScreen.mainScreen().bounds)
+        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
         uiWebView.delegate = self
         uiWebView.opaque = false
         self.view.addSubview(uiWebView)
         // Do any additional setup after loading the view.
-       setLoadData()
-    }
-    
-    
-    func setLoadData(){
+        
         //创建UIActivityIndicatorView背底半透明View
         var view = UIView(frame: UIScreen.mainScreen().bounds)
         view.tag = 103
@@ -54,34 +52,55 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
                 view.backgroundColor = UIColor.grayColor()
                 view.alpha = 0.8
-                var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.isFull = true
+                
             }
-            
+
         }
+
+   
         
-       
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
         view.addSubview(activityIndicator)
+
         
-        
-        
-        
+        var version = (UIDevice.currentDevice().systemVersion as NSString).floatValue
+        if version < 8.0 {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoStarted:", name: "UIMoviePlayerControllerDidEnterFullscreenNotification", object: nil) //播放器即将播放通知
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoFinished:",name: "UIMoviePlayerControllerWillExitFullscreenNotification", object: nil) //播放器即将退出通知
+        }else {
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoStarted:", name: "UIWindowDidBecomeVisibleNotification", object: nil) //播放器即将播放通知
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoFinished:",name: "UIWindowDidBecomeHiddenNotification", object: nil) //播放器即将退出通知
+        }
+
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    
+    
+    
+    //pragma mark 调用视频的通知方法
+    func videoStarted(notification:NSNotification) {
+        var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.isFull = true
+    }
+    
+    
+    func videoFinished(notification:NSNotification) { //完成播放
         var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.isFull = false
+       
+        
+        UIDevice.currentDevice().setValue(NSNumber(integer: UIInterfaceOrientation.Portrait.rawValue),  forKey:"orientation")
+        
+        
     }
     
-
-//    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-//        <#code#>
-//    }
     
-
+ 
+    
+    
     
     func webViewDidStartLoad(webView: UIWebView) {
          activityIndicator.startAnimating()
@@ -93,11 +112,6 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         activityIndicator.stopAnimating()
         var view = self.view.viewWithTag(103)
         view?.removeFromSuperview()
-        
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiWebView]-0-|", options: nil, metrics: nil, views: ["uiWebView":self.uiWebView]))
-        
-        
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[uiWebView]-0-|", options: nil, metrics: nil, views: ["uiWebView":self.uiWebView]))
     }
     
     
