@@ -108,8 +108,14 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         //    println(cell.frame.size.width)
         
         item?.lbl?.text = basicList[indexPath.row].Title
-        var picurl = basicList[indexPath.row].PicURL
-        var imgURL = NSURL(string: picurl)
+        
+        
+        var url =  self.basicList[indexPath.row].PicURL.stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        
+        
+        url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        var imgURL = NSURL(string: url)
+        
         PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
             //use image
             //item?.image?.image = image

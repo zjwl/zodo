@@ -96,7 +96,16 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     func viewWillAppearWithPageIndex(pageIndex : NSInteger) {
         var position : UICollectionViewScrollPosition =
         .CenteredHorizontally & .CenteredVertically
-        var imgURL = NSURL(string: self.basicList[pageIndex].PicURL)
+        
+        var url =  self.basicList[pageIndex].PicURL.stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        
+        
+        url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        var imgURL = NSURL(string: url)
+        
+        //var imgURL = NSURL(string: self.basicList[pageIndex].PicURL)
+        
+        
         PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
             //use image
             let imageHeight = image!.size.height*gridWidth/image!.size.width
@@ -130,8 +139,9 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             isScroll = true
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
+             println("scroll里加载的数据，page:：\(currentPage)")
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 15, 当前页码: currentPage++)
-            println("scroll里加载的数据，page:：\(currentPage)")
+           
         }
     }
     
