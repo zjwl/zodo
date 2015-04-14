@@ -30,6 +30,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         // Do any additional setup after loading the view, typically from a nib.
         //self.navigationController!.delegate = delegateHolder
         self.view.backgroundColor = UIColor.yellowColor()
+        //collectionView?.backgroundColor = UIColor.yellowColor()
         
         let collection :UICollectionView = collectionView!;
         collection.frame = CGRectMake(5, 5, screenWidth-10, screenHeight)
@@ -47,10 +48,10 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     
     func refreshData() {
-        refreshControl.endRefreshing()
         activityIndicator.startAnimating()
         println("refreshData里加载的数据，page:：\(currentPage)")
-        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 15, 当前页码: currentPage++)
+        currentPage = 0
+        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage)
         
     }
     
@@ -146,7 +147,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
              println("scroll里加载的数据，page:：\(currentPage)")
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 15, 当前页码: currentPage++)
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage++)
            
         }
     }
@@ -158,18 +159,23 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
+         refreshControl.endRefreshing()
         
         var  basicList1 = object as! Array<Model.BasicInfo>
+        
+        if basicList1.count < 1 {
+            return
+        }
+        
         println("basicList1.count:\(basicList1.count)")
         if currentPage == 0 {
             basicList = basicList1
-            collectionView!.reloadData()
-            refreshControl.endRefreshing()
         }else {
             basicList.extend(basicList1)
-            collectionView!.reloadData()
             isScroll = false
         }
+        
+        collectionView!.reloadData()
     }
     
 }

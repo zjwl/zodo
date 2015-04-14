@@ -65,7 +65,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
 //        basicList = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
 //        collectionView!.reloadData()
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -154,13 +154,18 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
         }
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.BasicInfo>
+        
+        if basicList1.count < 1 {
+            return
+        }
+        
         if currentPage == 0 {
             basicList = basicList1
             collectionView!.reloadData()
