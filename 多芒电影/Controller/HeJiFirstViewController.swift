@@ -12,19 +12,32 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     var hejiID=0
     var basicList:Array<Model.FilmAlbum> = [] //影片信息列表
     var currentInfo:Model.FilmAlbum=Model.FilmAlbum(),currentPage=0
-    var _loadingMore=false
+    var _loadingMore=false,_isDataLoadOver=false
     var activityIndicator : UIActivityIndicatorView!
+    var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
+        self.refreshControl = UIRefreshControl()
+        refreshControl!.attributedTitle = NSAttributedString(string: "松开更新信息")
+        refreshControl!.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
+        
         // Do any additional setup after loading the view.
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
-        //basicList = UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++)
+        refreshData()
+        tableFooterActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+    }
+    
+    func refreshData(){
+        CommonAccess(delegate: self, flag: "refresh").getFilmAlbum(每页数量: 10, 当前页码: 0)
+        currentPage=1
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,40 +114,56 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     func loadDataBegin(){
         if !_loadingMore {
             _loadingMore = true
-            var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(75, 10, 20, 20))
-            tableFooterActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            tableFooterActivityIndicator.startAnimating()
-            self.tableView.addSubview(tableFooterActivityIndicator)
+            
             
             //basicList.extend(UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++))
             activityIndicator.startAnimating()
+            tableFooterActivityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
+            println("加载的当前页是：\(currentPage)")
         }
     }
     
     // 创建表格底部
     func createTableFooter(){
         self.tableView.tableFooterView = nil
-        var tableFooterView = UIView(frame: CGRectMake(0.0, 0.0, self.tableView.bounds.size.width, 40.0))
-        var loadMoreText = UILabel(frame: CGRectMake(0, 0, 116, 40))
-        loadMoreText.text = "上拉显示更多数据"
+        var tableFooterView = UIView(frame: CGRectMake(0.0, 0.0, tableView.bounds.size.width, 40.0))
+        tableFooterActivityIndicator.frame = CGRectMake((tableView.bounds.size.width-160)/2, 10.0, 20.0, 20.0)
+        var loadMoreText = UILabel(frame: CGRectMake((tableView.bounds.size.width-120)/2, 5, 120, 30))
+        if _isDataLoadOver {
+            loadMoreText.text = "已加载完所有数据"
+        }else{
+            loadMoreText.text = "上拉显示更多数据"
+        }
         loadMoreText.font = UIFont(name: "Helvetica Neue", size: 14)
+        loadMoreText.textColor = UIColor.grayColor()
+        loadMoreText.textAlignment = NSTextAlignment.Center
         tableFooterView.addSubview(loadMoreText)
+        tableFooterView.addSubview(tableFooterActivityIndicator)
         self.tableView.tableFooterView = tableFooterView
+        tableFooterActivityIndicator.stopAnimating()
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.FilmAlbum>
+        if basicList1.count==0 {
+            _isDataLoadOver = true
+        }
         if currentPage == 0 {
             basicList = basicList1
             self.tableView.reloadData()
             //refreshControl.endRefreshing()
         }else {
-            basicList.extend(basicList1)
+            if flag=="refresh"{
+                basicList = basicList1
+            }else{
+                basicList.extend(basicList1)
+            }
             self.tableView.reloadData()
             //isScroll = false
         }
+        _loadingMore=false
         createTableFooter()
     }
     
