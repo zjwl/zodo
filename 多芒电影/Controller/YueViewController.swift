@@ -62,8 +62,14 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as! NTWaterfallViewCell
-        //collectionCell.imageName = self.imageNameList[indexPath.row]
-        collectionCell.imageName = self.basicList[indexPath.row].PicURL
+        //var collectionCell2: NTWaterfallViewCell = NTWaterfallViewCell(frame: CGRectMake(0, 0, screenWidth/3, screenWidth/3+30))
+        var url =  self.basicList[indexPath.row].PicURL.stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        
+        
+        url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        
+        //println("1加载图地址：\(url)")
+        collectionCell.imageName = url
         collectionCell.titleLbl.text = self.basicList[indexPath.row].Title
         collectionCell.setNeedsLayout()
         return collectionCell;
@@ -102,7 +108,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         
         url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
         var imgURL = NSURL(string: url)
-        
+        println("2加载图地址：\(url)")
         //var imgURL = NSURL(string: self.basicList[pageIndex].PicURL)
         
         

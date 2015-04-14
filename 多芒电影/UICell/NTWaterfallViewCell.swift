@@ -19,9 +19,7 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
         super.init(frame: frame)
         contentView.addSubview(imageViewContent)
         contentView.addSubview(titleLbl)
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        
         imageViewContent.frame = CGRectMake(0, 0, frame.size.width, frame.size.height-25)
         titleLbl.frame=CGRectMake(0,frame.height-25,frame.width,25)
         titleLbl.font=UIFont(name: "ArialUnicodeMS", size: 13)
@@ -29,17 +27,21 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
         self.imageViewContent.contentMode = UIViewContentMode.ScaleToFill
         //imageViewContent.image = UIImage(named: imageName!)
         //println(imageName!)
-        var imgURL = NSURL(string: imageName!)
-        PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (returnImage) -> Void in
-            //use image
-            if !(returnImage==nil) {
-                var image:UIImage = returnImage!
-                self.imageViewContent.image = image
-                
-            }
-        }
         
+        self.imageViewContent.image = UIImage(named: "0.jpg")
+        
+        
+//        var imgURL = NSURL(string: imageName!)
+//        PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (returnImage) -> Void in
+//            //use image
+//            if !(returnImage==nil) {
+//                var image:UIImage = returnImage!
+//                self.imageViewContent.image = image
+//                
+//            }
+//        }
     }
+   
     
     func snapShotForTransition() -> UIView! {
         let snapShotView = UIImageView(image: self.imageViewContent.image)
