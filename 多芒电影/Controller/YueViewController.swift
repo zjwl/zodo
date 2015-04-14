@@ -49,9 +49,8 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     func refreshData() {
         refreshControl.endRefreshing()
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage)
-        //basicList = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-        //collectionView!.reloadData()
+        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage++)
+         println("refreshData里加载的数据，page:：\(currentPage)")
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
@@ -130,7 +129,8 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             isScroll = true
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage++)
+            println("scroll里加载的数据，page:：\(currentPage)")
         }
     }
     
@@ -141,7 +141,9 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
+        
         var  basicList1 = object as! Array<Model.BasicInfo>
+        println("basicList1.count:\(basicList1.count)")
         if currentPage == 0 {
             basicList = basicList1
             collectionView!.reloadData()
