@@ -140,6 +140,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         var item = basicList[sender.tag]
         loadWebController.titleText = item.Title
         loadWebController.webAddress  = item.LinkUrl
+        loadWebController.shouldRound = true
         API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
 
         self.navigationController?.pushViewController(loadWebController, animated: true)
@@ -519,39 +520,5 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         uiTableView.reloadData()
         refreshControl.endRefreshing()
     }
-    
-    /*
-    func invoke(index:Int,StringResult result:String){
-    switch index
-    {
-    case 0:
-    println(0)
-    case 1:
-    println(1)
-    default :
-    println(2)
-    }
-    
-    println(result)
-    //  helloWorld.text = result
-    }
-    
-    func invoke(type: String, object: NSObject) {
-    //        switch type{
-    //        case "a":
-    //            println(type)
-    //        case "b":
-    //            println(type)
-    //        default:
-    //            break
-    //        }
-    var gameList:QaskList = object as QaskList
-    var str:String = "type:\(type),"
-    for item:Qask in gameList.list{
-    str += item.NickName + ","
-    }
-    print(str)
-    }
-    */
     
 }

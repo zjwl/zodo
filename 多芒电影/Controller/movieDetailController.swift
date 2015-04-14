@@ -34,7 +34,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     var mainScrollConstraintH:[AnyObject]?
     var webviewConstraintH:[AnyObject]?
     var tempContent:String=""
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,6 +90,12 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
             }
         }
         
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
+        view.addSubview(activityIndicator)
+        
+        
        API().exec(self, invokeIndex: 10, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)","0").loadData()
 
     }
@@ -134,9 +140,13 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         
     }
     
+    func webViewDidStartLoad(webView: UIWebView) {
+        activityIndicator.startAnimating()
+    }
+    
     func webViewDidFinishLoad(webView: UIWebView){
         mainContrainer.removeConstraints(webviewConstraintH!)
-        
+        activityIndicator.stopAnimating()
         var frame = webView.frame;
         frame.size.height = 1;
         webView.frame = frame;
@@ -157,7 +167,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         var memberid = "0"
         loadWebController.titleText = currentInfo.Title
         loadWebController.webAddress  =  currentInfo.LinkUrl
-        
+        loadWebController.shouldRound = true
         var userDefaults = NSUserDefaults.standardUserDefaults()
         var obj:AnyObject? = userDefaults.objectForKey("myUser")
         

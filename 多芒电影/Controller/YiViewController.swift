@@ -157,6 +157,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         var item = basicList[sender.tag]
         loadWebController.titleText = item.Title
         loadWebController.webAddress  = item.LinkUrl
+        loadWebController.shouldRound = true
         API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
         
         self.navigationController?.pushViewController(loadWebController, animated: true)

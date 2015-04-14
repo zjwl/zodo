@@ -25,7 +25,7 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     var webviewConstraintH:[AnyObject]?
     var isZanIng=false,isCollecting=false
     var tempContent:String=""
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         colors.append(UIColor(red: 51/255, green: 170/255, blue: 138/255, alpha: 1))
@@ -60,6 +60,12 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         webView.scrollView.scrollEnabled = false
         tempContent = currentInfo.Content.stringByReplacingOccurrencesOfString("\"/ueditor", withString: "\"http://apk.zdomo.com/ueditor", options: NSStringCompareOptions.LiteralSearch, range: nil)
         webView.delegate = self
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
+        view.addSubview(activityIndicator)
+        
         API().exec(self, invokeIndex: 10, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)","0").loadData()
     }
     
@@ -101,8 +107,12 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         
         
     }
+    func webViewDidStartLoad(webView: UIWebView) {
+        activityIndicator.startAnimating()
+    }
     
     func webViewDidFinishLoad(webView: UIWebView){
+        activityIndicator.stopAnimating()
         mainContrainer.removeConstraints(webviewConstraintH!)
         var frame = webView.frame;
         frame.size.height = 1;

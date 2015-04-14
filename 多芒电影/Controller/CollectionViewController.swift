@@ -20,7 +20,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     var isScroll = false
     var refreshControl = UIRefreshControl()
     var noDataView:UILabel=UILabel()
-    
+    var activityIndicator : UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,22 +33,20 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         uiTableView.dataSource = self
         uiTableView.delegate = self
         self.view.addSubview(noDataView)
-        println("viewDidLoad")
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
+        activityIndicator.center = view.center
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
+        view.addSubview(activityIndicator)
+        
+
     }
     
     override func viewWillAppear(animated: Bool) {
          refreshData()
-         println("viewWillAppear")
+
     }
-    
-    override func viewDidDisappear(animated: Bool) {
-        println("viewDidDisappear")
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        println("viewWillDisappear")
-    }
-    
+
     
     
     
@@ -59,6 +57,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         refreshControl.endRefreshing()
         if user.IsLogin {
             //basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            activityIndicator.startAnimating()
             CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             noDataView.hidden = true
             uiTableView.hidden = false
@@ -167,6 +166,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 isScroll = true
                 currentPage = currentPage + 1
                 //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                activityIndicator.startAnimating()
                 CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
             }
         }
@@ -201,6 +201,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
+        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.Collection>
         if currentPage == 0 {
             basicList = basicList1

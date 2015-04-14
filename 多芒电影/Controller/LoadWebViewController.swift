@@ -16,6 +16,8 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     var titleText   = ""
     var activityIndicator : UIActivityIndicatorView!
     var uiWebView:UIWebView!
+    var shouldRound = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -59,6 +61,18 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
         view.addSubview(activityIndicator)
 
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientationMask.Portrait.rawValue.hashValue | UIInterfaceOrientationMask.PortraitUpsideDown.rawValue.hashValue
+    }
+    
+
+    
+    override func shouldAutorotate() -> Bool {
+        
+        println(shouldRound)
+        return shouldRound
     }
     
     
