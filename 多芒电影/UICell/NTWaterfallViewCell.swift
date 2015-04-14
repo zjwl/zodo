@@ -25,10 +25,6 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
         titleLbl.font=UIFont(name: "ArialUnicodeMS", size: 13)
         titleLbl.textAlignment=NSTextAlignment.Center
         self.imageViewContent.contentMode = UIViewContentMode.ScaleToFill
-        //imageViewContent.image = UIImage(named: imageName!)
-        //println(imageName!)
-        
-        self.imageViewContent.image = UIImage(named: "0.jpg")
         
         
 //        var imgURL = NSURL(string: imageName!)
@@ -40,6 +36,18 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
 //                
 //            }
 //        }
+    }
+    
+    func configCell(){
+        var imgURL = NSURL(string: imageName!)
+        PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (returnImage) -> Void in
+            //use image
+            if !(returnImage==nil) {
+                var image:UIImage = returnImage!
+                self.imageViewContent.image = image
+
+            }
+        }
     }
    
     

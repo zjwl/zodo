@@ -71,7 +71,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         //println("1加载图地址：\(url)")
         collectionCell.imageName = url
         collectionCell.titleLbl.text = self.basicList[indexPath.row].Title
-        collectionCell.setNeedsLayout()
+        collectionCell.configCell()
         return collectionCell;
     }
     
