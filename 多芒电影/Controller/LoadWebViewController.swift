@@ -21,19 +21,19 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-         println(shouldRound)
-        
+       
         self.navigationItem.title = titleText
         uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
         uiWebView.delegate = self
         uiWebView.opaque = false
+        uiWebView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(uiWebView)
         // Do any additional setup after loading the view.
         
         //创建UIActivityIndicatorView背底半透明View
-        var view = UIView(frame: UIScreen.mainScreen().bounds)
-        view.tag = 103
-        self.view.addSubview(view)
+        var view1 = UIView(frame: UIScreen.mainScreen().bounds)
+        view1.tag = 103
+        self.view.addSubview(view1)
         
         if webAddress != "" {
             
@@ -46,13 +46,11 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 var path = NSBundle.mainBundle().bundlePath
                 var baseURL = NSURL.fileURLWithPath(path)
                 uiWebView.loadHTMLString(htmlstring?.stringByAppendingString(""), baseURL:baseURL)
-                self.view.backgroundColor = UIColor.whiteColor()
             } else {
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
-                view.backgroundColor = UIColor.grayColor()
-                view.alpha = 0.8
-                
+                view1.backgroundColor = UIColor.grayColor()
+                view1.alpha = 0.8
             }
 
         }

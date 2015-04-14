@@ -87,7 +87,39 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         webView.loadHTMLString(styleString+tempContent, baseURL: NSURL(fileURLWithPath: "http://apk.zdomo.com"))
         
         webView.delegate = self
+        
+        var version = (UIDevice.currentDevice().systemVersion as NSString).floatValue
+        if version < 8.0 {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoStarted:", name: "UIMoviePlayerControllerDidEnterFullscreenNotification", object: nil) //播放器即将播放通知
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoFinished:",name: "UIMoviePlayerControllerWillExitFullscreenNotification", object: nil) //播放器即将退出通知
+        }else {
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoStarted:", name: "UIWindowDidBecomeVisibleNotification", object: nil) //播放器即将播放通知
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoFinished:",name: "UIWindowDidBecomeHiddenNotification", object: nil) //播放器即将退出通知
+        }
+        
     }
+    
+    
+    
+    
+    //pragma mark 调用视频的通知方法
+    func videoStarted(notification:NSNotification) {
+        var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.isFull = true
+    }
+    
+    
+    func videoFinished(notification:NSNotification) { //完成播放
+        var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.isFull = false
+        
+        
+        UIDevice.currentDevice().setValue(NSNumber(integer: UIInterfaceOrientation.Portrait.rawValue),  forKey:"orientation")
+        
+        
+    }
+    
     
     func initConstraint(){
         self.view.frame=CGRectMake(0, 0, screenWidth, 1500)
