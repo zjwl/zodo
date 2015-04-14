@@ -122,7 +122,6 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     
     func invoke(index:Int,StringResult result:String){
 
-        println("this is niclnkkk \(user.NickName)")
         
         switch index {
         case 0:

@@ -148,7 +148,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     func invoke(index:Int,StringResult result:String){
-        println(result)
+        //println(result)
     }
     func invoke(type:String,object:NSObject){
         

@@ -296,7 +296,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             var url = (webSite + photo).stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
             url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
             
-            println("home:"+url)
+            //println("home:"+url)
             var imgURL = NSURL(string: url)
             /*var data = NSData(contentsOfURL:imgURL!)
             var image = UIImage(data:data!, scale: 1.0)

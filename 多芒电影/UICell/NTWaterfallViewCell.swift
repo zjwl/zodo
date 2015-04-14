@@ -28,7 +28,7 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
         titleLbl.textAlignment=NSTextAlignment.Center
         self.imageViewContent.contentMode = UIViewContentMode.ScaleToFill
         //imageViewContent.image = UIImage(named: imageName!)
-        println(imageName!)
+        //println(imageName!)
         var imgURL = NSURL(string: imageName!)
         PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (returnImage) -> Void in
             //use image
