@@ -43,6 +43,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     }
     
     override func viewWillAppear(animated: Bool) {
+         basicList.removeAll(keepCapacity: false)
          refreshData()
 
     }

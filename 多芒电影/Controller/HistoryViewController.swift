@@ -39,7 +39,8 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillAppear(animated: Bool) {
-           refreshData()
+        basicList.removeAll(keepCapacity: false)
+        refreshData()
     }
     
     
