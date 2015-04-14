@@ -41,7 +41,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
-        refreshData()
+        //refreshData()
     }
     
     
@@ -49,8 +49,9 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     func refreshData() {
         refreshControl.endRefreshing()
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage++)
-         println("refreshData里加载的数据，page:：\(currentPage)")
+        println("refreshData里加载的数据，page:：\(currentPage)")
+        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 15, 当前页码: currentPage++)
+        
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
@@ -129,7 +130,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             isScroll = true
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 21, 当前页码: currentPage++)
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 15, 当前页码: currentPage++)
             println("scroll里加载的数据，page:：\(currentPage)")
         }
     }
