@@ -20,14 +20,18 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.view.frame = UIScreen.mainScreen().bounds
         self.navigationItem.title = titleText
-        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
+        uiWebView = UIWebView(frame: UIScreen.mainScreen().bounds)
         uiWebView.delegate = self
         uiWebView.opaque = false
         self.view.addSubview(uiWebView)
         // Do any additional setup after loading the view.
-        
+       setLoadData()
+    }
+    
+    
+    func setLoadData(){
         //创建UIActivityIndicatorView背底半透明View
         var view = UIView(frame: UIScreen.mainScreen().bounds)
         view.tag = 103
@@ -50,44 +54,52 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
                 view.backgroundColor = UIColor.grayColor()
                 view.alpha = 0.8
+                var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.isFull = true
             }
-
+            
         }
-
-   
         
+       
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
         view.addSubview(activityIndicator)
-
-    }
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return UIInterfaceOrientationMask.Portrait.rawValue.hashValue | UIInterfaceOrientationMask.PortraitUpsideDown.rawValue.hashValue
-    }
-    
-
-    
-    override func shouldAutorotate() -> Bool {
         
-        println(shouldRound)
-        return shouldRound
+        
+        
+        
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        var  appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.isFull = false
+    }
+    
+
+//    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+//        <#code#>
+//    }
+    
+
     
     func webViewDidStartLoad(webView: UIWebView) {
          activityIndicator.startAnimating()
     }
     
-
-
+    
     func webViewDidFinishLoad(webView:UIWebView){
 
         activityIndicator.stopAnimating()
         var view = self.view.viewWithTag(103)
         view?.removeFromSuperview()
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiWebView]-0-|", options: nil, metrics: nil, views: ["uiWebView":self.uiWebView]))
+        
+        
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[uiWebView]-0-|", options: nil, metrics: nil, views: ["uiWebView":self.uiWebView]))
     }
+    
     
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {

@@ -121,6 +121,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
     }
     
+   
+    
     func playTarget(sender:UIButton){
         var loadWebController = LoadWebViewController()
         
@@ -473,9 +475,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
            // self.presentViewController(WebiewController(), animated: true, completion: nil)
         }
     }
-    
-    
-    
+   
     
     func setMianZhe(){
         

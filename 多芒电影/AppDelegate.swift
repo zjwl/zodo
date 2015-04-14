@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:Model.LoginModel?
-
+    var isFull:Bool = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -123,6 +123,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return ShareSDK.handleOpenURL(url,sourceApplication:sourceApplication,annotation:annotation,wxDelegate:self)
     }
     
+    
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
+        if isFull    {
+            return UIInterfaceOrientationMask.All.rawValue.hashValue
+        } else {
+            return  UIInterfaceOrientationMask.Portrait.rawValue.hashValue
+        
+        }
+        
+    }
+    
+    
+    
     func readNSUserDefaults() {
         var userDefaults = NSUserDefaults.standardUserDefaults()
         
@@ -136,6 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
+    
     
     
 
