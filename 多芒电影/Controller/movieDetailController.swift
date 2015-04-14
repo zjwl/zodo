@@ -154,17 +154,23 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     @IBAction func playAction(sender: AnyObject) {
         
         var loadWebController = LoadWebViewController()
+        var memberid = "0"
+        loadWebController.titleText = currentInfo.Title
+        loadWebController.webAddress  =  currentInfo.LinkUrl
+        
         var userDefaults = NSUserDefaults.standardUserDefaults()
         var obj:AnyObject? = userDefaults.objectForKey("myUser")
+        
         if obj != nil {
             //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
             var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
             if  user.MemberID != "" && user.MemberID != "0" {
-                loadWebController.titleText = currentInfo.Title
-                loadWebController.webAddress  =  currentInfo.LinkUrl
-                API().exec(self, invokeIndex: 10, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)",user.MemberID).loadData()
-            }
+              memberid = user.MemberID
+                
+          }
         }
+        
+        API().exec(self, invokeIndex: 10, invokeType: "qList", methodName: "ReadInfo", params: "\(currentInfo.InfoID)",memberid).loadData()
 
         self.navigationController?.pushViewController(loadWebController, animated: true)
     }

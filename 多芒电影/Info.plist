@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
@@ -50,6 +50,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wx9fcf751788a3e9ba</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>qqapi</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ448CD546</string>
 			</array>
 		</dict>
 	</array>

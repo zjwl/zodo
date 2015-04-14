@@ -72,7 +72,7 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
-        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合辑板块id:hejiID)

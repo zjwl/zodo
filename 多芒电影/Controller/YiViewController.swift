@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, CommonAccessDelegate {
+class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, CommonAccessDelegate,DataDelegate {
 
     @IBOutlet weak var uiTableView: UITableView!
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表
@@ -32,7 +32,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
-        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.White
+        activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
         
         refreshData()
@@ -95,6 +95,14 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         cell!.displayLink = true
         cell!.configureCell(model)
         
+        var playBtn = cell?.playBtn
+        
+        if (playBtn?.hidden != true) {
+            playBtn?.tag = indexPath.row
+            playBtn?.addTarget(self, action: "playTarget:", forControlEvents: UIControlEvents.TouchDown)
+        }
+
+        
         return cell!
     }
     
@@ -130,6 +138,38 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
         
     }
     
+    func playTarget(sender:UIButton){
+        var loadWebController = LoadWebViewController()
+        
+        var memberid = "0"
+        
+        var userDefaults = NSUserDefaults.standardUserDefaults()
+        var obj:AnyObject? = userDefaults.objectForKey("myUser")
+        
+        if obj != nil {
+            //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
+            var user:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
+            if  user.MemberID != "" && user.MemberID != "0" {
+                memberid = user.MemberID
+            }
+        }
+        
+        var item = basicList[sender.tag]
+        loadWebController.titleText = item.Title
+        loadWebController.webAddress  = item.LinkUrl
+        API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
+        
+        self.navigationController?.pushViewController(loadWebController, animated: true)
+    }
+
+    
+    func invoke(index:Int,StringResult result:String){
+        
+    }
+    //type:方法的标识（一个页面可能有多个方法回调，以此参数作为标识区分） object:返回的数据
+    func invoke(type:String,object:NSObject){
+        
+    }
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.BasicInfo>
