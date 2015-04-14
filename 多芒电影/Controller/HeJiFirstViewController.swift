@@ -147,6 +147,7 @@ class HeJiFirstViewController: UITableViewController, UITableViewDataSource, UIT
     func setCallbackObject(flag: String, object: NSObject) {
         activityIndicator.stopAnimating()
         refreshControl?.endRefreshing()
+       
         var  basicList1 = object as! Array<Model.FilmAlbum>
         if basicList1.count==0 {
             _isDataLoadOver = true

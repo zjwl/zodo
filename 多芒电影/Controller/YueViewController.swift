@@ -25,7 +25,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
-       // refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         collectionView?.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         //self.navigationController!.delegate = delegateHolder
@@ -146,7 +146,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             isScroll = true
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-             println("scroll里加载的数据，page:：\(currentPage)")
+            // println("scroll里加载的数据，page:：\(currentPage)")
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage++)
            
         }
@@ -158,8 +158,10 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
-        activityIndicator.stopAnimating()
-         refreshControl.endRefreshing()
+        
+       refreshControl.endRefreshing()
+       activityIndicator.stopAnimating()
+ 
         
         var  basicList1 = object as! Array<Model.BasicInfo>
         
@@ -167,7 +169,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             return
         }
         
-        println("basicList1.count:\(basicList1.count)")
+       // println("basicList1.count:\(basicList1.count)")
         if currentPage == 0 {
             basicList = basicList1
         }else {
