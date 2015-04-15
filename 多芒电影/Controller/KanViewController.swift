@@ -58,10 +58,10 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[scwv(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(48)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-113-[columnName(25)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-113-[columnName(1)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-123-[uiTableView]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-99-[uiTableView]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
     }
     
     func refreshData() {

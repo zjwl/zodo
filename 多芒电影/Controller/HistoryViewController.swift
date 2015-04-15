@@ -177,6 +177,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             uiTableView.reloadData()
             isScroll = false
         }
+        activityIndicator.stopAnimating()
     }
 
 }
