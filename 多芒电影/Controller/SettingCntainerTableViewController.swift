@@ -67,9 +67,18 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
                 }})
             
         case 1://清除缓存
-            
+            //var keys=["basic_c_0_s_0_p_0","","","","","","","","",""]
             var ud = NSUserDefaults.standardUserDefaults()
-
+            var defaultsDictionary = ud.dictionaryRepresentation()
+            for item in defaultsDictionary.keys{
+                
+                var tempString = item as! String
+                if (tempString.has("basic") || tempString.has("collection") || tempString.has("history") || tempString.has("ad") || tempString.has("filmalbum") || tempString.has("game") || tempString.has("basic")) {
+                    println("item key has removed:\(item)")
+                    ud.removeObjectForKey(tempString)
+                }
+            }
+            
             var alertview = UIAlertView(title: "缓存清理", message: "缓存已清除", delegate: nil, cancelButtonTitle: "确定")
             alertview.show()
             
