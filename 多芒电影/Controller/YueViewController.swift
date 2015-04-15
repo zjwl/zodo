@@ -51,7 +51,12 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         activityIndicator.startAnimating()
         println("refreshData里加载的数据，page:：\(currentPage)")
         currentPage = 0
-        CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage)
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_3_s_0_p_0"))
+        }
+        
         
     }
     
@@ -147,8 +152,9 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
             // println("scroll里加载的数据，page:：\(currentPage)")
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage++)
-           
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage++)
+            }
         }
     }
     

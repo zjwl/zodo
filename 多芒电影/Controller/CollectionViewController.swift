@@ -59,7 +59,14 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         if user.IsLogin {
             //basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            }else{
+                CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("collection_0"))
+            }
+            
+            
             noDataView.hidden = true
             uiTableView.hidden = false
         } else {
@@ -168,7 +175,9 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 currentPage = currentPage + 1
                 //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 activityIndicator.startAnimating()
-                CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                if IJReachability.isConnectedToNetwork(){
+                    CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                }
             }
         }
         

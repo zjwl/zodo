@@ -40,7 +40,12 @@ class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func refreshData(){
-        CommonAccess(delegate: self, flag: "refresh").getFilmAlbum(每页数量: 10, 当前页码: 0)
+        
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "refresh").getFilmAlbum(每页数量: 10, 当前页码: 0)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("filmalbum_0"))
+        }
         currentPage=1
     }
 
@@ -123,7 +128,10 @@ class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableV
             //basicList.extend(UTIL.getFilmAlbum(每页数量: 10, 当前页码: curPageIndex++))
             activityIndicator.startAnimating()
             tableFooterActivityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
+            
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
+            }
             println("加载的当前页是：\(currentPage)")
         }
     }

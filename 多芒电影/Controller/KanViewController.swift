@@ -64,9 +64,13 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     func refreshData() {
         //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-//        uiTableView.reloadData()
-//        refreshControl.endRefreshing()
+        
+
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_1_s_\(currentLableID)_p_0"))
+        }
         
     }
     
@@ -195,7 +199,12 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         }
         columnName.text = labelName
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_1_s_\(currentLableID)_p_0"))
+        }
         //basicList = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         //uiTableView.reloadData()
         self.uiTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
@@ -253,11 +262,10 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             isScroll = true
             currentPage = currentPage + 1
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-//            var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
-//            basicList.extend(basicList1)
-//            uiTableView.reloadData()
-//            isScroll = false
+            
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+            }
             
         }
         

@@ -50,8 +50,12 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
          refreshControl.endRefreshing()
         //basicList = UTIL.getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-        //uiTableView.reloadData()
+        
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_2_s_0_p_0"))
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,10 +111,10 @@ class DuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
-            //basicList.extend(basicList1)
             
-            
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 2, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
+            }
         }
         
     }

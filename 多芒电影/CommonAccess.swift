@@ -481,7 +481,7 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
         var url = webJsonUrl + "apibasic?columnid=\(columnid)&pageSize=\(pageSize)&pageNum=\(pageNum)&sid=\(sid)"
         methodName = "getLlatestUpdate"
         if pageNum==0{
-            cacheKey="basic_column_\(columnid)_0"
+            cacheKey="basic_c_\(columnid)_s_\(sid)_p_0"
             isCache=true
         }
         setConnectionWithUrl(url)

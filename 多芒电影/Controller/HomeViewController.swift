@@ -64,10 +64,11 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func refreshData() {
-        //basicList = UTIL.getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
-        
-        CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_column_0_0"))
-        //CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_0_s_0_p_0"))
+        }
     }
     
     override func didReceiveMemoryWarning() {

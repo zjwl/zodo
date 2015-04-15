@@ -47,7 +47,12 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     func refreshData() {
         //basicList = UTIL.getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_6_s_\(currentLableID)_p_0"))
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -133,7 +138,9 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
+            }
         }
         
     }

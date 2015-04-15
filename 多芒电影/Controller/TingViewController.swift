@@ -60,7 +60,12 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
 //        basicList = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
 //        collectionView!.reloadData()
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
+        
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_4_s_0_p_0"))
+        }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -149,7 +154,9 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
+            }
         }
     }
     

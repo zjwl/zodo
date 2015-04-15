@@ -75,7 +75,12 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合辑板块id:hejiID)
+        
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合辑板块id:hejiID)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("filmalbum_\(hejiID)"))
+        }
         
     }
     

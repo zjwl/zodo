@@ -53,8 +53,12 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
 
             //basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            }else{
+                CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("history_0"))
+            }
             
 
             noDataView.hidden = true
@@ -126,7 +130,10 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 isScroll = true
                 currentPage = currentPage + 1
                 activityIndicator.startAnimating()
-                CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                
+                if IJReachability.isConnectedToNetwork(){
+                    CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                }
 
             }
         }
