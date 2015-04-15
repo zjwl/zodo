@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if changNetWork == 0 && isConnectionToNetwork == true {
-            alert = UIAlertView(title: "网络连接信息", message: "网络连接恢复异常", delegate: nil, cancelButtonTitle: "确定")
+            alert = UIAlertView(title: "网络连接信息", message: "网络连接恢复正常", delegate: nil, cancelButtonTitle: "确定")
             changNetWork = 1
             alert?.show()
         }

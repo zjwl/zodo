@@ -382,8 +382,9 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     }
     
     func setObjectByCache(value data:AnyObject?){
+        
         if data == nil{
-            return
+             return
         }else {
             setValueByMethodName(value: data as! NSMutableData)
         }
