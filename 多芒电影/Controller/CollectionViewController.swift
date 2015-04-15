@@ -178,7 +178,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 activityIndicator.startAnimating()
                 if IJReachability.isConnectedToNetwork(){
-                    CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                    CommonAccess(delegate: self, flag: "refresh").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 }
             }
         }
@@ -220,7 +220,11 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
             uiTableView.reloadData()
             refreshControl.endRefreshing()
         }else {
-            basicList.extend(basicList1)
+            if flag=="refresh"{
+                basicList = basicList1
+            }else{
+                basicList.extend(basicList1)
+            }
             uiTableView.reloadData()
             isScroll = false
         }
