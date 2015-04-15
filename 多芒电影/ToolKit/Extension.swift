@@ -71,6 +71,10 @@ extension UIViewController{
             }
         }
     
+    func readObjectFromUD(key:String)->AnyObject?{
+        var ud = NSUserDefaults.standardUserDefaults()
+        return ud.objectForKey(key)
+    }
     
     //检测是否已赞
     func isBasicInfoZaned(id:Int)->Bool{

@@ -381,69 +381,84 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
         self.delegate.setCallbackObject(flag, object: qaskList)
     }
     
+    func setObjectByCache(value data:AnyObject?){
+        if data == nil{
+            return
+        }else {
+            setValueByMethodName(value: data as! NSMutableData)
+        }
+    }
+    
+    private func setValueByMethodName(value data:NSMutableData){
+        switch methodName {
+        case "getLlatestUpdate":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setBasicList(arrayData)
+        case "getApiAD":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setADlist(arrayData)
+        case "getBasicInfo":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var jsonData = json as! NSDictionary
+            setBasicInfo(jsonData)
+        case "getUpdateCount","getCollectionIDS":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            self.delegate.setCallbackObject(flag, object: json as! NSObject)
+        case "getCollection":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setCollectionList(arrayData)
+        case "getFilmAlbum":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setFilmAlbum(arrayData)
+        case "getFilmAlbumDetail":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setFilmAlbumDetail(arrayData)
+        case "getGameList":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setGameList(arrayData)
+        case "getHistory":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setHistory(arrayData)
+        case "getSpecilLabel":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setSpecilLabel(arrayData)
+        case "getEveryoneSayList":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setEveryoneSayList(arrayData)
+        case "getQASKList":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setQASKList(arrayData)
+        case "getQASKInfo":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setQASKInfo(arrayData)
+        case "getQASKParticipant":
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setQASKParticipant(arrayData)
+        default:
+            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var arrayData = json as! NSArray
+            setBasicList(arrayData)
+        }
+    }
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
-        switch methodName {
-            case "getLlatestUpdate":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setBasicList(arrayData)
-            case "getApiAD":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setADlist(arrayData)
-            case "getBasicInfo":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var jsonData = json as! NSDictionary
-                setBasicInfo(jsonData)
-            case "getUpdateCount","getCollectionIDS":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                self.delegate.setCallbackObject(flag, object: json as! NSObject)
-            case "getCollection":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setCollectionList(arrayData)
-            case "getFilmAlbum":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setFilmAlbum(arrayData)
-            case "getFilmAlbumDetail":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setFilmAlbumDetail(arrayData)
-            case "getGameList":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setGameList(arrayData)
-            case "getHistory":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setHistory(arrayData)
-            case "getSpecilLabel":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setSpecilLabel(arrayData)
-            case "getEveryoneSayList":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setEveryoneSayList(arrayData)
-            case "getQASKList":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setQASKList(arrayData)
-            case "getQASKInfo":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setQASKInfo(arrayData)
-            case "getQASKParticipant":
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setQASKParticipant(arrayData)
-            default:
-                var json:AnyObject = NSJSONSerialization.JSONObjectWithData(mutableData, options: NSJSONReadingOptions.MutableContainers, error: nil)!
-                var arrayData = json as! NSArray
-                setBasicList(arrayData)
+        if isCache {
+            var ud = NSUserDefaults.standardUserDefaults()
+            ud.setValue(mutableData, forKey: cacheKey)
         }
+        setValueByMethodName(value: mutableData)
     }
     
     func setConnectionWithUrl(url:String){
@@ -465,6 +480,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getLlatestUpdate(栏目id columnid:Int,特殊标签id sid:Int, 每页数量 pageSize:Int,当前页码 pageNum:Int){
         var url = webJsonUrl + "apibasic?columnid=\(columnid)&pageSize=\(pageSize)&pageNum=\(pageNum)&sid=\(sid)"
         methodName = "getLlatestUpdate"
+        if pageNum==0{
+            cacheKey="basic_column_\(columnid)_0"
+            isCache=true
+        }
         setConnectionWithUrl(url)
     }
     
@@ -472,6 +491,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getApiAD(广告位id adplaceid:Int,每页数量 pageSize:Int,当前页码 pageNum:Int) {
         var url = webJsonUrl + "apiad/getAd?adplaceid=\(adplaceid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
         methodName = "getApiAD"
+        if pageNum==0{
+            cacheKey="ad_0"
+            isCache=true
+        }
         setConnectionWithUrl(url)
     }
     
@@ -493,6 +516,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getCollection(客户id memberid:Int,每页数量 pageSize:Int,当前页码 pageNum:Int){
         var url = webJsonUrl + "apiCollection?memberid=\(memberid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
         methodName = "getCollection"
+        if pageNum==0{
+            cacheKey="collection_0"
+            isCache=true
+        }
         setConnectionWithUrl(url)
     }
     
@@ -509,6 +536,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getFilmAlbum(每页数量 pageSize:Int,当前页码 pageNum:Int){
         var url = webJsonUrl + "apiFilmAlbum?pageSize=\(pageSize)&pageNum=\(pageNum)"
         methodName = "getFilmAlbum"
+        if pageNum==0{
+            cacheKey="filmalbum_0"
+            isCache=true
+        }
         setConnectionWithUrl(url)
     }
     
@@ -516,6 +547,8 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getFilmAlbumDetail(电影合辑板块id id:Int) {
         var url = webJsonUrl + "apiFilmAlbum?id=\(id)"
         methodName = "getFilmAlbumDetail"
+        cacheKey="filmalbum_\(id)"
+        isCache=true
         setConnectionWithUrl(url)
     }
     
@@ -523,6 +556,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getGameList(每页数量 pageSize:Int,当前页码 pageNum:Int) {
         var url = webJsonUrl + "apiGame/?pageSize=\(pageSize)&pageNum=\(pageNum)&type=ios"
         methodName = "getGameList"
+        if pageNum==0{
+            cacheKey="game_0"
+            isCache=true
+        }
         setConnectionWithUrl(url)
     }
     
@@ -532,6 +569,10 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     func getHistory(客户id memberid:Int,每页数量 pageSize:Int,当前页码 pageNum:Int) {
         var url = webJsonUrl + "apiHistory?memberid=\(memberid)&pageSize=\(pageSize)&pageNum=\(pageNum)"
         methodName = "getHistory"
+        if pageNum==0{
+            cacheKey="history_0"
+            isCache=true
+        }
         setConnectionWithUrl(url)
     }
     
