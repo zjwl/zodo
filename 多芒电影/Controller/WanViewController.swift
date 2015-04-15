@@ -22,30 +22,32 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        uiTableView.backgroundColor = UIColor.clearColor()
+        
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
-        
-        uiTableView.dataSource = self
-        uiTableView.delegate = self
-        
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
-        
+        uiTableView.dataSource = self
+        uiTableView.delegate = self
         refreshData()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.uiTableView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
+   
     }
     
     
     func refreshData() {
-        //basicList = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
+        
         activityIndicator.startAnimating()
-        CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
+        
+        if IJReachability.isConnectedToNetwork(){
+            CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
+        }else{
+            CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("game_0"),methodName: "getGameList")
+        }
         
     }
     
@@ -122,8 +124,10 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
-            
+
+            if IJReachability.isConnectedToNetwork(){
+                CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
+            }
         }
         
     }

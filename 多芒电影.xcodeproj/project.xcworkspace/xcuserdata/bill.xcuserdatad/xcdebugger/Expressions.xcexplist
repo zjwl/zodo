@@ -28,6 +28,11 @@
       </ContextState>
       <ContextState
          contextName = ":CommonAccess.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "methodName">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = ":HomeViewController.swift">
@@ -36,10 +41,13 @@
                value = "readObjectFromUD(&quot;basic_c_0_s_0_p_0&quot;)">
             </PersistentString>
             <PersistentString
-               value = "currentClickModel!.ColumnID">
+               value = "readObjectFromUD(&quot;basic_c_0_sdfdsfs_0_p_0&quot;)">
             </PersistentString>
             <PersistentString
-               value = "readObjectFromUD(&quot;basic_c_0_sdfdsfs_0_p_0&quot;)">
+               value = "basicList">
+            </PersistentString>
+            <PersistentString
+               value = "currentClickModel!.ColumnID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

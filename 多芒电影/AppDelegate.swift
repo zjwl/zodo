@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isFull:Bool = false
     var changNetWork = 1
     var alert :UIAlertView?
-    var checkNetwork = "checkNetworkNotificationCenter"
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

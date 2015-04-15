@@ -381,8 +381,8 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
         self.delegate.setCallbackObject(flag, object: qaskList)
     }
     
-    func setObjectByCache(value data:AnyObject?){
-        
+    func setObjectByCache(value data:AnyObject?,methodName:String="getLlatestUpdate"){
+        self.methodName=methodName
         if data == nil{
              return
         }else {

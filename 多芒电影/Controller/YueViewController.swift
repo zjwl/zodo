@@ -42,7 +42,6 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
-        //refreshData()
     }
     
     
@@ -154,6 +153,8 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
             // println("scroll里加载的数据，page:：\(currentPage)")
             if IJReachability.isConnectedToNetwork(){
                 CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage++)
+            }else {
+                refreshData()
             }
         }
     }

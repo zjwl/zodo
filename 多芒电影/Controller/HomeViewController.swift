@@ -52,7 +52,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     override func viewWillAppear(animated: Bool) {
         
-          setTableViewHeader()
+        setTableViewHeader()
         
         if !isSetNickName {
            if user.IsLogin {
@@ -124,6 +124,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
    
     
     func playTarget(sender:UIButton){
+        
         var loadWebController = LoadWebViewController()
         
         var memberid = "0"
@@ -143,7 +144,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         loadWebController.titleText = item.Title
         loadWebController.webAddress  = item.LinkUrl
         loadWebController.shouldRound = true
-        API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
+        if IJReachability.isConnectedToNetwork(){
+            API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
+        }
 
         self.navigationController?.pushViewController(loadWebController, animated: true)
     }
@@ -275,11 +278,22 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         scwv!.showsHorizontalScrollIndicator = false
         v_headerView.addSubview(scwv!)//将v_headerImageView添加到创建的视图（v_headerView）中
         
-        if IJReachability.isConnectedToNetwork() != true {
-            var lbl = UILabel(frame: UIScreen.mainScreen().bounds)
+        let imageW:CGFloat = 320.0 * bili
+        let imageH:CGFloat = 125.0 * bili
+        var imageY:CGFloat = 0;
+
+        pageControl = UIPageControl(frame: CGRect(x: rect.width * 0.8 + 10, y: 181 + imageH, width: rect.width * 0.2 - 20.0, height: 20))
+        pageControl?.currentPageIndicatorTintColor = UIColor.redColor()
+        self.view.addSubview(pageControl!)
+        
+        
+        if !IJReachability.isConnectedToNetwork()  {
+            var lbl = UILabel(frame: CGRect(x: 0,y: scwv!.frame.height/2-15,width: screenWidth,height: 30))
             lbl.tag = 103
             lbl.text = "网络异常！"
-            lbl.center = scwv!.center
+            lbl.textColor = UIColor.grayColor()
+
+            lbl.textAlignment = NSTextAlignment.Center
             scwv?.addSubview(lbl)
         }else {
             
@@ -289,10 +303,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             }
             
             var hejiList = UTIL.getFilmAlbum(每页数量: 4, 当前页码: 0)
-            let imageW:CGFloat = 320.0 * bili
-            let imageH:CGFloat = 125.0 * bili
-            var imageY:CGFloat = 0;
-            var totalCount = hejiList.count
+                        var totalCount = hejiList.count
             var webSite = ""
             
             for index in 0..<totalCount{
@@ -346,9 +357,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             scwv!.pagingEnabled = true
             scwv!.delegate = self
         
-            pageControl = UIPageControl(frame: CGRect(x: rect.width * 0.8 + 10, y: 181 + imageH, width: rect.width * 0.2 - 20.0, height: 20))
-            pageControl?.currentPageIndicatorTintColor = UIColor.redColor()
-            self.view.addSubview(pageControl!)
+            
         
             self.pageControl!.numberOfPages = totalCount
             //  self.pageControl!.backgroundColor = UIColor.purpleColor()
@@ -422,7 +431,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.performSegueWithIdentifier("hejiList", sender: self)
     }
     
-    
+   
     func nextImage(sender:AnyObject!){
         var page:Int = self.pageControl!.currentPage;
         if(page == 3){
@@ -440,14 +449,17 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         let page:Int = (Int)((x + scrollviewW / 2) / scrollviewW);
         self.pageControl!.currentPage = page;
     }
-    
+
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.removeTimer();
     }
     
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.addTimer();
+       
+        if IJReachability.isConnectedToNetwork(){
+             self.addTimer()
+        }
     }
     
     
@@ -457,7 +469,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func removeTimer(){
-        self.timer.invalidate();
+        if timer != nil {
+            self.timer.invalidate()
+        }
         
     }
     

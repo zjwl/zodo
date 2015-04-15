@@ -28,6 +28,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     var isScroll = false
     var refreshControl = UIRefreshControl()
+    var labelitems:Dictionary<Int,String>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +38,18 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         refreshControl.attributedTitle = NSAttributedString(string: "松开更新信息")
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
+        uiTableView.dataSource = self
+        uiTableView.delegate = self
         
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0,width: 32,height: 32))
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
-        
+       
         refreshData()
         
-        uiTableView.dataSource = self
-        uiTableView.delegate = self
+       
     }
     
     func initConstraint(){
@@ -97,8 +99,9 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     //设置标签
     func setScollViewValues(){
-        specalLabes = UTIL.getSpecilLabel()
-        var labelitems:Dictionary<Int,String> = [0:"icon_tsbq_0_zxtj",20:"icon_tsbq_0_dmfx",11:"icon_tsbq_1_bmh",12:"icon_tsbq_2_znl",13:"icon_tsbq_3_gzs",14:"icon_tsbq_4_dmx",15:"icon_tsbq_5_wlt",16:"icon_tsbq_6_zqc",17:"icon_tsbq_7_xhh",18:"icon_tsbq_8_ash",19:"icon_tsbq_9_dsj"]
+        //specalLabes = UTIL.getSpecilLabel()
+        CommonAccess(delegate: self, flag: "bq").getSpecilLabel()
+        labelitems = [0:"icon_tsbq_0_zxtj",20:"icon_tsbq_0_dmfx",11:"icon_tsbq_1_bmh",12:"icon_tsbq_2_znl",13:"icon_tsbq_3_gzs",14:"icon_tsbq_4_dmx",15:"icon_tsbq_5_wlt",16:"icon_tsbq_6_zqc",17:"icon_tsbq_7_xhh",18:"icon_tsbq_8_ash",19:"icon_tsbq_9_dsj"]
         
         var btn     = UIButton(frame: CGRect(x: 0,y:0,width: 64,height: 32))
         var imv     = UIImageView(frame: btn.bounds) //创建一个UIimageView（v_headerImageView）
@@ -119,25 +122,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         btn.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
         scwv.addSubview(btn)
         
-        for item in specalLabes {
-            var value = labelitems[item.LabelID]
-            var pointx:Int
-            if(item.LabelID == 20) {
-                return
-            } else {
-                pointx = 64 * (item.LabelID - 9 )
-            }
-            var btn1     = UIButton(frame: CGRect(x: pointx, y: 0, width: 64, height: 32))
-            var imv1     = UIImageView(frame: btn1.bounds) //创建一个UIimageView（v_headerImageView）
-            imv1.image   = UIImage(named: value!) //给ImageView设置图片
-            
-            btn1.addSubview(imv1)
-            btn1.tag = item.LabelID
-            //  println(btn1)
-            btn1.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
-            scwv.addSubview(btn1)
-            
-        }
+        
         
     }
     
@@ -272,16 +257,40 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     }
     
     func setCallbackObject(flag:String,object:NSObject){
-        var  basicList1 = object as! Array<Model.BasicInfo>
-        activityIndicator.stopAnimating()
-        if currentPage == 0 {
-            basicList = basicList1
-            uiTableView.reloadData()
-            refreshControl.endRefreshing()
-        }else {
-            basicList.extend(basicList1)
-            uiTableView.reloadData()
-            isScroll = false
+        if flag=="bq"{
+            specalLabes = object as! Array<Model.SpecilLabel>
+            for item in specalLabes {
+                var value = labelitems![item.LabelID]
+                var pointx:Int
+                if(item.LabelID == 20) {
+                    return
+                } else {
+                    pointx = 64 * (item.LabelID - 9 )
+                }
+                var btn1     = UIButton(frame: CGRect(x: pointx, y: 0, width: 64, height: 32))
+                var imv1     = UIImageView(frame: btn1.bounds) //创建一个UIimageView（v_headerImageView）
+                imv1.image   = UIImage(named: value!) //给ImageView设置图片
+                
+                btn1.addSubview(imv1)
+                btn1.tag = item.LabelID
+                //  println(btn1)
+                btn1.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
+                scwv.addSubview(btn1)
+                
+            }
+        }else{
+        
+            var  basicList1 = object as! Array<Model.BasicInfo>
+            activityIndicator.stopAnimating()
+            if currentPage == 0 {
+                basicList = basicList1
+                uiTableView.reloadData()
+                refreshControl.endRefreshing()
+            }else {
+                basicList.extend(basicList1)
+                uiTableView.reloadData()
+                isScroll = false
+                }
         }
     }
     

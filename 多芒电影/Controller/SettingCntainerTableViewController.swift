@@ -67,6 +67,9 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
                 }})
             
         case 1://清除缓存
+            
+            var ud = NSUserDefaults.standardUserDefaults()
+
             var alertview = UIAlertView(title: "缓存清理", message: "缓存已清除", delegate: nil, cancelButtonTitle: "确定")
             alertview.show()
             
