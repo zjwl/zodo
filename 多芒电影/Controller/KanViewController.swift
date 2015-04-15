@@ -46,7 +46,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         activityIndicator.center = view.center
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
-       
+        columnName.text = ""
         refreshData()
         
        
@@ -56,8 +56,8 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         self.view.frame=CGRectMake(0, 0, screenWidth, screenHeight)
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[scwv(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(32)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-95-[columnName(25)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(52)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-113-[columnName(25)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-123-[uiTableView]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
@@ -83,7 +83,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        scwv.contentSize = CGSize(width: 704, height: 32)
+        scwv.contentSize = CGSize(width: 1056, height: 48)
     }
     
     
@@ -100,23 +100,27 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     //设置标签
     func setScollViewValues(){
         //specalLabes = UTIL.getSpecilLabel()
+        
+        var vb = UIView(frame: CGRect(x: 0,y: 0,width: scwv.frame.width,height: 48))
+        vb.backgroundColor = UIColor.whiteColor()
+        scwv.addSubview(vb)
+        
         CommonAccess(delegate: self, flag: "bq").getSpecilLabel()
         labelitems = [0:"icon_tsbq_0_zxtj",20:"icon_tsbq_0_dmfx",11:"icon_tsbq_1_bmh",12:"icon_tsbq_2_znl",13:"icon_tsbq_3_gzs",14:"icon_tsbq_4_dmx",15:"icon_tsbq_5_wlt",16:"icon_tsbq_6_zqc",17:"icon_tsbq_7_xhh",18:"icon_tsbq_8_ash",19:"icon_tsbq_9_dsj"]
         
-        var btn     = UIButton(frame: CGRect(x: 0,y:0,width: 64,height: 32))
-        var imv     = UIImageView(frame: btn.bounds) //创建一个UIimageView（v_headerImageView）
+        var btn     =  UIButton(frame: CGRect(x: 0,y:0,width: 96,height: 52))
+        btn.backgroundColor = UIColor.blackColor()
+        var imv     = UIImageView(frame: CGRect(x: 0,y:0,width: 96,height: 48)) //创建一个UIimageView（v_headerImageView）
         imv.image   = UIImage(named: "icon_tsbq_0_zxtj") //给ImageView设置图片
-        
         btn.addSubview(imv)
         btn.tag = 0
         btn.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
         scwv.addSubview(btn)
         
         
-        btn     = UIButton(frame: CGRect(x: 64,y:0,width: 64,height: 32))
-        imv     = UIImageView(frame: btn.bounds) //创建一个UIimageView（v_headerImageView）
+        btn     = UIButton(frame: CGRect(x: 96,y:0,width: 96,height: 52))
+        imv     = UIImageView(frame: CGRect(x: 0,y:0,width: 96,height: 48)) //创建一个UIimageView（v_headerImageView）
         imv.image   = UIImage(named: "icon_tsbq_0_dmfx") //给ImageView设置图片
-        
         btn.addSubview(imv)
         btn.tag = 20
         btn.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
@@ -170,7 +174,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         currentPage = 0
         currentLableID = sender.tag
         
-        
+       /*
         var labelName = "最新推荐"
         
         if currentLableID == 20 {
@@ -183,6 +187,19 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             }
         }
         columnName.text = labelName
+
+        */
+        for view in sender.superview!.subviews {
+            if view.isKindOfClass(UIButton.classForCoder()){
+                var btn = view as! UIButton
+                if btn == sender {
+                    btn.backgroundColor = UIColor.blackColor()
+                }else{
+                    btn.backgroundColor = UIColor.whiteColor()
+                }
+            }
+        }
+        
         activityIndicator.startAnimating()
         
         if IJReachability.isConnectedToNetwork(){
@@ -265,18 +282,15 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
                 if(item.LabelID == 20) {
                     return
                 } else {
-                    pointx = 64 * (item.LabelID - 9 )
+                    pointx = 96 * (item.LabelID - 9 )
                 }
-                var btn1     = UIButton(frame: CGRect(x: pointx, y: 0, width: 64, height: 32))
-                var imv1     = UIImageView(frame: btn1.bounds) //创建一个UIimageView（v_headerImageView）
-                imv1.image   = UIImage(named: value!) //给ImageView设置图片
-                
-                btn1.addSubview(imv1)
-                btn1.tag = item.LabelID
-                //  println(btn1)
-                btn1.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
-                scwv.addSubview(btn1)
-                
+                var btn  = UIButton(frame: CGRect(x: pointx, y: 0, width: 96, height: 52))
+                var imv  = UIImageView(frame: CGRect(x: 0,y:0,width: 96,height: 48)) //创建一个UIimageView（v_headerImageView）
+                imv.image   = UIImage(named: value!) //给ImageView设置图片
+                btn.addSubview(imv)
+                btn.tag = item.LabelID
+                btn.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
+                scwv.addSubview(btn)
             }
         }else{
         

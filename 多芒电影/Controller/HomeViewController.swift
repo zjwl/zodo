@@ -46,13 +46,12 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         // 设置tableView的委托
         self.uiTableView.delegate = self
         
-      
-        
+        setTableViewHeader()
     }
     
     override func viewWillAppear(animated: Bool) {
         
-        setTableViewHeader()
+        
         
         if !isSetNickName {
            if user.IsLogin {
@@ -272,9 +271,10 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             v_headerView.addSubview(btn)//将btn添加到创建的视图（v_headerView）中
         }
         
+
         
+       
         scwv = UIScrollView(frame: CGRect(x: 0,y: 200,width: 320*bili,height: 125 * bili))
-        
         scwv!.showsHorizontalScrollIndicator = false
         v_headerView.addSubview(scwv!)//将v_headerImageView添加到创建的视图（v_headerView）中
         
@@ -282,10 +282,6 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         let imageH:CGFloat = 125.0 * bili
         var imageY:CGFloat = 0;
 
-        pageControl = UIPageControl(frame: CGRect(x: rect.width * 0.8 + 10, y: 181 + imageH, width: rect.width * 0.2 - 20.0, height: 20))
-        pageControl?.currentPageIndicatorTintColor = UIColor.redColor()
-        self.view.addSubview(pageControl!)
-        
         
         if !IJReachability.isConnectedToNetwork()  {
             var lbl = UILabel(frame: CGRect(x: 0,y: scwv!.frame.height/2-15,width: screenWidth,height: 30))
@@ -357,11 +353,18 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             scwv!.pagingEnabled = true
             scwv!.delegate = self
         
-            
-        
+           
+            pageControl = UIPageControl(frame: CGRect(x: rect.width * 0.8 + 10, y: 181 + imageH, width: rect.width * 0.2 - 20.0, height: 20))
+            pageControl?.tag = 505
+            pageControl?.currentPageIndicatorTintColor = UIColor.redColor()
+            self.view.addSubview(pageControl!)
             self.pageControl!.numberOfPages = totalCount
             //  self.pageControl!.backgroundColor = UIColor.purpleColor()
             self.addTimer()
+         
+            
+        
+
           }
         var v_headerLab = UILabel(frame: CGRect(x: 10.0,y: addPart + 325,width: UIScreen.mainScreen().bounds.size.width-20 ,height: 30.0)) //创建一个UILable（v_headerLab）用来显示标题
         v_headerLab.backgroundColor = UIColor.clearColor()//设置v_headerLab的背景颜色
