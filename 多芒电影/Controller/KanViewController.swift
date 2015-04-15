@@ -18,6 +18,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     @IBOutlet var columnName: UILabel!
     var basicList:Array<Model.BasicInfo> = [] //影片信息列表
+    var hrView=UIView()
     
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var currentID=0
@@ -56,7 +57,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         self.view.frame=CGRectMake(0, 0, screenWidth, screenHeight)
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[scwv(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(52)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(48)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-113-[columnName(25)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
@@ -100,17 +101,11 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     //设置标签
     func setScollViewValues(){
         //specalLabes = UTIL.getSpecilLabel()
-        
-        var vb = UIView(frame: CGRect(x: 0,y: 0,width: scwv.frame.width,height: 48))
-        vb.backgroundColor = UIColor.whiteColor()
-        scwv.addSubview(vb)
-        
         CommonAccess(delegate: self, flag: "bq").getSpecilLabel()
         labelitems = [0:"icon_tsbq_0_zxtj",20:"icon_tsbq_0_dmfx",11:"icon_tsbq_1_bmh",12:"icon_tsbq_2_znl",13:"icon_tsbq_3_gzs",14:"icon_tsbq_4_dmx",15:"icon_tsbq_5_wlt",16:"icon_tsbq_6_zqc",17:"icon_tsbq_7_xhh",18:"icon_tsbq_8_ash",19:"icon_tsbq_9_dsj"]
         
-        var btn     =  UIButton(frame: CGRect(x: 0,y:0,width: 96,height: 52))
-        btn.backgroundColor = UIColor.blackColor()
-        var imv     = UIImageView(frame: CGRect(x: 0,y:0,width: 96,height: 48)) //创建一个UIimageView（v_headerImageView）
+        var btn     =  UIButton(frame: CGRect(x: 0,y:0,width: 96,height: 48))
+        var imv     = UIImageView(frame: btn.bounds) //创建一个UIimageView（v_headerImageView）
         imv.image   = UIImage(named: "icon_tsbq_0_zxtj") //给ImageView设置图片
         btn.addSubview(imv)
         btn.tag = 0
@@ -118,8 +113,8 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         scwv.addSubview(btn)
         
         
-        btn     = UIButton(frame: CGRect(x: 96,y:0,width: 96,height: 52))
-        imv     = UIImageView(frame: CGRect(x: 0,y:0,width: 96,height: 48)) //创建一个UIimageView（v_headerImageView）
+        btn     = UIButton(frame: CGRect(x: 96,y:0,width: 96,height: 48))
+        imv     = UIImageView(frame:btn.bounds) //创建一个UIimageView（v_headerImageView）
         imv.image   = UIImage(named: "icon_tsbq_0_dmfx") //给ImageView设置图片
         btn.addSubview(imv)
         btn.tag = 20
@@ -173,7 +168,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     func buttonPress(sender:UIButton){
         currentPage = 0
         currentLableID = sender.tag
-        
+        hrViewAnimation(sender.center.x)
        /*
         var labelName = "最新推荐"
         
@@ -284,13 +279,17 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
                 } else {
                     pointx = 96 * (item.LabelID - 9 )
                 }
-                var btn  = UIButton(frame: CGRect(x: pointx, y: 0, width: 96, height: 52))
-                var imv  = UIImageView(frame: CGRect(x: 0,y:0,width: 96,height: 48)) //创建一个UIimageView（v_headerImageView）
+                var btn  = UIButton(frame: CGRect(x: pointx, y: 0, width: 96, height: 48))
+                var imv  = UIImageView(frame:btn.bounds) //创建一个UIimageView（v_headerImageView）
                 imv.image   = UIImage(named: value!) //给ImageView设置图片
                 btn.addSubview(imv)
                 btn.tag = item.LabelID
                 btn.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
                 scwv.addSubview(btn)
+                
+                hrView.frame = CGRectMake(0, scwv.frame.height-2, 96, 4)
+                hrView.backgroundColor=UIColor.blackColor()
+                scwv.addSubview(hrView)
             }
         }else{
         
@@ -308,5 +307,12 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         }
     }
     
-    
+    func hrViewAnimation(tox:CGFloat){
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.5)
+        
+        var point = CGPointMake(tox, scwv.frame.height-2)
+        hrView.center=point
+        UIView.commitAnimations()
+    }
 }
