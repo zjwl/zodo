@@ -55,7 +55,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             activityIndicator.startAnimating()
             
             if IJReachability.isConnectedToNetwork(){
-                CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("history_0"))
             }
@@ -169,7 +169,11 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             uiTableView.reloadData()
             refreshControl.endRefreshing()
         }else {
-            basicList.extend(basicList1)
+            if flag=="refresh"{
+                basicList = basicList1
+            }else{
+                basicList.extend(basicList1)
+            }
             uiTableView.reloadData()
             isScroll = false
         }
