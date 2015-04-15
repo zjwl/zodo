@@ -166,11 +166,8 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         activityIndicator.stopAnimating()
         refreshControl?.endRefreshing()
         
-        uiTableView!.contentOffset = CGPointMake(0, 0);
-        
-        
         basicList = object as! Array<Model.BasicInfo>
-        self.tableView.reloadData()
+        uiTableView.reloadData()
     }
     
     /*
