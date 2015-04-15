@@ -9,24 +9,52 @@
 
 import UIKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var user:Model.LoginModel?
     var isFull:Bool = false
-
+    var changNetWork = 1
+    var alert :UIAlertView?
+    var checkNetwork = "checkNetworkNotificationCenter"
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-       
+      
+        //开启网络状况的监听
+     //   NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: checkNetwork, object: nil)
+       // NSNotificationCenter.defaultCenter().postNotificationName(checkNetwork, object: nil)
+
+        
+         NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "reachabilityChanged:", userInfo: nil, repeats: true)  // 设置定时器，每过一秒中执行一次方法timerFireMethod:
+        
         initShareSDK()
         readNSUserDefaults()
-        return true
         
+        return true
+    }
+    
+    
+    func reachabilityChanged(note:NSNotification){
+        
+        var isConnectionToNetwork =  IJReachability.isConnectedToNetwork()
+        
+        if changNetWork == 1 && isConnectionToNetwork == false {
+            alert = UIAlertView(title: "网络连接异常", message: "暂无法访问多芒电影信息", delegate: nil, cancelButtonTitle: "确定")
+            changNetWork = 0
+            alert?.show()
+        }
+        
+        if changNetWork == 0 && isConnectionToNetwork == true {
+            alert = UIAlertView(title: "网络连接信息", message: "网络连接恢复异常", delegate: nil, cancelButtonTitle: "确定")
+            changNetWork = 1
+            alert?.show()
+        }
         
     }
+    
     
     func initShareSDK() {
         
@@ -135,6 +163,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    
+    func startNotificationNetwork(){
+        
+    }
     
     
     func readNSUserDefaults() {
