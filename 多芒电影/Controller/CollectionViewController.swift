@@ -29,6 +29,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
         uiTableView.separatorInset=UIEdgeInsetsZero
+        uiTableView.backgroundColor = UIColor.clearColor()
         
         uiTableView.dataSource = self
         uiTableView.delegate = self
@@ -72,6 +73,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
         } else {
             uiTableView.hidden = true
             noDataView.hidden = false
+            activityIndicator.stopAnimating()
             noDataView.text = "您未登录或尚未收藏信息"
             noDataView.textAlignment = NSTextAlignment.Center
             noDataView.alignmentRectForFrame(self.view.bounds)

@@ -67,6 +67,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             uiTableView.hidden = true
             noDataView.hidden = false
             noDataView.text = "您未登录或尚未点播影视节目"
+            activityIndicator.stopAnimating()
             noDataView.textAlignment = NSTextAlignment.Center
             noDataView.alignmentRectForFrame(self.view.bounds)
             noDataView.backgroundColor = UIColor.whiteColor()
