@@ -14,6 +14,8 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     var flag="",methodName="getLlatestUpdate"
     var delegate:CommonAccessDelegate
     var mutableData:NSMutableData  = NSMutableData.alloc()
+    var isCache=false
+    var cacheKey=""
     
     internal init(delegate:CommonAccessDelegate,flag:String) {
         self.delegate = delegate
