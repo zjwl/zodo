@@ -12,7 +12,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     @IBOutlet weak var uiTableView: UITableView!
     
-    var basicList:Array<Model.BasicInfo> = []
+    var basicList:Array<Model.BasicInfo> = [],cacheBasicList:Array<Model.BasicInfo> = []
     var currentIndexPath: NSIndexPath?
     var scwv:UIScrollView?
     var pageControl: UIPageControl?
@@ -22,7 +22,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     var isSetNickName = false
     var rect = UIScreen.mainScreen().bounds
     var currentClickModel:Model.BasicInfo?
-    
+    var remindView:UILabel=UILabel()
     
     override func viewDidLoad() {
         
@@ -37,7 +37,10 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
         uiTableView.addSubview(refreshControl)
         refreshData()
-        //    API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "GetQASKList", params: "true","3","10","0","0").loadData()
+        
+        //Get Cache
+        CommonAccess(delegate: self,flag:"cache").setObjectByCache(value: readObjectFromUD("basic_c_0_s_0_p_0"))
+       
         
         // topView.frame = CGRect(x: 0, y: 0, width: 320, height: 200)
         // self.uiTableView=UITableView(frame:self.view.frame,style:UITableViewStyle.Plain)
@@ -269,6 +272,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             
             btn.addTarget(self, action:"buttonPress:", forControlEvents: UIControlEvents.TouchDown)
             v_headerView.addSubview(btn)//将btn添加到创建的视图（v_headerView）中
+            
         }
         
 
@@ -366,12 +370,15 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
 
           }
-        var v_headerLab = UILabel(frame: CGRect(x: 10.0,y: addPart + 325,width: UIScreen.mainScreen().bounds.size.width-20 ,height: 30.0)) //创建一个UILable（v_headerLab）用来显示标题
+        var v_headerLab = UILabel(frame: CGRect(x: 10.0,y: addPart + 325,width: 55 ,height: 30.0)) //创建一个UILable（v_headerLab）用来显示标题
         v_headerLab.backgroundColor = UIColor.clearColor()//设置v_headerLab的背景颜色
         v_headerLab.textColor = UIColor.grayColor()//设置v_headerLab的字体颜色
         v_headerLab.font =  UIFont(name: "Arial", size: 13) //设置v_headerLab的字体样式和大小
         //v_headerLab.shadowColor = UIColor.whiteColor()//设置v_headerLab的字体的投影
         v_headerLab.text = "最新更新";
+        
+        
+        
         
         var currentTime = UILabel(frame:  CGRect(x: (UIScreen.mainScreen().bounds.size.width - 160 ) / 2   ,y: 0,width: 160.0 ,height: 30.0))
         
@@ -420,7 +427,12 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
          v_headerLab.addSubview(rightImageBtn)
         */
         
+        //更新提醒
+        remindView.frame = CGRectMake(v_headerLab.frame.origin.x+v_headerLab.frame.width, v_headerLab.frame.origin.y, 30, 30)
+        remindView.font=UIFont(name: "ArialUnicodeMS", size: 12)
+        remindView.textColor=UIColor.greenColor()
         v_headerView.addSubview(v_headerLab)//将标题v_headerLab添加到创建的视图（v_headerView）中
+        v_headerView.addSubview(remindView)
         
         var view = UIView(frame: CGRect(x: 0,y: addPart+355,width: UIScreen.mainScreen().bounds.size.width,height: 0.3))
         view.backgroundColor = UIColor(red: 0.2, green: 0.4, blue: 0.6, alpha: 0.6)
@@ -545,11 +557,28 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     func setCallbackObject(flag: String, object: NSObject) {
 
+        if flag=="cache"{
+            cacheBasicList = object as! Array<Model.BasicInfo>
+        }else{
             basicList = object as! Array<Model.BasicInfo>
             uiTableView.reloadData()
             refreshControl.endRefreshing()
-        
-        println("1111")
+            
+            //compare and get the update count
+            var updateCount=0
+            for item in basicList {
+                for item2 in cacheBasicList{
+                    if item.InfoID==item2.InfoID{
+                        updateCount++
+                        continue
+                    }
+                }
+            }
+            updateCount=basicList.count-updateCount
+            if updateCount>0{
+                remindView.text = updateCount == 20 ? "20+" : "\(updateCount)"
+            }
+        }
     }
     
 }
