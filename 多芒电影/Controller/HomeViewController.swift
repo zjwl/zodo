@@ -503,7 +503,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         case 3:
             self.performSegueWithIdentifier("UIYu", sender: self)
         case 4:
-            self.performSegueWithIdentifier("UIWan", sender: self)
+            //self.performSegueWithIdentifier("UIWan", sender: self)
+            UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/cn/genre/ios-you-xi/id6014?mt=8")!)
         case 5:
             self.performSegueWithIdentifier("UIWen", sender: self)
         case 6:
