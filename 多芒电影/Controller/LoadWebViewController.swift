@@ -17,7 +17,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     var activityIndicator : UIActivityIndicatorView!
     var uiWebView:UIWebView!
     var shouldRound = false
-    
+    var firstLoadTime = 0
     override func viewWillDisappear(animated: Bool) {
         self.tabBarController?.tabBar.hidden = false
     }
@@ -51,7 +51,6 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 var baseURL = NSURL.fileURLWithPath(path)
                 uiWebView.loadHTMLString(htmlstring?.stringByAppendingString(""), baseURL:baseURL)
             } else {
-                
                 
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
@@ -116,14 +115,20 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
         activityIndicator.stopAnimating()
         var view = self.view.viewWithTag(103)
         view?.removeFromSuperview()
+        firstLoadTime = 1
     }
     
     
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        var errorString = "<html><center><font size=+5 color='red' >页面加载出错了<br/>\(error.localizedDescription)</center></html>"
-        uiWebView.loadHTMLString(errorString, baseURL: nil)
+        
+        if firstLoadTime == 0{
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            var errorString = "<html><center><font size=+5 color='red' >页面加载出错了<br/>\(error.localizedDescription)</center></html>"
+            uiWebView.loadHTMLString(errorString, baseURL: nil)
+        }
+      
+        
     }
     
     override func didReceiveMemoryWarning() {
