@@ -108,6 +108,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     }
     
     @IBAction func qqTapped(sender: AnyObject) {
+       
         ShareSDK.getUserInfoWithType(ShareTypeQQSpace, authOptions: nil) { (result:Bool , userinfo:ISSPlatformUser!, error:ICMErrorInfo!) -> Void in
                if (result) {
                 //成功登录后，判断该用户的ID是否在自己的数据库中。

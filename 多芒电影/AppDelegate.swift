@@ -63,7 +63,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //shareSDK key :e29f62efd4b
      
         //QQ空间
-        ShareSDK.connectQZoneWithAppKey("1150080326", appSecret:"da0efeea8fa6fcc79d8532259cd6d0c", qqApiInterfaceCls: QQApiInterface.classForCoder(), tencentOAuthCls: TencentOAuth.classForCoder())
+       ShareSDK.connectQZoneWithAppKey("1150080326", appSecret:"da0efeea8fa6fcc79d8532259cd6d0c", qqApiInterfaceCls: QQApiInterface.classForCoder(), tencentOAuthCls: TencentOAuth.classForCoder())
+        
+        var app:ISSQZoneApp = ShareSDK.getClientWithType(ShareTypeQQSpace) as! ISSQZoneApp
+        app.setIsAllowWebAuthorize(true)
+        
+ 
         
         //添加QQ空间应用
         //ShareSDK.connectQZoneWithAppKey("100371282", appSecret:"aed9b0303e3ed1e27bae87c33761161d",qqApiInterfaceCls: QQApiInterface.classForCoder(),tencentOAuthCls: TencentOAuth.classForCoder())

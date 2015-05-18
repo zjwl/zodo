@@ -671,9 +671,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A97648411A64C1C000182E56 /* 多芒电影 */ = {
+		A97648411A64C1C000182E56 /* 多芒电影iPhone版 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A97648611A64C1C000182E56 /* Build configuration list for PBXNativeTarget "多芒电影" */;
+			buildConfigurationList = A97648611A64C1C000182E56 /* Build configuration list for PBXNativeTarget "多芒电影iPhone版" */;
 			buildPhases = (
 				A976483E1A64C1C000182E56 /* Sources */,
 				A976483F1A64C1C000182E56 /* Frameworks */,
@@ -683,7 +683,7 @@
 			);
 			dependencies = (
 			);
-			name = "多芒电影";
+			name = "多芒电影iPhone版";
 			productName = "多芒电影";
 			productReference = A97648421A64C1C000182E56 /* 多芒电影.app */;
 			productType = "com.apple.product-type.application";
@@ -739,7 +739,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A97648411A64C1C000182E56 /* 多芒电影 */,
+				A97648411A64C1C000182E56 /* 多芒电影iPhone版 */,
 				A97648561A64C1C000182E56 /* 多芒电影Tests */,
 			);
 		};
@@ -893,7 +893,7 @@
 /* Begin PBXTargetDependency section */
 		A97648591A64C1C000182E56 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A97648411A64C1C000182E56 /* 多芒电影 */;
+			target = A97648411A64C1C000182E56 /* 多芒电影iPhone版 */;
 			targetProxy = A97648581A64C1C000182E56 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1117,7 +1117,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A97648611A64C1C000182E56 /* Build configuration list for PBXNativeTarget "多芒电影" */ = {
+		A97648611A64C1C000182E56 /* Build configuration list for PBXNativeTarget "多芒电影iPhone版" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A97648621A64C1C000182E56 /* Debug */,

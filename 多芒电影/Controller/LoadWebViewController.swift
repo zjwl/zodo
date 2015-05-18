@@ -47,6 +47,8 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
                 var baseURL = NSURL.fileURLWithPath(path)
                 uiWebView.loadHTMLString(htmlstring?.stringByAppendingString(""), baseURL:baseURL)
             } else {
+                
+                
                 baseURL  = NSURL(string: webAddress)!
                 uiWebView.loadRequest(NSURLRequest(URL: baseURL))
                 view1.backgroundColor = UIColor.grayColor()
@@ -122,7 +124,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can be recreated.r
     }
     
     

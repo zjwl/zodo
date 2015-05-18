@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A97648411A64C1C000182E56"
                BuildableName = "&#x591a;&#x8292;&#x7535;&#x5f71;.app"
-               BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;"
+               BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;iPhone&#x7248;"
                ReferencedContainer = "container:&#x591a;&#x8292;&#x7535;&#x5f71;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -58,7 +58,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A97648411A64C1C000182E56"
             BuildableName = "&#x591a;&#x8292;&#x7535;&#x5f71;.app"
-            BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;"
+            BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;iPhone&#x7248;"
             ReferencedContainer = "container:&#x591a;&#x8292;&#x7535;&#x5f71;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,7 +78,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A97648411A64C1C000182E56"
             BuildableName = "&#x591a;&#x8292;&#x7535;&#x5f71;.app"
-            BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;"
+            BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;iPhone&#x7248;"
             ReferencedContainer = "container:&#x591a;&#x8292;&#x7535;&#x5f71;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -97,7 +97,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A97648411A64C1C000182E56"
             BuildableName = "&#x591a;&#x8292;&#x7535;&#x5f71;.app"
-            BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;"
+            BlueprintName = "&#x591a;&#x8292;&#x7535;&#x5f71;iPhone&#x7248;"
             ReferencedContainer = "container:&#x591a;&#x8292;&#x7535;&#x5f71;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
