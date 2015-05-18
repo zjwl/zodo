@@ -18,11 +18,15 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     var uiWebView:UIWebView!
     var shouldRound = false
     
+    override func viewWillDisappear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
-       
-        self.navigationItem.title = titleText
+        self.tabBarController?.tabBar.hidden = true
+        self.navigationItem.title = webAddress
         uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
         uiWebView.delegate = self
         uiWebView.opaque = false
