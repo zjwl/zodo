@@ -39,9 +39,13 @@ class musicPlayItem: UITableViewCell {
     
     func configCell(title:String,playUrl:String){
         titlelbl?.text = title
-        
+        var tempLinkUrl:NSString = playUrl as NSString
+        var isShow = tempLinkUrl.containsString("zjmoviezdomo=1")
+        if !isShow {
+            playIcon!.hidden = true
+        }
     }
-        
+    
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
