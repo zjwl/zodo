@@ -419,9 +419,11 @@ extension UIControl{
                     }
                   
                 }
+                var tempLinkUrl:NSString = model.LinkUrl as NSString
+                var isShow = tempLinkUrl.containsString("zjmoviezdomo=1")
                 
           //     basicPicView.sd_setImageWithURL(imgURL)
-                if model.ColumnID == 1 || model.ColumnID == 6 {
+                if (model.ColumnID == 1 || model.ColumnID == 6) && isShow {
                     var imv = UIImageView(frame: playBtn.bounds)
                     
                     imv.image = UIImage(named: "play")
