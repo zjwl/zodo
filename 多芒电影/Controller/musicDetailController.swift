@@ -28,11 +28,12 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
     var webviewConstraintH:[AnyObject]?
     var musicData:Array<Array<String>>=Array<Array<String>>()
     var descHeight:CGFloat=0
-    var isZanIng=false,isCollecting=false
+    var isZanIng=false,isCollecting=false,isShowPlayButton=true
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setMusicData()
         uiTableView.delegate=self
         uiTableView.dataSource = self
@@ -75,6 +76,8 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
     }
     
     func setMusicData(){
+        var tempLinkUrl = currentInfo.Content as NSString
+        isShowPlayButton = tempLinkUrl.containsString("zjmoviezdomo=1")
        var  tempMusicData = currentInfo.Content.componentsSeparatedByString("{}")
         for item in tempMusicData {
             var tempArray = item.componentsSeparatedByString("<>")
@@ -110,7 +113,7 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         var cell = musicPlayItem(frame: CGRectMake(0, 0, screenWidth, 25))
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.configCell(musicData[indexPath.row][0], playUrl: musicData[indexPath.row][1])
+        cell.configCell(musicData[indexPath.row][0], playUrl: musicData[indexPath.row][1],isShowPlay: isShowPlayButton)
         
         var playBtn = cell.playIcon
         
