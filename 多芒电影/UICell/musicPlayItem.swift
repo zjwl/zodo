@@ -37,11 +37,12 @@ class musicPlayItem: UITableViewCell {
 //        self.addSubview(hr!)
 //    }
     
-    func configCell(title:String,playUrl:String){
+    func configCell(title:String,playUrl:String,isShowPlay:Bool){
+        
         titlelbl?.text = title
         var tempLinkUrl:NSString = playUrl as NSString
-        var isShow = tempLinkUrl.containsString("zjmoviezdomo=1")
-        if !isShow {
+        
+        if !isShowPlay {
             playIcon!.hidden = true
         }
     }
