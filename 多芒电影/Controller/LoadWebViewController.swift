@@ -27,7 +27,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
        
         self.tabBarController?.tabBar.hidden = true
         self.navigationItem.title = webAddress
-        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height))
+        uiWebView = UIWebView(frame: CGRect(x: 0.0,y: 0,width: self.view.bounds.width,height: self.view.bounds.height+48))
         uiWebView.delegate = self
         uiWebView.opaque = false
         uiWebView.backgroundColor = UIColor.whiteColor()

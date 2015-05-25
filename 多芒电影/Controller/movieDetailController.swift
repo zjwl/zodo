@@ -23,6 +23,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     @IBOutlet weak var descTitleLbl: UILabel!
     @IBOutlet weak var goodTimsLbl: UILabel!
     @IBOutlet weak var collect_0: UIButton!
+    @IBOutlet weak var playIcon: UIButton!
     
     var descHeight:CGFloat=0
     var isZanIng:Bool=false,isCollecting=false
@@ -41,6 +42,11 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         
         webView.backgroundColor = UIColor.blueColor()
         
+        var tempLinkUrl:NSString = currentInfo.LinkUrl as NSString
+        var isShow = tempLinkUrl.containsString("zjmoviezdomo=1")
+        if !isShow {
+            playIcon.hidden = true
+        }
         
         titleLbl.text = currentInfo.Title
         typeLbl.text = "类型："+currentInfo.LabelIDS
