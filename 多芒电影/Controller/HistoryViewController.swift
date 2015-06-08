@@ -39,7 +39,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillAppear(animated: Bool) {
-        basicList.removeAll(keepCapacity: false)
+        //basicList.removeAll(keepCapacity: false)
         refreshData()
     }
     
@@ -55,7 +55,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             activityIndicator.startAnimating()
             
             if IJReachability.isConnectedToNetwork(){
-                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 5, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("history_0"))
             }
@@ -133,7 +133,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 activityIndicator.startAnimating()
                 
                 if IJReachability.isConnectedToNetwork(){
-                    CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                    CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 5, 当前页码: currentPage)
                 }
 
             }
@@ -172,12 +172,38 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             if flag=="refresh"{
                 basicList = basicList1
             }else{
-                basicList.extend(basicList1)
+                //basicList.extend(basicList1)
+                filterTheSameData(basicList1)
             }
             uiTableView.reloadData()
             isScroll = false
         }
         activityIndicator.stopAnimating()
+    }
+    
+    func filterTheSameData(basicList1:Array<Model.History>){
+        var tempIDs:Array<Int> = [] //已有的重复的id
+        for item in basicList{
+            for item1 in basicList1{
+                if item.InfoID == item1.InfoID{
+                    tempIDs.append(item.InfoID)
+                    break
+                }
+            }
+        }
+        var isIn = false
+        for item in basicList1{
+            for id in tempIDs{
+                if id == item.InfoID{
+                    isIn = true
+                    break
+                }
+            }
+            if !isIn {
+                basicList.append(item)
+            }
+            isIn = false
+        }
     }
 
 }

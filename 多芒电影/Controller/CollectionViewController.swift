@@ -44,7 +44,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     }
     
     override func viewWillAppear(animated: Bool) {
-         basicList.removeAll(keepCapacity: false)
+         //basicList.removeAll(keepCapacity: false)
          refreshData()
 
     }
@@ -110,6 +110,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
        // var cell: CollectionAndHistoryCell = tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier) as CollectionAndHistoryCell
         
        // var cell = CollectionAndHistoryCell(frame: tableView.frame)
+        println("Colleciton basicList count:\(basicList.count)")
         let model: Model.Collection? = basicList[indexPath.row]
         
         cell!.title = model?.Title
@@ -223,10 +224,36 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
             if flag=="refresh"{
                 basicList = basicList1
             }else{
-                basicList.extend(basicList1)
+                //basicList.extend(basicList1)
+                filterTheSameData(basicList1)
             }
             uiTableView.reloadData()
             isScroll = false
+        }
+    }
+    
+    func filterTheSameData(basicList1:Array<Model.Collection>){
+        var tempIDs:Array<Int> = [] //已有的重复的id
+        for item in basicList{
+            for item1 in basicList1{
+                if item.InfoID == item1.InfoID{
+                    tempIDs.append(item.InfoID)
+                    break
+                }
+            }
+        }
+        var isIn = false
+        for item in basicList1{
+            for id in tempIDs{
+                if id == item.InfoID{
+                    isIn = true
+                    break
+                }
+            }
+            if !isIn {
+                basicList.append(item)
+            }
+            isIn = false
         }
     }
     
