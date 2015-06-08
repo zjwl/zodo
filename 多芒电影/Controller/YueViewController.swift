@@ -95,7 +95,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     func pageViewControllerLayout () -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         let itemSize  = self.navigationController!.navigationBarHidden ?
-            CGSizeMake(screenWidth, screenHeight+20) : CGSizeMake(screenWidth, screenHeight-navigationHeaderAndStatusbarHeight)
+            CGSizeMake(screenWidth, screenHeight) : CGSizeMake(screenWidth, screenHeight-navigationHeaderAndStatusbarHeight)
         println("itemSize is:\(itemSize)")
         flowLayout.itemSize = itemSize
         flowLayout.minimumLineSpacing = 0

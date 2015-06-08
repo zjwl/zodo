@@ -71,6 +71,9 @@ class PLMImageCache {
                // println("[IMAGECACHE] - Will download image")
                 //Download original image, resize it and store it
                 NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: url), queue: self.downloadImageQueue, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                    if data == nil {
+                        return
+                    }
                     if let responseFormatted = response as? NSHTTPURLResponse {
                         let errorCode: Int = responseFormatted.statusCode
                         if 0 == data.length {
