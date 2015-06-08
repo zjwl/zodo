@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // NSNotificationCenter.defaultCenter().postNotificationName(checkNetwork, object: nil)
 
         
-         NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "reachabilityChanged:", userInfo: nil, repeats: true)  // 设置定时器，每过一秒中执行一次方法timerFireMethod:
+         NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "reachabilityChanged:", userInfo: nil, repeats: true)  // 设置定时器，每过5秒中执行一次方法timerFireMethod:
         
         initShareSDK()
         readNSUserDefaults()
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func reachabilityChanged(note:NSNotification){
         
         var isConnectionToNetwork =  IJReachability.isConnectedToNetwork()
-        
+                
         if changNetWork == 1 && isConnectionToNetwork == false {
             alert = UIAlertView(title: "网络连接异常", message: "暂无法访问多芒电影信息", delegate: nil, cancelButtonTitle: "确定")
             changNetWork = 0
@@ -52,6 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             changNetWork = 1
             alert?.show()
         }
+        
+        var nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("NetStateChange", object: changNetWork)
         
     }
     

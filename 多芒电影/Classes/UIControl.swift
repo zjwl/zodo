@@ -18,7 +18,7 @@ extension UIControl{
         
         var Title               : UILabel!
         var basicPicView        : UIImageView!
-        var infoID              :Int = 0
+        var infoID              : Int = 0
         
         
         override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
@@ -338,7 +338,7 @@ extension UIControl{
             var displayLink         = false
             var isCircul = false
         
-        var columnNames = ["1":"[电影推荐]","2":"[说说电影]","4":"[电影源声]","5":"[轻松一刻]"]
+        var columnNames = ["1":"[电影推荐]","2":"[说说电影]","4":"[电影原声]","5":"[轻松一刻]"]
         
         override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)

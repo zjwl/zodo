@@ -36,7 +36,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         
         var soapMessage = getMethodString(self.methodName)
-        println("soapMessage is:\(soapMessage)")
+        //println("soapMessage is:\(soapMessage)")
         var url = NSURL(string: urlString)
         
         var theRequest = NSMutableURLRequest(URL: url!)
@@ -145,12 +145,12 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     func parserDidStartDocument(parser: NSXMLParser) {
-        println("Beginnnn....")
+        //println("Beginnnn....")
     }
     
     //can be override
     func parserDidEndDocument(parser: NSXMLParser) {
-        println("Endding...")
+        //println("Endding...")
         dataDelegate.invoke(index, StringResult: singleResult)
         
     }

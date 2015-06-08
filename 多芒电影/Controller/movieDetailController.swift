@@ -53,7 +53,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         descTitleLbl.text = currentInfo.Introduction
         var content:NSString = descTitleLbl.text!
         descHeight = content.textSizeWithFont(descTitleLbl.font, constrainedToSize: CGSizeMake(descTitleLbl.frame.width,  CGFloat(MAXFLOAT))).height+58
-        println("descHeight is :\(descHeight)")
+        //println("descHeight is :\(descHeight)")
         initConstraint()
         
         webView.scrollView.scrollEnabled = false
@@ -161,7 +161,7 @@ class movieDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         webView.frame = frame;
         
         
-        println("webView.scrollView.contentSize.height:\(webView.scrollView.contentSize.height)")
+        //println("webView.scrollView.contentSize.height:\(webView.scrollView.contentSize.height)")
         var metrics:Dictionary = ["webViewH":webView.scrollView.contentSize.height,"descHeight":(descHeight+120)];
         webviewConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-descHeight-[webView(webViewH)]-70-|", options: nil, metrics: metrics, views: ["webView":webView])
         mainContrainer.addConstraints(webviewConstraintH!)

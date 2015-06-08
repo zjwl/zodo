@@ -23,6 +23,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     var rect = UIScreen.mainScreen().bounds
     var currentClickModel:Model.BasicInfo?
     var remindView:UILabel=UILabel()
+    var bili = UIScreen.mainScreen().bounds.width / 320.0
+    var tag = 0
     
     override func viewDidLoad() {
         
@@ -48,9 +50,113 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.uiTableView!.dataSource=self
         // 设置tableView的委托
         self.uiTableView.delegate = self
-        
         setTableViewHeader()
+        
+        var nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: Selector("netStateChange:"), name: "NetStateChange", object: nil)
+        
     }
+    
+    
+    
+    func netStateChange(notify:NSNotification){
+        
+  
+
+        
+        if pageControl != nil {
+            return
+        }
+        
+        let imageW:CGFloat = 320.0 * bili
+        let imageH:CGFloat = 125.0 * bili
+        var imageY:CGFloat = 0;
+        
+        
+        if   IJReachability.isConnectedToNetwork() == false {
+            var lbl = UILabel(frame: CGRect(x: 0,y: scwv!.frame.height/2-15,width: screenWidth,height: 30))
+            lbl.tag = 103
+            lbl.text = "网络异常！"
+            lbl.textColor = UIColor.grayColor()
+            
+            lbl.textAlignment = NSTextAlignment.Center
+            scwv?.addSubview(lbl)
+        
+            return
+        }
+        
+        
+        var lbl = scwv?.viewWithTag(103)
+        if lbl != nil {
+            lbl?.removeFromSuperview()
+        }
+        
+        var hejiList = UTIL.getFilmAlbum(每页数量: 4, 当前页码: 0)
+        var totalCount = hejiList.count
+        var webSite = ""
+        
+        for index in 0..<totalCount{
+            let imageX:CGFloat = CGFloat(index) * imageW
+            var btn = UIButton(frame: CGRect(x: imageX, y: imageY, width: imageW, height: imageH))
+            var imageView:UIImageView = UIImageView(frame: btn.bounds)
+            
+            var photo = hejiList[index].ThePhoto
+            if photo.has("ueditor") {
+                webSite =  "http://apk.zdomo.com"
+            }else {
+                webSite = "http://apk.zdomo.com/ueditor/net/"
+            }
+            
+            var url = (webSite + photo).stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
+            url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
+            
+            //println("home:"+url)
+            var imgURL = NSURL(string: url)
+            /*var data = NSData(contentsOfURL:imgURL!)
+            var image = UIImage(data:data!, scale: 1.0)
+            imageView.image = image*/
+            
+            PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSize(width: 133, height: 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
+                //use image
+                if !(image == nil) {
+                    imageView.image = image
+                }
+                
+            }
+            
+            btn.addSubview(imageView)
+            btn.tag = tag + index
+            btn.addTarget(self, action:"goHeJi", forControlEvents: UIControlEvents.TouchDown)
+            
+            var hjLbl = UILabel()
+            hjLbl.frame = CGRect(x: imageX, y: imageH-20.0, width: rect.width * 0.8 , height: 20.0)
+            //   hjLbl.backgroundColor = UIColor.grayColor()//设置v_headerLab的背景颜色
+            hjLbl.backgroundColor = UIColor(red: 0.2, green: 0.4, blue: 0.6, alpha: 0.6)
+            hjLbl.textColor = UIColor.whiteColor()//设置v_headerLab的字体颜色
+            hjLbl.font =  UIFont(name: "Arial", size: 13) //设置v_headerLab的字体样式和大小
+            // hjLbl.shadowColor = UIColor.grayColor()//设置v_headerLab的字体的投影
+            hjLbl.text = "   合辑:\(hejiList[index].Title)"
+            
+            scwv!.addSubview(btn)
+            scwv!.addSubview(hjLbl)
+            
+        }
+        let contentW:CGFloat = imageW * CGFloat(totalCount)
+        scwv!.contentSize = CGSizeMake(contentW, 0)
+        scwv!.pagingEnabled = true
+        scwv!.delegate = self
+        
+        
+        pageControl = UIPageControl(frame: CGRect(x: rect.width * 0.8 + 10, y: 181 + imageH, width: rect.width * 0.2 - 20.0, height: 20))
+        pageControl?.tag = 505
+        pageControl?.currentPageIndicatorTintColor = UIColor.redColor()
+        self.view.addSubview(pageControl!)
+        self.pageControl!.numberOfPages = totalCount
+        self.addTimer()
+    
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -221,8 +327,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         // 6p (0.0,0.0,414.0,736.0)
         // 6 (0.0,0.0,375.0,667.0)
         // 5S (0.0,0.0,320.0,568.0)
-        var bili = rect.width / 320.0
         var addPart = 125.0 * (bili-1)
+        
         
         var v_headerView = UIView(frame: CGRect(x: 0.0,y: 0.0,width: 320.0 * bili ,height: 360.0 + addPart ))  //创建一个视图（v_headerView）
         
@@ -260,7 +366,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             "icon_yi":  CGRect(x: jianJu+dianYuan * 2, y: 110.0, width: 49.0, height: 71.0),
             "icon_yue": CGRect(x: jianJu+dianYuan * 3, y: 110.0, width: 49.0, height: 71.0)]
         
-        var tag = 0
+        
         for (key,value) in dict {
             var btn     = UIButton(frame: value)
             var imv     = UIImageView(frame: btn.bounds) //创建一个UIimageView（v_headerImageView）
@@ -281,95 +387,11 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         scwv = UIScrollView(frame: CGRect(x: 0,y: 200,width: 320*bili,height: 125 * bili))
         scwv!.showsHorizontalScrollIndicator = false
         v_headerView.addSubview(scwv!)//将v_headerImageView添加到创建的视图（v_headerView）中
+      
+       
         
-        let imageW:CGFloat = 320.0 * bili
-        let imageH:CGFloat = 125.0 * bili
-        var imageY:CGFloat = 0;
-
         
-        if !IJReachability.isConnectedToNetwork()  {
-            var lbl = UILabel(frame: CGRect(x: 0,y: scwv!.frame.height/2-15,width: screenWidth,height: 30))
-            lbl.tag = 103
-            lbl.text = "网络异常！"
-            lbl.textColor = UIColor.grayColor()
-
-            lbl.textAlignment = NSTextAlignment.Center
-            scwv?.addSubview(lbl)
-        }else {
-            
-            var lbl = scwv?.viewWithTag(103)
-            if lbl != nil {
-                lbl?.removeFromSuperview()
-            }
-            
-            var hejiList = UTIL.getFilmAlbum(每页数量: 4, 当前页码: 0)
-                        var totalCount = hejiList.count
-            var webSite = ""
-            
-            for index in 0..<totalCount{
-                let imageX:CGFloat = CGFloat(index) * imageW
-                var btn = UIButton(frame: CGRect(x: imageX, y: imageY, width: imageW, height: imageH))
-                var imageView:UIImageView = UIImageView(frame: btn.bounds)
-                
-                var photo = hejiList[index].ThePhoto
-                if photo.has("ueditor") {
-                    webSite =  "http://apk.zdomo.com"
-                }else {
-                    webSite = "http://apk.zdomo.com/ueditor/net/"
-                }
-                
-                var url = (webSite + photo).stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
-                url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
-                
-                //println("home:"+url)
-                var imgURL = NSURL(string: url)
-                /*var data = NSData(contentsOfURL:imgURL!)
-                var image = UIImage(data:data!, scale: 1.0)
-                imageView.image = image*/
-                
-                PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSize(width: 133, height: 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
-                    //use image
-                    if !(image == nil) {
-                        imageView.image = image
-                    }
-                    
-                }
-                
-                btn.addSubview(imageView)
-                btn.tag = tag + index
-                btn.addTarget(self, action:"goHeJi", forControlEvents: UIControlEvents.TouchDown)
-                
-                var hjLbl = UILabel()
-                hjLbl.frame = CGRect(x: imageX, y: imageH-20.0, width: rect.width * 0.8 , height: 20.0)
-                //   hjLbl.backgroundColor = UIColor.grayColor()//设置v_headerLab的背景颜色
-                hjLbl.backgroundColor = UIColor(red: 0.2, green: 0.4, blue: 0.6, alpha: 0.6)
-                hjLbl.textColor = UIColor.whiteColor()//设置v_headerLab的字体颜色
-                hjLbl.font =  UIFont(name: "Arial", size: 13) //设置v_headerLab的字体样式和大小
-                // hjLbl.shadowColor = UIColor.grayColor()//设置v_headerLab的字体的投影
-                hjLbl.text = "   合辑:\(hejiList[index].Title)"
-                
-                scwv!.addSubview(btn)
-                scwv!.addSubview(hjLbl)
-                
-            }
-            let contentW:CGFloat = imageW * CGFloat(totalCount)
-            scwv!.contentSize = CGSizeMake(contentW, 0)
-            scwv!.pagingEnabled = true
-            scwv!.delegate = self
         
-           
-            pageControl = UIPageControl(frame: CGRect(x: rect.width * 0.8 + 10, y: 181 + imageH, width: rect.width * 0.2 - 20.0, height: 20))
-            pageControl?.tag = 505
-            pageControl?.currentPageIndicatorTintColor = UIColor.redColor()
-            self.view.addSubview(pageControl!)
-            self.pageControl!.numberOfPages = totalCount
-            //  self.pageControl!.backgroundColor = UIColor.purpleColor()
-            self.addTimer()
-         
-            
-        
-
-          }
         var v_headerLab = UILabel(frame: CGRect(x: 10.0,y: addPart + 325,width: 55 ,height: 30.0)) //创建一个UILable（v_headerLab）用来显示标题
         v_headerLab.backgroundColor = UIColor.clearColor()//设置v_headerLab的背景颜色
         v_headerLab.textColor = UIColor.grayColor()//设置v_headerLab的字体颜色
@@ -377,8 +399,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         //v_headerLab.shadowColor = UIColor.whiteColor()//设置v_headerLab的字体的投影
         v_headerLab.text = "最新更新";
         
-        
-        
+
         
         var currentTime = UILabel(frame:  CGRect(x: (UIScreen.mainScreen().bounds.size.width - 160 ) / 2   ,y: 0,width: 160.0 ,height: 30.0))
         
@@ -459,10 +480,15 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let scrollviewW:CGFloat = scwv!.frame.size.width;
-        let x:CGFloat = scwv!.contentOffset.x;
-        let page:Int = (Int)((x + scrollviewW / 2) / scrollviewW);
-        self.pageControl!.currentPage = page;
+        
+        if pageControl != nil {
+            let scrollviewW:CGFloat = scwv!.frame.size.width;
+            let x:CGFloat = scwv!.contentOffset.x;
+            let page:Int = (Int)((x + scrollviewW / 2) / scrollviewW);
+            self.pageControl!.currentPage = page;
+        }
+        
+
     }
 
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
