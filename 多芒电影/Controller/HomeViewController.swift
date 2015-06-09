@@ -25,7 +25,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     var remindView:UILabel=UILabel()
     var bili = UIScreen.mainScreen().bounds.width / 320.0
     var tag = 0
-    
+    let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -52,18 +52,17 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.uiTableView.delegate = self
         setTableViewHeader()
         
-        var nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: Selector("netStateChange:"), name: "NetStateChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("netStateChange:"), name: "NetStateChange", object: nil)
         
     }
     
     
     
     func netStateChange(notify:NSNotification){
-        
-  
-
-        
+        setHeJiData()
+    }
+    
+    func setHeJiData(){
         if pageControl != nil {
             return
         }
@@ -73,7 +72,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         var imageY:CGFloat = 0;
         
         
-        if   IJReachability.isConnectedToNetwork() == false {
+        if   !reachability.isReachable() {
             var lbl = UILabel(frame: CGRect(x: 0,y: scwv!.frame.height/2-15,width: screenWidth,height: 30))
             lbl.tag = 103
             lbl.text = "网络异常！"
@@ -81,7 +80,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             
             lbl.textAlignment = NSTextAlignment.Center
             scwv?.addSubview(lbl)
-        
+            
             return
         }
         
@@ -153,10 +152,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.view.addSubview(pageControl!)
         self.pageControl!.numberOfPages = totalCount
         self.addTimer()
-    
+        refreshData()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -175,7 +173,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func refreshData() {
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 0, 特殊标签id: 0, 每页数量: 20, 当前页码: 0)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_0_s_0_p_0"))
@@ -252,7 +250,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         loadWebController.titleText = item.Title
         loadWebController.webAddress  = item.LinkUrl
         loadWebController.shouldRound = true
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "ReadInfo", params: String(item.InfoID),memberid).loadData()
         }
 
@@ -388,8 +386,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         scwv!.showsHorizontalScrollIndicator = false
         v_headerView.addSubview(scwv!)//将v_headerImageView添加到创建的视图（v_headerView）中
       
-       
-        
+        setHeJiData()
         
         
         var v_headerLab = UILabel(frame: CGRect(x: 10.0,y: addPart + 325,width: 55 ,height: 30.0)) //创建一个UILable（v_headerLab）用来显示标题
@@ -498,7 +495,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
        
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
              self.addTimer()
         }
     }

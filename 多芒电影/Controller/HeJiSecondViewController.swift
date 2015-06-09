@@ -18,6 +18,7 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var titleString:String?,descString:String?
     var activityIndicator : UIActivityIndicatorView!
+     let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         super.viewDidLoad()
         colors.append(UIColor(red: 51/255, green: 170/255, blue: 138/255, alpha: 1))
@@ -76,7 +77,7 @@ class HeJiSecondViewController: UITableViewController, UITableViewDataSource, UI
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getFilmAlbumDetail(电影合辑板块id:hejiID)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("filmalbum_\(hejiID)"))

@@ -19,6 +19,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var noDataView:UILabel=UILabel()
     var activityIndicator : UIActivityIndicatorView!
+    let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,29 +37,10 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        
-        let reachability = Reachability.reachabilityForInternetConnection()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
-        
-        reachability.startNotifier()
+
        
     }
-    
-    func reachabilityChanged(note: NSNotification) {
-        
-        let reachability = note.object as! Reachability
-        
-        if reachability.isReachable() {
-            if reachability.isReachableViaWiFi() {
-                println("Reachable via WiFi")
-            } else {
-                println("Reachable via Cellular")
-            }
-        } else {
-            println("Not reachable")
-        }
-    }
+
     
     override func viewWillAppear(animated: Bool) {
         //basicList.removeAll(keepCapacity: false)
@@ -68,6 +50,8 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     
     func refreshData() {
         
+        
+        
         noDataView.frame = self.view.bounds
         
         refreshControl.endRefreshing()
@@ -76,7 +60,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             //basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             activityIndicator.startAnimating()
             
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 5, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("history_0"))
@@ -154,7 +138,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 currentPage = currentPage + 1
                 activityIndicator.startAnimating()
                 
-                if IJReachability.isConnectedToNetwork(){
+                if reachability.isReachable(){
                     CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 5, 当前页码: currentPage)
                 }
 

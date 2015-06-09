@@ -30,7 +30,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     var isScroll = false
     var refreshControl = UIRefreshControl()
     var labelitems:Dictionary<Int,String>?
-    
+     let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initConstraint()
@@ -69,7 +69,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         activityIndicator.startAnimating()
         
 
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_1_s_\(currentLableID)_p_0"))
@@ -197,7 +197,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
         
         activityIndicator.startAnimating()
         
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_1_s_\(currentLableID)_p_0"))
@@ -260,7 +260,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             currentPage = currentPage + 1
             activityIndicator.startAnimating()
             
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
             }
             

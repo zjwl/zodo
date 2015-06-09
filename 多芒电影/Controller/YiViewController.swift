@@ -23,6 +23,8 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     var isScroll = false
     var refreshControl = UIRefreshControl()
     var activityIndicator : UIActivityIndicatorView!
+     let reachability = Reachability.reachabilityForInternetConnection()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +49,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     func refreshData() {
         //basicList = UTIL.getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         activityIndicator.startAnimating()
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 6, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_6_s_\(currentLableID)_p_0"))
@@ -138,7 +140,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 1, 特殊标签id: currentLableID, 每页数量: 20, 当前页码: currentPage)
             }
         }

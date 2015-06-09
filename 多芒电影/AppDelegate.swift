@@ -28,7 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // NSNotificationCenter.defaultCenter().postNotificationName(checkNetwork, object: nil)
 
         
-         NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "reachabilityChanged:", userInfo: nil, repeats: true)  // 设置定时器，每过5秒中执行一次方法timerFireMethod:
+     //    NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "reachabilityChanged:", userInfo: nil, repeats: true)  // 设置定时器，每过5秒中执行一次方法timerFireMethod:
+        
+        let reachability = Reachability.reachabilityForInternetConnection()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
+        
+        reachability.startNotifier()
+        
         
         initShareSDK()
         readNSUserDefaults()
@@ -39,22 +46,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func reachabilityChanged(note:NSNotification){
         
-        var isConnectionToNetwork =  IJReachability.isConnectedToNetwork()
+ 
+        let reachability = note.object as! Reachability
+        
+        
+        var isConnectionToNetwork =  reachability.isReachable()
                 
-        if changNetWork == 1 && isConnectionToNetwork == false {
+        if changNetWork == 1 && isConnectionToNetwork {
             alert = UIAlertView(title: "网络连接异常", message: "暂无法访问多芒电影信息", delegate: nil, cancelButtonTitle: "确定")
             changNetWork = 0
             alert?.show()
         }
         
-        if changNetWork == 0 && isConnectionToNetwork == true {
+        if changNetWork == 0 && !isConnectionToNetwork  {
             alert = UIAlertView(title: "网络连接信息", message: "网络连接恢复正常", delegate: nil, cancelButtonTitle: "确定")
             changNetWork = 1
             alert?.show()
         }
         
-        var nc = NSNotificationCenter.defaultCenter()
-        nc.postNotificationName("NetStateChange", object: changNetWork)
+        NSNotificationCenter.defaultCenter().postNotificationName("NetStateChange", object: changNetWork)
         
     }
     

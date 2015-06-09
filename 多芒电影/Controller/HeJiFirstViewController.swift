@@ -17,7 +17,7 @@ class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableV
     var tableFooterActivityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     var refreshControl =  UIRefreshControl()
     @IBOutlet weak var uiTableView: UITableView!
-   
+    let reachability = Reachability.reachabilityForInternetConnection()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableV
     
     func refreshData(){
         
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "refresh").getFilmAlbum(每页数量: 10, 当前页码: 0)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("filmalbum_0"))
@@ -129,7 +129,7 @@ class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableV
             activityIndicator.startAnimating()
             tableFooterActivityIndicator.startAnimating()
             
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable() {
                 CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
             }
             println("加载的当前页是：\(currentPage)")
