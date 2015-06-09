@@ -16,6 +16,8 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     
+    var isAllData = false
+    var pageSize = 5
     var currentPage = 0
     var isScroll = false
     var refreshControl = UIRefreshControl()
@@ -62,7 +64,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
             activityIndicator.startAnimating()
             
             if IJReachability.isConnectedToNetwork(){
-                CommonAccess(delegate: self, flag: "refresh").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+                CommonAccess(delegate: self, flag: "refresh").getCollection(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("collection_0"))
             }
@@ -179,7 +181,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 activityIndicator.startAnimating()
                 if IJReachability.isConnectedToNetwork(){
-                    CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
+                    CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: currentPage)
                 }
             }
         }
@@ -214,26 +216,27 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     }
     
     func setCallbackObject(flag: String, object: NSObject) {
-        activityIndicator.stopAnimating()
         var  basicList1 = object as! Array<Model.Collection>
-        if currentPage == 0 {
+        if basicList1.count<pageSize {
+            isAllData = true
+        }
+        if basicList.count==0{
             basicList = basicList1
-            uiTableView.reloadData()
-            refreshControl.endRefreshing()
-        }else {
+        }else{
             if flag=="refresh"{
-                basicList = basicList1
+                filterTheSameData(basicList1,isRefresh: true)
             }else{
-                //basicList.extend(basicList1)
                 filterTheSameData(basicList1)
             }
-            uiTableView.reloadData()
-            isScroll = false
         }
+        uiTableView.reloadData()
+        isScroll = false
+        refreshControl.endRefreshing()
+        activityIndicator.stopAnimating()
     }
     
-    func filterTheSameData(basicList1:Array<Model.Collection>){
-        var tempIDs:Array<Int> = [] //已有的重复的id
+    func filterTheSameData(basicList1:Array<Model.Collection>,isRefresh:Bool=false){
+        var tempIDs:Array<Int> = [] //已有的重复的ids
         for item in basicList{
             for item1 in basicList1{
                 if item.InfoID == item1.InfoID{
@@ -251,7 +254,12 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 }
             }
             if !isIn {
-                basicList.append(item)
+                if isRefresh {
+                    basicList.insert(item, atIndex: 0)
+                }else{
+                    basicList.append(item)
+                }
+                
             }
             isIn = false
         }

@@ -14,7 +14,9 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     var basicList:Array<Model.History> = [] //影片信息列表
     
     var currentPage = 0
+    var pageSize = 5
     var isScroll = false
+    var isAllData = false
     var refreshControl = UIRefreshControl()
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var noDataView:UILabel=UILabel()
@@ -36,29 +38,10 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        
-        let reachability = Reachability.reachabilityForInternetConnection()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
-        
-        reachability.startNotifier()
        
     }
     
-    func reachabilityChanged(note: NSNotification) {
-        
-        let reachability = note.object as! Reachability
-        
-        if reachability.isReachable() {
-            if reachability.isReachableViaWiFi() {
-                println("Reachable via WiFi")
-            } else {
-                println("Reachable via Cellular")
-            }
-        } else {
-            println("Not reachable")
-        }
-    }
+   
     
     override func viewWillAppear(animated: Bool) {
         //basicList.removeAll(keepCapacity: false)
@@ -73,11 +56,11 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         refreshControl.endRefreshing()
         if user.IsLogin {
 
-            //basicList = UTIL.getHistory(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
+            
             activityIndicator.startAnimating()
             
             if IJReachability.isConnectedToNetwork(){
-                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 5, 当前页码: 0)
+                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("history_0"))
             }
@@ -145,7 +128,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if isScroll {
+        if isScroll || isAllData {
             return
         }
         if user.IsLogin {
@@ -153,9 +136,8 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 isScroll = true
                 currentPage = currentPage + 1
                 activityIndicator.startAnimating()
-                
                 if IJReachability.isConnectedToNetwork(){
-                    CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: 5, 当前页码: currentPage)
+                    CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: currentPage)
                 }
 
             }
@@ -186,25 +168,26 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
     
     func setCallbackObject(flag: String, object: NSObject) {
         var  basicList1 = object as! Array<Model.History>
-        if currentPage == 0 {
+        if basicList1.count<pageSize {
+            isAllData = true
+        }
+        if basicList.count==0{
             basicList = basicList1
-            uiTableView.reloadData()
-            refreshControl.endRefreshing()
-        }else {
+        }else{
             if flag=="refresh"{
-                basicList = basicList1
+                filterTheSameData(basicList1,isRefresh: true)
             }else{
-                //basicList.extend(basicList1)
                 filterTheSameData(basicList1)
             }
-            uiTableView.reloadData()
-            isScroll = false
         }
+        uiTableView.reloadData()
+        isScroll = false
+        refreshControl.endRefreshing()
         activityIndicator.stopAnimating()
     }
     
-    func filterTheSameData(basicList1:Array<Model.History>){
-        var tempIDs:Array<Int> = [] //已有的重复的id
+    func filterTheSameData(basicList1:Array<Model.History>,isRefresh:Bool=false){
+        var tempIDs:Array<Int> = [] //已有的重复的ids
         for item in basicList{
             for item1 in basicList1{
                 if item.InfoID == item1.InfoID{
@@ -222,7 +205,12 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             if !isIn {
-                basicList.append(item)
+                if isRefresh {
+                    basicList.insert(item, atIndex: 0)
+                }else{
+                    basicList.append(item)
+                }
+                
             }
             isIn = false
         }
