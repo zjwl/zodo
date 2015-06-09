@@ -35,7 +35,29 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
         activityIndicator.activityIndicatorViewStyle =  UIActivityIndicatorViewStyle.Gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        
+        
+        let reachability = Reachability.reachabilityForInternetConnection()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
+        
+        reachability.startNotifier()
        
+    }
+    
+    func reachabilityChanged(note: NSNotification) {
+        
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable() {
+            if reachability.isReachableViaWiFi() {
+                println("Reachable via WiFi")
+            } else {
+                println("Reachable via Cellular")
+            }
+        } else {
+            println("Not reachable")
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
