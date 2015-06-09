@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B68B33C1B2677BF0024FEC1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B68B33B1B2677BF0024FEC1 /* Reachability.swift */; };
 		5BB912691AD3B62E00F4C76E /* BlurBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB912681AD3B62E00F4C76E /* BlurBackground.swift */; };
 		5BCB0FB41AAD899E00C45EDC /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FA61AAD899E00C45EDC /* 0.jpg */; };
 		5BCB0FB51AAD899E00C45EDC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FA71AAD899E00C45EDC /* 1.jpg */; };
@@ -158,6 +159,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B68B33B1B2677BF0024FEC1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		5BB912681AD3B62E00F4C76E /* BlurBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackground.swift; sourceTree = "<group>"; };
 		5BCB0FA61AAD899E00C45EDC /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
 		5BCB0FA71AAD899E00C45EDC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				A968F2F01ABFF16D005C2F7D /* NSString.swift */,
 				A968F2F11ABFF16D005C2F7D /* PLMImageCache.swift */,
 				A968F2F21ABFF16D005C2F7D /* UTIL.swift */,
+				5B68B33B1B2677BF0024FEC1 /* Reachability.swift */,
 			);
 			name = ToolKit;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				A97A258D1A8E01260008CB92 /* insertZanQASK.swift in Sources */,
 				A97A25A61A8E022D0008CB92 /* YuViewController.swift in Sources */,
 				A97A25A41A8E021A0008CB92 /* TingViewController.swift in Sources */,
+				5B68B33C1B2677BF0024FEC1 /* Reachability.swift in Sources */,
 				A9F25E861ACD19D8006C88E4 /* SettingCntainerTableViewController.swift in Sources */,
 				A968F2FF1ABFF1AF005C2F7D /* musicDetailController.swift in Sources */,
 				A976484A1A64C1C000182E56 /* ViewController.swift in Sources */,
