@@ -14,7 +14,7 @@
 		<string>https://github.com/zjwl/zodo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>多芒电影.xcodeproj/project.xcworkspace</string>
+	<string>多芒电影.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>72A0C534D12E955DACD8D61A352019B239F50982</key>
