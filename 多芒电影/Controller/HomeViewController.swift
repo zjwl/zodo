@@ -29,9 +29,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-       // println("exec once only")
+
         
         MobClick.startWithAppkey("54c8911dfd98c517bc0003ab", reportPolicy: BATCH, channelId: "多芒网")
 
