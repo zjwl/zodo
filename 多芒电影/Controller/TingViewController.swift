@@ -78,7 +78,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        return CGSize(width: screenWidth/2, height: screenWidth/2+25);
+        return CGSize(width: screenWidth/2-6, height: screenWidth/2+25);
         
     }
     
@@ -90,7 +90,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         
         var item:musicItem? = cell.contentView.viewWithTag(TAG_CELL_LABEL) as? musicItem
         if item == nil {
-            item = musicItem(frame: CGRectMake(0, 0, screenWidth/2, screenWidth/2+25))
+            item = musicItem(frame: CGRectMake(0, 0, screenWidth/2-6, screenWidth/2+25))
             item!.tag = TAG_CELL_LABEL
             cell.contentView.addSubview(item!)
         }
