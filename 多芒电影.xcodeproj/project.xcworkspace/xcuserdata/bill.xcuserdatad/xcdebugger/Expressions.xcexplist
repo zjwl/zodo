@@ -3,6 +3,69 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = ":LoginThirdViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.MemberID == &quot;&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "user.MemberID">
+            </PersistentString>
+            <PersistentString
+               value = "memberID">
+            </PersistentString>
+            <PersistentString
+               value = "user.IsUsed">
+            </PersistentString>
+            <PersistentString
+               value = "user.NickName">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":KanViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "specalLabes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":BaseAccess.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ps[8]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":HistoryViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " user?.MemberID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":CommonAccess.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "methodName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = ":UIControl.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "model.Content">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = ":CollectionViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -19,20 +82,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":UIControl.swift">
+         contextName = ":Model.swift">
          <PersistentStrings>
             <PersistentString
-               value = "model.Content">
+               value = "aDecoder.decodeObjectForKey(&quot;registrationTime&quot;) as! String">
+            </PersistentString>
+            <PersistentString
+               value = "self.LastVisitTime">
+            </PersistentString>
+            <PersistentString
+               value = "self.registrationTime ">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = ":CommonAccess.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "methodName">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = ":movieDetailController.swift">
       </ContextState>
       <ContextState
          contextName = ":HomeViewController.swift">
@@ -56,47 +120,6 @@
          <PersistentStrings>
             <PersistentString
                value = "user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":KanViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "specalLabes">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":LoginThirdViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.MemberID">
-            </PersistentString>
-            <PersistentString
-               value = "user.IsUsed">
-            </PersistentString>
-            <PersistentString
-               value = "user.NickName">
-            </PersistentString>
-            <PersistentString
-               value = "user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":BaseAccess.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "ps[8]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = ":HistoryViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " user?.MemberID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

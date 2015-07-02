@@ -130,7 +130,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         //打印输出用户uid：
         var  date = NSDate()
         var formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd- HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
         var dateString = formatter.stringFromDate(date)
         
         var user1 = Model.LoginModel()

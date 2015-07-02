@@ -50,7 +50,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     }
     
     func checkLogin(){
-        if user.IsLogin {
+        if !user.IsLogin {
             API().exec(self, invokeIndex: 0, invokeType: "", methodName: "GetUserID", params: user.Identity,user.NickName.trim()).loadData()
         }else {
             btnFace.addTarget(self, action: Selector("addPicEvent"), forControlEvents: UIControlEvents.TouchDown)
@@ -128,7 +128,19 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
         switch index {
         case 0:
             var memberID = result
-            user.MemberID = memberID
+            var userDefaults = NSUserDefaults.standardUserDefaults()
+            var obj:AnyObject? = userDefaults.objectForKey("myUser")
+            
+            if obj != nil {
+                //var result = NSKeyedUnarchiver.unarchiveObjectWithData(obj) as? NSMutableArray
+                var tempuser:Model.LoginModel = NSKeyedUnarchiver.unarchiveObjectWithData(obj! as! NSData) as! Model.LoginModel
+                if  user.MemberID == "" || user.MemberID != "0" {
+                    tempuser.MemberID = memberID
+                    userDefaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(tempuser), forKey: "myUser")
+                }
+            }
+            println("registrationTime id is :\(user.registrationTime)")
+            println("LastVisitTime id is :\(user.LastVisitTime)")
              API().exec(self, invokeIndex:1, invokeType: "", methodName: "UpdateUserInfo", params: user.MemberID,user.NickName,user.UserName,user.Password,user.WhereFrom,user.Mail,user.Identity,user.HeadPhotoURL,user.IsUsed,user.IsActivation,user.registrationTime,user.LastVisitTime).loadData()
         default:
             println("i am here")

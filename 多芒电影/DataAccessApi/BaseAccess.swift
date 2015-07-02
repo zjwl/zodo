@@ -36,7 +36,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         
         var soapMessage = getMethodString(self.methodName)
-        //println("soapMessage is:\(soapMessage)")
+        println("soapMessage is:\(soapMessage)")
         var url = NSURL(string: urlString)
         
         var theRequest = NSMutableURLRequest(URL: url!)
