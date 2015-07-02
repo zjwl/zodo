@@ -94,6 +94,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
             
             var userDeFaults = NSUserDefaults.standardUserDefaults()
             userDeFaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(user1), forKey: "myUser")
+            
+            var dele = UIApplication.sharedApplication().delegate as! AppDelegate
+            dele.readNSUserDefaults()
             self.performSegueWithIdentifier("UILoginMember", sender: self)
             
         }
