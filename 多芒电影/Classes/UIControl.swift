@@ -429,6 +429,7 @@ extension UIControl{
                     imv.image = UIImage(named: "play")
                     playBtn.addSubview(imv)
                     playBtn.tag = infoID
+                    playBtn.hidden = false
                 }else {
                     playBtn.hidden = true
                 }
