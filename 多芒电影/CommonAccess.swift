@@ -101,7 +101,7 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
         basic.AuditID = dict["AuditID"] as! Int
         basic.IsUsed = dict["IsUsed"] as! Bool
         basic.AuditState = dict["AuditState"] as! Bool
-        basic.Content = (dict["Content"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+        basic.Content = (dict["Content"] as! String)
         basic.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
         basic.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
         
@@ -184,7 +184,7 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
             //basic.AuditID = dict["AuditID"] as Int
             //basic.IsUsed = dict["IsUsed"] as Bool
             //basic.AuditState = dict["AuditState"] as Bool
-            basic.Content = (dict["Content"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            basic.Content = (dict["Content"] as! String)
             basic.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             basic.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             
@@ -234,7 +234,7 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
             //            history.AuditID = dict["AuditID"] as Int
             //            history.IsUsed = dict["IsUsed"] as Bool
             //            history.AuditState = dict["AuditState"] as Bool
-            history.Content = (dict["Content"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
+            history.Content = (dict["Content"] as! String)
             history.AddTime = (dict["AddTime"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             history.LabelIDS = (dict["LabelIDS"] as! String).stringByReplacingOccurrencesOfString(" ", withString: "")
             history.HistoryID = dict["HistoryID"] as! Int
