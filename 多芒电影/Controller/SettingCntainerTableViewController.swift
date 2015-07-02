@@ -56,7 +56,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
             var  imagePath = NSBundle.mainBundle().pathForResource("AppIcon", ofType: "png")
             //构造分享内容
             
-            var publishContent = ShareSDK.content("多芒电影是一款个性化电影推荐聚合应用，主打品读式移动观影，其简洁清新的界面风格、个性独特的推荐方式，让您在电影的精深世界里尽享慢生活之乐。", defaultContent: "多芒电影，有你好看", image:ShareSDK.imageWithPath(imagePath), title: "多芒电影应用分享", url: "https://itunes.apple.com/cn/app/duo-mang-dian-ying/id789581054?mt=8&uo=4", description: "多芒电影是一款个性化电影推荐聚合应用，主打品读式移动观影，其简洁清新的界面风格、个性独特的推荐方式，让您在电影的精深世界里尽享慢生活之乐。", mediaType: SSPublishContentMediaTypeNews)
+            var publishContent = ShareSDK.content("多芒电影是一款个性化电影推荐聚合应用，主打品读式移动观影，其简洁清新的界面风格、个性独特的推荐方式，让您在电影的精深世界里尽享慢生活之乐。", defaultContent: "多芒电影，有你好看", image:ShareSDK.imageWithPath(imagePath), title: "多芒电影应用分享", url: "http://m.zdomo.com/appurlios.php", description: "多芒电影是一款个性化电影推荐聚合应用，主打品读式移动观影，其简洁清新的界面风格、个性独特的推荐方式，让您在电影的精深世界里尽享慢生活之乐。", mediaType: SSPublishContentMediaTypeNews)
             
             
             ShareSDK.showShareActionSheet(nil, shareList: nil, content: publishContent, statusBarTips: true, authOptions: nil, shareOptions: nil, result: { (shareType:ShareType, state:SSResponseState, info:ISSPlatformShareInfo!, error:ICMErrorInfo!, Bool) -> Void in

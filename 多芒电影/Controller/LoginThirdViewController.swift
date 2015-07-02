@@ -139,8 +139,8 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
                     userDefaults.setValue(NSKeyedArchiver.archivedDataWithRootObject(tempuser), forKey: "myUser")
                 }
             }
-            println("registrationTime id is :\(user.registrationTime)")
-            println("LastVisitTime id is :\(user.LastVisitTime)")
+            //println("registrationTime id is :\(user.registrationTime)")
+            //println("LastVisitTime id is :\(user.LastVisitTime)")
              API().exec(self, invokeIndex:1, invokeType: "", methodName: "UpdateUserInfo", params: user.MemberID,user.NickName,user.UserName,user.Password,user.WhereFrom,user.Mail,user.Identity,user.HeadPhotoURL,user.IsUsed,user.IsActivation,user.registrationTime,user.LastVisitTime).loadData()
         default:
             println("i am here")
