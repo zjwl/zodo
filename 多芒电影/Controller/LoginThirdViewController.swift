@@ -18,6 +18,8 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     override func viewDidLoad() {
        super.viewDidLoad()
         self.setBasicValue()
+        var dele = UIApplication.sharedApplication().delegate as! AppDelegate
+        dele.readNSUserDefaults()
        self.checkLogin()
         // Do any additional setup after loading the view.
 
