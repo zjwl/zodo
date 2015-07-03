@@ -11,7 +11,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
     var lblTitile:UILabel = UILabel(frame: CGRectMake(20, 10, 100, 20))
     var lblTime:UILabel = UILabel(frame: CGRectMake(20, 40, 100, 20))
     var hrView:UIView = UIView()
-    var lblContent:UILabel = UILabel()
+    
     var tableWidth = UIScreen.mainScreen().applicationFrame.width
     var heartBtn:UIImageView = UIImageView()
     var replyBtn:UIImageView = UIImageView()
@@ -44,7 +44,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
             tempView.frame = CGRectMake(10, heartBtn.frame.height+heartBtn.frame.origin.y, tempView.frame.width, tempView.frame.height)
             holdView.addSubview(tempView)
             
-            var departView = UIView(frame: CGRectMake(10, tempView.frame.height+tempView.frame.origin.y+5, self.tableWidth-20, 1))
+            var departView = UIView(frame: CGRectMake(10, tempView.frame.height+tempView.frame.origin.y+5, screenWidth-20, 1))
             departView.backgroundColor = UIColor.grayColor()
             holdView.addSubview(departView)
             
@@ -52,7 +52,8 @@ class xbShuoCell: UITableViewCell,DataDelegate{
             tempView2.frame = CGRectMake(10, departView.frame.height+departView.frame.origin.y+5, tempView2.frame.width, tempView2.frame.height)
             holdView.addSubview(tempView2)
             
-            replyBtn2 = UIButton(frame: CGRectMake(0, tempView2.frame.height+tempView2.frame.origin.y, self.tableWidth, 30))
+            replyBtn2 = UIButton(frame: CGRectMake(screenWidth/2-140/2, tempView2.frame.height+tempView2.frame.origin.y, 140, 30))
+            
             replyBtn2!.backgroundColor = UIColor.grayColor()
             replyBtn2!.setTitle("查看全部回复", forState: UIControlState.Normal)
             println("回复的y:\(replyBtn2!.frame.origin.y)")
@@ -64,9 +65,13 @@ class xbShuoCell: UITableViewCell,DataDelegate{
     }
     
     func configItem0Base(model:Model.QASK){
+        m=model
         var content:NSString = model.Content
-        var contentSize:CGSize = content.textSizeWithFont(lblContent.font, constrainedToSize: CGSizeMake(self.frame.width-20,  CGFloat(MAXFLOAT)))
-        self.frame = CGRectMake(0, 0, self.tableWidth, contentSize.height+91) //整个Cell的高度
+        var lblContent:UILabel = UILabel()
+        lblContent.font = UIFont(name: "ArialUnicodeMS", size: 15)
+        var contentSize:CGSize = content.textSizeWithFont(lblContent.font, constrainedToSize: CGSizeMake(screenWidth-20,  CGFloat(MAXFLOAT)))
+        
+        self.frame = CGRectMake(0, 0, screenWidth, contentSize.height+91) //整个Cell的高度
         println("content is:\(content)")
         println("xbshuo content height:\(contentSize.height)")
         lblTitile.frame = CGRectMake(80, 10, self.frame.width - 90, 40)
@@ -74,6 +79,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
         hrView.frame = CGRectMake(10, userIcon.frame.height + userIcon.frame.origin.y+10, self.frame.width - 20, 1)
         lblContent.frame = CGRectMake(10, userIcon.frame.height + userIcon.frame.origin.y+21, self.frame.width-20, contentSize.height)
         
+        //lblContent.backgroundColor=UIColor.redColor()
         heartBtn.frame = CGRectMake(self.frame.width - 122, lblContent.frame.height+lblContent.frame.origin.y+10, 30, 30)
         goodTimes.frame = CGRectMake(self.frame.width-84, lblContent.frame.height+lblContent.frame.origin.y+10, 30, 30)
         replyBtn.frame = CGRectMake(self.frame.width - (8*2+30), lblContent.frame.height+lblContent.frame.origin.y+10, 30, 30)
@@ -116,11 +122,12 @@ class xbShuoCell: UITableViewCell,DataDelegate{
     }
     
     func configItem0(model:Model.QASK){
+        m=model
         configItem0Base(model)
         
-        var departView = UIView(frame: CGRectMake(10, heartBtn.frame.height+heartBtn.frame.origin.y+5, self.tableWidth-20, 1))
-        departView.backgroundColor = UIColor.grayColor()
-        holdView.addSubview(departView)
+        //var departView = UIView(frame: CGRectMake(10, heartBtn.frame.height+heartBtn.frame.origin.y+5, screenWidth-20, 1))
+        //departView.backgroundColor = UIColor.grayColor()
+        //holdView.addSubview(departView)
         
         holdView.backgroundColor=UIColor.whiteColor()
         self.backgroundColor=UIColor.grayColor()
@@ -128,6 +135,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
     }
     
     func configItem(model:Model.QASK){
+        m=model
         var tempView = self.setReplyItem(model)
         tempView.frame = CGRectMake(10, 5, tempView.frame.width, tempView.frame.height+11)
         var hrViewY:CGFloat = tempView.frame.height > 80 ? tempView.frame.height : 80
@@ -190,8 +198,11 @@ class xbShuoCell: UITableViewCell,DataDelegate{
         var who:UILabel = UILabel(frame: CGRectMake(80, 10, self.frame.width - 90, 20))
         
         var content:NSString = model.Content
-        var contentSize:CGSize = content.textSizeWithFont(lblContent.font, constrainedToSize: CGSizeMake(self.frame.width-90,  CGFloat(MAXFLOAT)))
-        var replyContent = UILabel(frame: CGRectMake(80, who.frame.height + who.frame.origin.y+10, self.frame.width-90, contentSize.height))
+        var lblContent:UILabel = UILabel()
+        var tempcontentwidth = IS_IPHONE_6P ? screenWidth - 100 : screenWidth - 90
+        var contentSize:CGSize = content.textSizeWithFont(lblContent.font, constrainedToSize: CGSizeMake(tempcontentwidth,  CGFloat(MAXFLOAT)))
+        
+        var replyContent = UILabel(frame: CGRectMake(80, who.frame.height + who.frame.origin.y+10, tempcontentwidth, contentSize.height))
         tempView.frame = CGRectMake(0, 0, tableWidth, replyContent.frame.height+replyContent.frame.origin.y+10)
         
         var tempString:NSString = model.iconFace
