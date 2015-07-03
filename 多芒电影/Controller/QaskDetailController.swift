@@ -40,7 +40,7 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = xbShuoCell(frame:CGRectMake(0, 0, tableView.frame.width, 80))
+        var cell = xbShuoCell(frame:CGRectMake(0, 0, screenWidth, 80))
         
         if indexPath.row==0 {
             cell.configItem0(askList[indexPath.row])
@@ -62,7 +62,7 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
         lbl.numberOfLines = 0
         lbl.text = askList[indexPath.row].Content
         var content:NSString = lbl.text!
-        var content0_size:CGSize = content.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-20,  CGFloat(MAXFLOAT)))
+        var content0_size:CGSize = content.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(screenWidth-20,  CGFloat(MAXFLOAT)))
         
     
         if indexPath.row==0 {
@@ -71,7 +71,8 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
             return content0_H
         }else{
             var content1:NSString = askList[indexPath.row].Content
-            var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
+            
+            var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(screenWidth-90,  CGFloat(MAXFLOAT)))
             var content1_H = content1_size.height + 50 //10+20+10+ContentH+10
             return content1_H //> 80 ? content1_H : 80
         }

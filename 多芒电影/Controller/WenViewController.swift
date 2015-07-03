@@ -25,6 +25,8 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     var tempCell:daJiaShuoCellCode = daJiaShuoCellCode()  //[self.tableView dequeueReusableCellWithIdentifier:@"C1"];
     var toQid:Int=0,sourceID:Int=1,toViewQid=0,dajiashuoPageIndex=0,xbShuoPageIndex=0
     var _loadingMore=false,_isXBdataLoadOver=false,_isDJSdataLoadOver=false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets=false
@@ -324,24 +326,34 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             var lbl:UILabel = UILabel()
             lbl.numberOfLines = 0
             lbl.text = tempAskList_L0[indexPath.row].Content
+            lbl.font = UIFont(name: "ArialUnicodeMS", size: 15)
             var content:NSString = lbl.text!
-            var content0_size:CGSize = content.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-20,  CGFloat(MAXFLOAT)))
+            var content0_size:CGSize = content.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(screenWidth-20,  CGFloat(MAXFLOAT)))
             
             var content0_H:CGFloat=0,content1_H:CGFloat=0,content2_H:CGFloat=0
             content0_H = content0_size.height + 141 //10+60+10+1+10+contentH+10+30+10
             if arraylistForXBS[indexPath.row].count==2 {
                 var content1:NSString = arraylistForXBS[indexPath.row][1].Content
-                var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
+                var lbl1:UILabel = UILabel()
+                lbl1.numberOfLines = 0
+                var tempcontentwidth = IS_IPHONE_6P ? screenWidth - 100 : screenWidth - 90
+                
+                var content1_size:CGSize = content1.textSizeWithFont(lbl1.font, constrainedToSize: CGSizeMake(tempcontentwidth,  CGFloat(MAXFLOAT)))
                 content1_H = content1_size.height + 50 //10+20+10+ContentH+10
             }
             
             if arraylistForXBS[indexPath.row].count==3 {
                 var content1:NSString = arraylistForXBS[indexPath.row][1].Content
-                var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
+                var lbl2:UILabel = UILabel()
+                lbl2.numberOfLines = 0
+                var tempcontentwidth = IS_IPHONE_6P ? screenWidth - 100 : screenWidth - 90
+                var content1_size:CGSize = content1.textSizeWithFont(lbl2.font, constrainedToSize: CGSizeMake(tempcontentwidth,  CGFloat(MAXFLOAT)))
                 content1_H = content1_size.height + 50
                 
+                var lbl3:UILabel = UILabel()
+                lbl3.numberOfLines = 0
                 var content2:NSString = arraylistForXBS[indexPath.row][2].Content
-                var content2_size:CGSize = content2.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(tableView.frame.width-90,  CGFloat(MAXFLOAT)))
+                var content2_size:CGSize = content2.textSizeWithFont(lbl3.font, constrainedToSize: CGSizeMake(tempcontentwidth,  CGFloat(MAXFLOAT)))
                 content2_H = content2_size.height + 50 + 11 //5+departViewHeight+5
             }
             
@@ -357,7 +369,11 @@ class WenViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
             if arraylistForXBS[indexPath.row].count == 3 {
                 tempH = 20  //查看所有的高度
             }
-            var tempTotalHeight=content0_H+content1_H+content2_H+CGFloat(tempH)
+            var iphone6puls:CGFloat=0
+            if IS_IPHONE_6P {
+                iphone6puls = 30
+            }
+            var tempTotalHeight=content0_H+content1_H+content2_H+CGFloat(tempH)+iphone6puls
             println("totol Height:\(tempTotalHeight),")
             return tempTotalHeight
         }

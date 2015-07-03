@@ -535,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				A9EF58AF1ACE6D0D00BB9A0B /* QaskDetailController.swift */,
+				A97A25C11A8E03CA0008CB92 /* HeJiFirstViewController.swift */,
 				A9EF58B01ACE6D0D00BB9A0B /* WenWenViewController.swift */,
 				A9F25E831ACD135C006C88E4 /* WoDeHuDongController.swift */,
 				A97A25C91A8E046E0008CB92 /* CollectionViewController.swift */,
@@ -543,7 +544,6 @@
 				A97A25BF1A8E03A20008CB92 /* DetailYueViewController.swift */,
 				A97A25BB1A8E036B0008CB92 /* DetialKanViewController.swift */,
 				A97A259F1A8E01F50008CB92 /* DuViewController.swift */,
-				A97A25C11A8E03CA0008CB92 /* HeJiFirstViewController.swift */,
 				A97A25C31A8E03DE0008CB92 /* HeJiSecondViewController.swift */,
 				A97A25B71A8E03020008CB92 /* HistoryViewController.swift */,
 				A97A259D1A8E01C30008CB92 /* HomeViewController.swift */,
