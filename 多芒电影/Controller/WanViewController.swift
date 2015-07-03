@@ -19,6 +19,8 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var isScroll = false
     var refreshControl = UIRefreshControl()
     var activityIndicator:UIActivityIndicatorView!
+     let reachability = Reachability.reachabilityForInternetConnection()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +45,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         activityIndicator.startAnimating()
         
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("game_0"),methodName: "getGameList")
@@ -125,7 +127,7 @@ class WanViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             //var  basicList1 = UTIL.getGameList(每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
 
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "").getGameList(每页数量: 20, 当前页码: currentPage)
             }
         }

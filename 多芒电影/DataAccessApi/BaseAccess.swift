@@ -145,12 +145,12 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     
     func parserDidStartDocument(parser: NSXMLParser) {
-        println("Beginnnn....")
+        //println("Beginnnn....")
     }
     
     //can be override
     func parserDidEndDocument(parser: NSXMLParser) {
-        println("Endding...")
+        //println("Endding...")
         dataDelegate.invoke(index, StringResult: singleResult)
         
     }

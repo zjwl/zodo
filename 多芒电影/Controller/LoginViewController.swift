@@ -111,6 +111,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
     }
     
     @IBAction func qqTapped(sender: AnyObject) {
+       
         ShareSDK.getUserInfoWithType(ShareTypeQQSpace, authOptions: nil) { (result:Bool , userinfo:ISSPlatformUser!, error:ICMErrorInfo!) -> Void in
                if (result) {
                 //成功登录后，判断该用户的ID是否在自己的数据库中。
@@ -129,7 +130,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
         //打印输出用户uid：
         var  date = NSDate()
         var formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd- HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd\'T\'HH:mm:ss"
         var dateString = formatter.stringFromDate(date)
         
         var user1 = Model.LoginModel()

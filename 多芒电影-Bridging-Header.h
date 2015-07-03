@@ -8,3 +8,4 @@
 #import "TencentOpenAPI/QQApiInterface.h"
 #import "TencentOpenAPI/TencentOAuth.h"
 #import "WXApi.h"
+#import "QZoneConnection/ISSQZoneApp.h"

@@ -103,7 +103,6 @@
 		A97A25C61A8E043C0008CB92 /* LoginThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A25C51A8E043C0008CB92 /* LoginThirdViewController.swift */; };
 		A97A25C81A8E04580008CB92 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A25C71A8E04580008CB92 /* LoginRegisterViewController.swift */; };
 		A97A25CA1A8E046E0008CB92 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A25C91A8E046E0008CB92 /* CollectionViewController.swift */; };
-		A986C6951ADDF83800ABE63B /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A986C6941ADDF83800ABE63B /* IJReachability.swift */; };
 		A9ECC84E1ABFE4D6007A3C40 /* MailConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82A1ABFE4D6007A3C40 /* MailConnection.framework */; };
 		A9ECC84F1ABFE4D6007A3C40 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82B1ABFE4D6007A3C40 /* QQConnection.framework */; };
 		A9ECC8501ABFE4D6007A3C40 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */; };
@@ -260,7 +259,6 @@
 		A97A25C51A8E043C0008CB92 /* LoginThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginThirdViewController.swift; path = Controller/LoginThirdViewController.swift; sourceTree = "<group>"; };
 		A97A25C71A8E04580008CB92 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginRegisterViewController.swift; path = Controller/LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		A97A25C91A8E046E0008CB92 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionViewController.swift; path = Controller/CollectionViewController.swift; sourceTree = "<group>"; };
-		A986C6941ADDF83800ABE63B /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IJReachability.swift; path = Classes/IJReachability.swift; sourceTree = "<group>"; };
 		A9ECC82A1ABFE4D6007A3C40 /* MailConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MailConnection.framework; sourceTree = "<group>"; };
 		A9ECC82B1ABFE4D6007A3C40 /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
@@ -436,7 +434,6 @@
 				A97A25951A8E016C0008CB92 /* Qask.swift */,
 				A97A25961A8E016C0008CB92 /* String Extention.swift */,
 				A97A25971A8E016C0008CB92 /* UIControl.swift */,
-				A986C6941ADDF83800ABE63B /* IJReachability.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -715,7 +712,7 @@
 		A976483A1A64C1C000182E56 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "珠影网络";
 				TargetAttributes = {
 					A97648411A64C1C000182E56 = {
@@ -825,7 +822,6 @@
 				A968F2FF1ABFF1AF005C2F7D /* musicDetailController.swift in Sources */,
 				A976484A1A64C1C000182E56 /* ViewController.swift in Sources */,
 				A97A25A01A8E01F50008CB92 /* DuViewController.swift in Sources */,
-				A986C6951ADDF83800ABE63B /* IJReachability.swift in Sources */,
 				A968F2ED1ABFF11D005C2F7D /* xbShuoCell.swift in Sources */,
 				A97A25AE1A8E026D0008CB92 /* YueViewController.swift in Sources */,
 				A97A25881A8E01260008CB92 /* GetQASKInfo.swift in Sources */,

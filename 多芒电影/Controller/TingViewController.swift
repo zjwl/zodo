@@ -20,7 +20,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
     var isScroll = false
     var activityIndicator:UIActivityIndicatorView!
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
-    
+    let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +61,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
 //        collectionView!.reloadData()
         activityIndicator.startAnimating()
         
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_4_s_0_p_0"))
@@ -154,7 +154,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 4, 特殊标签id: 0, 每页数量: 120, 当前页码: currentPage)
             }
         }

@@ -18,6 +18,7 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     var refreshControl = UIRefreshControl()
     var currentInfo:Model.BasicInfo=Model.BasicInfo()
     var  activityIndicator: UIActivityIndicatorView!
+    let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initConstraint()
@@ -48,7 +49,7 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
 //        uiTableView.reloadData()
         activityIndicator.startAnimating()
         
-        if IJReachability.isConnectedToNetwork(){
+        if reachability.isReachable(){
             CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
         }else{
             CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("basic_c_5_s_0_p_0"))
@@ -107,7 +108,7 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
             currentPage = currentPage + 1
             //var  basicList1 = UTIL.getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             activityIndicator.startAnimating()
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "").getLlatestUpdate(栏目id: 5, 特殊标签id: 0, 每页数量: 20, 当前页码: currentPage)
             }
             

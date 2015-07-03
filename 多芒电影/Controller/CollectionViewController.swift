@@ -23,6 +23,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     var refreshControl = UIRefreshControl()
     var noDataView:UILabel=UILabel()
     var activityIndicator : UIActivityIndicatorView!
+     let reachability = Reachability.reachabilityForInternetConnection()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,7 +64,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
             //basicList = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: 0)
             activityIndicator.startAnimating()
             
-            if IJReachability.isConnectedToNetwork(){
+            if reachability.isReachable(){
                 CommonAccess(delegate: self, flag: "refresh").getCollection(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("collection_0"))
@@ -180,7 +181,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 currentPage = currentPage + 1
                 //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 activityIndicator.startAnimating()
-                if IJReachability.isConnectedToNetwork(){
+                if reachability.isReachable(){
                     CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: currentPage)
                 }
             }
