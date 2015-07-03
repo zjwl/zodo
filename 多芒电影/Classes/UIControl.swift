@@ -345,14 +345,14 @@ extension UIControl{
             
             columnNameLabel = UILabel(frame: CGRect(x: 95, y: 15, width: 200, height: 17))
             columnNameLabel.backgroundColor = UIColor.clearColor()
-            columnNameLabel.font = UIFont.systemFontOfSize(15)
+            columnNameLabel.font = UIFont.systemFontOfSize(13)
             columnNameLabel.textColor =  UIColor.grayColor()
             self.contentView.addSubview(columnNameLabel)
             
             Title = UILabel(frame: CGRect(x: 90, y: 30,width: screenWidth-95, height: 40))
             Title.numberOfLines = 2
             Title.backgroundColor = UIColor.clearColor()
-            Title.font = UIFont.systemFontOfSize(13)
+            Title.font = UIFont.systemFontOfSize(15)
            // Title.lineBreakMode = lin
             self.contentView.addSubview(Title)
             
