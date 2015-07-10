@@ -106,8 +106,9 @@ extension UIControl{
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             
             basicPicView = UIImageView(frame: CGRect(x: 5, y: 5, width: screenWidth - 10, height: 133))
-            basicPicView.contentMode = UIViewContentMode.ScaleToFill
+            basicPicView.contentMode = UIViewContentMode.ScaleAspectFill
             self.contentView.addSubview(basicPicView)
+            basicPicView.clipsToBounds=true
             
             view = UIView(frame: CGRect(x: 5, y: 138, width: screenWidth - 10, height: 27))
             //view.backgroundColor = UIColor.grayColor()
