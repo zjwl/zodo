@@ -38,7 +38,7 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
         if content.trim().length()<10{
             UIAlertView(title: "", message: "请输入至少10个字", delegate: nil, cancelButtonTitle: "确定").show()
         }else{
-            UIAlertView(title: "", message: "大于10", delegate: nil, cancelButtonTitle: "确定").show()
+            API().exec(self, invokeIndex: 0, invokeType: "", methodName:"InsertQASK", params: content,String(uid!),String(qid!),String(sourceid)).loadData()
         }
         //API().exec(self, invokeIndex: 0, invokeType: "", methodName:"InsertQASK", params: content,String(uid!),String(qid!),String(sourceid)).loadData()
     }
