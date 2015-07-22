@@ -5,96 +5,116 @@
 //  Created by junjian chen on 15/3/27.
 //  Copyright (c) 2015年 珠影网络. All rights reserved.
 //
+import UIKit
+import WebKit
 
-import Foundation
-
-class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDataSource, DataDelegate {
-    var qid:Int=0
-    var askList:Array<Model.QASK> = []
-    
-    var refreshControl = UIRefreshControl()
-    
-    @IBOutlet weak var uiTableView: UITableView!
+class QaskDetailController: UIViewController, WKScriptMessageHandler,QaskCallbackDataDelegate,DataDelegate {
+    var appWebView:WKWebView?
+    var tempreplyQasid:Int=0,source=1
+    var iszaning=false
     
     
     
     override func viewDidLoad() {
-        // 设置tableView的数据源
-        self.uiTableView!.dataSource=self
-        // 设置tableView的委托
-        self.uiTableView!.delegate = self
-        self.uiTableView.separatorStyle=UITableViewCellSeparatorStyle.None
-        refreshData()
+        super.viewDidLoad()
+        let (theWebView,errorOptional) = buildSwiftly(self,"http://apk.zdomo.com/ios/xbshuodetail.html?id=\(tempreplyQasid)&senderid=\(user.MemberID)" ,["js","css","html","png","jpg","gif"])
+        if let errorDescription = errorOptional?.description{
+            println(errorDescription)
+        }
+        else{
+            appWebView = theWebView
+            appWebView?.frame=CGRectMake(0, 0, screenWidth, screenHeight)
+        }
     }
     
-    func refreshData(){
-        API().exec(self, invokeIndex: 0, invokeType: "qaskList", methodName: "GetQASKInfo", params: String(qid),"100","0","0").loadData()
-    }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return askList.count
+    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage){
+        var sentData = message.body as! NSDictionary
+        tempreplyQasid = Int(sentData["id"] as! NSNumber)
         
-    }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int{
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = xbShuoCell(frame:CGRectMake(0, 0, screenWidth, 80))
+        var method:NSString = sentData["m"] as! NSString
         
-        if indexPath.row==0 {
-            cell.configItem0(askList[indexPath.row])
-        }else{
-            cell.configItem(askList[indexPath.row])
+        if(method=="reply"){
+            goWenWenPageFromXbs()
         }
         
-        var replyGesture = UITapGestureRecognizer(target: self, action: Selector("goWenWenPageFromXbs:"))
-        cell.replyBtn.userInteractionEnabled=true
-        cell.replyBtn.addGestureRecognizer(replyGesture)
-        cell.replyBtn.tag=askList[indexPath.row].QASKID
-        
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var lbl:UILabel = UILabel()
-        lbl.numberOfLines = 0
-        lbl.text = askList[indexPath.row].Content
-        var content:NSString = lbl.text!
-        var content0_size:CGSize = content.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(screenWidth-20,  CGFloat(MAXFLOAT)))
-        
-    
-        if indexPath.row==0 {
-            var content0_H:CGFloat=0,content1_H:CGFloat=0,content2_H:CGFloat=0
-            content0_H = content0_size.height + 141 //10+60+10+1+10+contentH+10+30+10
-            return content0_H
-        }else{
-            var content1:NSString = askList[indexPath.row].Content
+        if(method=="addzan"){
+            if iszaning {return}
+            iszaning=true
+            var userDefault = NSUserDefaults.standardUserDefaults()
+            var zanCollection:NSString? = userDefault.stringForKey("zanCollection")
             
-            var content1_size:CGSize = content1.textSizeWithFont(lbl.font, constrainedToSize: CGSizeMake(screenWidth-90,  CGFloat(MAXFLOAT)))
-            var content1_H = content1_size.height + 50 //10+20+10+ContentH+10
-            return content1_H //> 80 ? content1_H : 80
+            
+            
+            if !(zanCollection==nil){
+                var str:String=","+String(tempreplyQasid)+","
+                var isContains=zanCollection!.containsString(str)
+                if isContains {
+                    iszaning=false
+                    //UIAlertView(title: "", message: "已赞", delegate: nil, cancelButtonTitle: "确定").show()
+                    return
+                }
+            }
+            
+            //the last parameter of evaluateJavaScript is a closure that is called after the JavaScript is run.
+            //If there is a value returned from the JavaScript it is passed to the closure as its first parameter.
+            //If there is an error calling the JavaScript, that error is passed as the second parameter.
+            appWebView!.evaluateJavaScript("updateCount({id:\(tempreplyQasid)})"){(JSReturnValue:AnyObject?, error:NSError?) in
+                if let errorDescription = error?.description{
+                    println("returned value: \(errorDescription)")
+                }
+                else if JSReturnValue != nil{
+                    println("returned value: \(JSReturnValue!)")
+                }
+                else{
+                    println("no return from JS")
+                }
+            }
+            
+            API().exec(self, invokeIndex: 0, invokeType: "", methodName: "insertZanQASK", params: String(tempreplyQasid),"0").loadData()
+            
+            
+            
         }
+        
+        
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        return 80
+    func setCallbackContent(content:String){
+        //http://ww1.sinaimg.cn/crop.160.347.338.338.1024/86961b4ejw8esta6jwx79j20ia0wigm1.jpg
+        println("the return content is:\(content)")
+        var timeFormat = NSDateFormatter()
+        timeFormat.dateFormat = "yyyy-MM-dd HH:mm"
+        var nowtime = timeFormat.stringFromDate(NSDate())
+        
+        
+        appWebView!.evaluateJavaScript("updateItem({QASKID:\(tempreplyQasid),Content:'\(content)',iconFace:'\(user.HeadPhotoURL)',NickName:'\(user.NickName)',AddTmie:'\(nowtime)',AuditID:0})"){(JSReturnValue:AnyObject?, error:NSError?) in
+            if let errorDescription = error?.description{
+                println("returned value: \(errorDescription)")
+            }
+            else if JSReturnValue != nil{
+                println("returned value: \(JSReturnValue!)")
+            }
+            else{
+                println("no return from JS")
+            }
+        }
     }
     
     func invoke(index:Int,StringResult result:String){
-    
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        var zanCollection:String? = userDefault.stringForKey("zanCollection")
+        if zanCollection==nil{
+            userDefault.setValue(","+String(tempreplyQasid)+",", forKey: "zanCollection")
+        }else{
+            userDefault.setValue(zanCollection!+String(tempreplyQasid)+",", forKey: "zanCollection")
+        }
+        iszaning=false
     }
     func invoke(type:String,object:NSObject){
-        println("askList.count:\(askList.count)")
-        
-        askList = object as! Array<Model.QASK>
-        refreshControl.endRefreshing()
-        
-        uiTableView.reloadData()
     }
     
-    func goWenWenPageFromXbs(tap:UITapGestureRecognizer){
+    func goWenWenPageFromXbs(){
        
         if  user.IsLogin  {
             self.performSegueWithIdentifier("wenwenFromDetail", sender: self)
@@ -120,8 +140,9 @@ class QaskDetailController: UIViewController,UITableViewDelegate, UITableViewDat
         if user != nil {
             theSegue.uid = user!.MemberID.toInt()
         }
-        theSegue.qid = qid
-        theSegue.sourceid=qid
+        theSegue.delete=self
+        theSegue.qid = tempreplyQasid
+        theSegue.sourceid=tempreplyQasid
     }
     func doLoginActions(action:UIAlertAction!){
         println("lgoin")

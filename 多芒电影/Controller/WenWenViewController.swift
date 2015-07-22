@@ -12,7 +12,9 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
     var qid:Int?
     var uid:Int?
     var sourceid:Int=0
-    
+    var delete:QaskCallbackDataDelegate?
+    var isPostSuccess=false
+    var content=""
     @IBOutlet weak var contentTextField: UITextView!
     
     
@@ -23,21 +25,14 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
         contentTextField.layer.borderWidth=1
         contentTextField.layer.borderColor=UIColor.grayColor().CGColor
         contentTextField.layer.cornerRadius=5.0
+        self.automaticallyAdjustsScrollViewInsets = false;
         
-        var topBar:UIToolbar=UIToolbar(frame:CGRectMake(0, 0, screenWidth, 30))
-        var btnSpace:UIBarButtonItem=UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
-        var doneButton:UIBarButtonItem=UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: Selector("dismissKeyBoard"))
-        var buttonsArray:NSArray=NSArray(objects: btnSpace,doneButton)
-        topBar.setItems(buttonsArray as [AnyObject], animated: false)
-        contentTextField.inputAccessoryView=topBar
         
     }
     
     @IBAction func commitAsk(sender: AnyObject) {
-        var content=contentTextField.text
-        if content.trim().length()<10{
-            UIAlertView(title: "", message: "请输入至少10个字", delegate: nil, cancelButtonTitle: "确定").show()
-        }else{
+        content=contentTextField.text
+        if content.trim().length()>0{
             API().exec(self, invokeIndex: 0, invokeType: "", methodName:"InsertQASK", params: content,String(uid!),String(qid!),String(sourceid)).loadData()
         }
         //API().exec(self, invokeIndex: 0, invokeType: "", methodName:"InsertQASK", params: content,String(uid!),String(qid!),String(sourceid)).loadData()
@@ -45,8 +40,16 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
     
     func invoke(index:Int,StringResult result:String){
         UIAlertView(title: "", message: "提交成功", delegate: self, cancelButtonTitle: "确定").show()
+        isPostSuccess=true
         contentTextField.text=""
     }
+    override func viewWillDisappear(animated: Bool) {
+        if isPostSuccess {
+            delete?.setCallbackContent(content)
+        }
+    }
+    
+    
     //type:方法的标识（一个页面可能有多个方法回调，以此参数作为标识区分） object:返回的数据
     func invoke(type:String,object:NSObject){
     
