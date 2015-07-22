@@ -23,6 +23,9 @@
 		5BCB0FBF1AAD899E00C45EDC /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FB11AAD899E00C45EDC /* 7.jpg */; };
 		5BCB0FC01AAD899E00C45EDC /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FB21AAD899E00C45EDC /* 8.jpg */; };
 		5BCB0FC11AAD899E00C45EDC /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BCB0FB31AAD899E00C45EDC /* 9.jpg */; };
+		5BD22F011B5C9C3E0075784E /* SwiftlyHybrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD22F001B5C9C3E0075784E /* SwiftlyHybrid.swift */; };
+		5BD22F031B5CA92F0075784E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD22F021B5CA92F0075784E /* WebKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		5BD22F051B5D08B40075784E /* QaskCallbackDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD22F041B5D08B40075784E /* QaskCallbackDataDelegate.swift */; };
 		5BF831191ADB4A6600FD81CC /* CommonAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF831181ADB4A6600FD81CC /* CommonAccess.swift */; };
 		5BF8311B1ADB4B2300FD81CC /* CommonAccessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8311A1ADB4B2300FD81CC /* CommonAccessDelegate.swift */; };
 		A91329A41AD4F97E009A1042 /* SendFeedBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91329A31AD4F97E009A1042 /* SendFeedBack.swift */; };
@@ -174,6 +177,9 @@
 		5BCB0FB11AAD899E00C45EDC /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
 		5BCB0FB21AAD899E00C45EDC /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
 		5BCB0FB31AAD899E00C45EDC /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
+		5BD22F001B5C9C3E0075784E /* SwiftlyHybrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftlyHybrid.swift; sourceTree = "<group>"; };
+		5BD22F021B5CA92F0075784E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		5BD22F041B5D08B40075784E /* QaskCallbackDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QaskCallbackDataDelegate.swift; sourceTree = "<group>"; };
 		5BF831181ADB4A6600FD81CC /* CommonAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAccess.swift; sourceTree = "<group>"; };
 		5BF8311A1ADB4B2300FD81CC /* CommonAccessDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAccessDelegate.swift; sourceTree = "<group>"; };
 		A91329A31AD4F97E009A1042 /* SendFeedBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendFeedBack.swift; path = DataAccessApi/SendFeedBack.swift; sourceTree = "<group>"; };
@@ -314,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD22F031B5CA92F0075784E /* WebKit.framework in Frameworks */,
 				A9ECC8751ABFE66A007A3C40 /* libsqlite3.dylib in Frameworks */,
 				A9ECC8711ABFE5E8007A3C40 /* libz.1.2.5.dylib in Frameworks */,
 				A9ECC86F1ABFE5C9007A3C40 /* libstdc++.dylib in Frameworks */,
@@ -357,6 +364,7 @@
 		5BB3B36F1AA021F700D9EB6E /* ToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				5BD22F001B5C9C3E0075784E /* SwiftlyHybrid.swift */,
 				A968F2EE1ABFF16D005C2F7D /* Extension.swift */,
 				A968F2EF1ABFF16D005C2F7D /* Macro.swift */,
 				A968F2F01ABFF16D005C2F7D /* NSString.swift */,
@@ -465,6 +473,7 @@
 				A91329A31AD4F97E009A1042 /* SendFeedBack.swift */,
 				5BF831181ADB4A6600FD81CC /* CommonAccess.swift */,
 				5BF8311A1ADB4B2300FD81CC /* CommonAccessDelegate.swift */,
+				5BD22F041B5D08B40075784E /* QaskCallbackDataDelegate.swift */,
 			);
 			name = DataAccessAPI;
 			sourceTree = "<group>";
@@ -472,6 +481,7 @@
 		A97648391A64C1C000182E56 = {
 			isa = PBXGroup;
 			children = (
+				5BD22F021B5CA92F0075784E /* WebKit.framework */,
 				A9ECC8741ABFE66A007A3C40 /* libsqlite3.dylib */,
 				A9ECC8701ABFE5E8007A3C40 /* libz.1.2.5.dylib */,
 				A9ECC86E1ABFE5C9007A3C40 /* libstdc++.dylib */,
@@ -796,6 +806,7 @@
 			files = (
 				A968F2F61ABFF16D005C2F7D /* PLMImageCache.swift in Sources */,
 				A97A258B1A8E01260008CB92 /* InsertQASK.swift in Sources */,
+				5BD22F011B5C9C3E0075784E /* SwiftlyHybrid.swift in Sources */,
 				A97A25891A8E01260008CB92 /* GetUserID.swift in Sources */,
 				A9EF58B61ACE6D3600BB9A0B /* String+exten.swift in Sources */,
 				A968F3031ABFF1AF005C2F7D /* ypDetailController.swift in Sources */,
@@ -864,6 +875,7 @@
 				A97A257E1A8E01260008CB92 /* AddMember.swift in Sources */,
 				A9EF58B21ACE6D0D00BB9A0B /* WenWenViewController.swift in Sources */,
 				A968F2EA1ABFF11D005C2F7D /* musicPlayItem.swift in Sources */,
+				5BD22F051B5D08B40075784E /* QaskCallbackDataDelegate.swift in Sources */,
 				A97A258F1A8E01260008CB92 /* ReadInfo.swift in Sources */,
 				A968F2E51ABFF11D005C2F7D /* CollectionAndHistoryCell.swift in Sources */,
 				A9F25E841ACD135C006C88E4 /* WoDeHuDongController.swift in Sources */,
