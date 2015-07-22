@@ -98,10 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
         //添加新浪微博应用
        ShareSDK.connectSinaWeiboWithAppKey("731264100", appSecret: "42600f8a8e709edc4eb0f4a71b11dd3e", redirectUri: "http://www.zdomo.com")
+       
+
         
         //添加腾讯微博应用
-       ShareSDK.connectTencentWeiboWithAppKey("1150080326",appSecret:"da0efeea8fa6fcc79d8532259cd6d0c",redirectUri:"http://m.zdomo.com")
-
+      //  ShareSDK.connectTencentWeiboWithAppKey("1150080326",appSecret:"da0efeea8fa6fcc79d8532259cd6d0c",redirectUri:"http://m.zdomo.com")
+        
+        
+        
         //连接短信分享
         ShareSDK.connectSMS()
         //连接邮件

@@ -108,7 +108,6 @@
 		A9ECC8501ABFE4D6007A3C40 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */; };
 		A9ECC8511ABFE4D6007A3C40 /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82D1ABFE4D6007A3C40 /* SinaWeiboConnection.framework */; };
 		A9ECC8521ABFE4D6007A3C40 /* SMSConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82E1ABFE4D6007A3C40 /* SMSConnection.framework */; };
-		A9ECC8531ABFE4D6007A3C40 /* TencentWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC82F1ABFE4D6007A3C40 /* TencentWeiboConnection.framework */; };
 		A9ECC8541ABFE4D6007A3C40 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC8301ABFE4D6007A3C40 /* WeChatConnection.framework */; };
 		A9ECC8551ABFE4D6007A3C40 /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9ECC8321ABFE4D6007A3C40 /* AGCommon.framework */; };
 		A9ECC8561ABFE4D6007A3C40 /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9ECC8331ABFE4D6007A3C40 /* ShareSDKLocalizable.strings */; };
@@ -264,7 +263,6 @@
 		A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
 		A9ECC82D1ABFE4D6007A3C40 /* SinaWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinaWeiboConnection.framework; sourceTree = "<group>"; };
 		A9ECC82E1ABFE4D6007A3C40 /* SMSConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMSConnection.framework; sourceTree = "<group>"; };
-		A9ECC82F1ABFE4D6007A3C40 /* TencentWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentWeiboConnection.framework; sourceTree = "<group>"; };
 		A9ECC8301ABFE4D6007A3C40 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
 		A9ECC8321ABFE4D6007A3C40 /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
 		A9ECC8341ABFE4D6007A3C40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShareSDKLocalizable.strings; sourceTree = "<group>"; };
@@ -338,7 +336,6 @@
 				A9ECC8581ABFE4D6007A3C40 /* ShareSDKCoreService.framework in Frameworks */,
 				A9ECC8521ABFE4D6007A3C40 /* SMSConnection.framework in Frameworks */,
 				A9ECC8511ABFE4D6007A3C40 /* SinaWeiboConnection.framework in Frameworks */,
-				A9ECC8531ABFE4D6007A3C40 /* TencentWeiboConnection.framework in Frameworks */,
 				A9ECC8501ABFE4D6007A3C40 /* QZoneConnection.framework in Frameworks */,
 				A9ECC8541ABFE4D6007A3C40 /* WeChatConnection.framework in Frameworks */,
 			);
@@ -591,7 +588,6 @@
 				A9ECC82C1ABFE4D6007A3C40 /* QZoneConnection.framework */,
 				A9ECC82D1ABFE4D6007A3C40 /* SinaWeiboConnection.framework */,
 				A9ECC82E1ABFE4D6007A3C40 /* SMSConnection.framework */,
-				A9ECC82F1ABFE4D6007A3C40 /* TencentWeiboConnection.framework */,
 				A9ECC8301ABFE4D6007A3C40 /* WeChatConnection.framework */,
 			);
 			path = Connection;

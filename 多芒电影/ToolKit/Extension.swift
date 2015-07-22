@@ -142,7 +142,28 @@ extension UIViewController{
     
     //构造分享内容
     func basicShareFunc(currentInfo:Model.BasicInfo){
-        var publishContent = ShareSDK.content(currentInfo.Title, defaultContent: currentInfo.Introduction, image:ShareSDK.imageWithUrl(currentInfo.PicURL), title: currentInfo.Title, url:"http://apk.zdomo.com/frontpage/?id=\(currentInfo.InfoID)", description: currentInfo.Content, mediaType: SSPublishContentMediaTypeNews)
+        
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let sandboxPath = paths[0] as! String
+
+        
+       // var sandboxPath = NSString //NSHomeDirectory()
+        var documentPath =  sandboxPath.stringByAppendingPathComponent("shareImg")
+        
+        //Get Image From URL
+        var  imageFromURL = getImageFromURL(currentInfo.PicURL)
+        
+        //Save Image to Directory
+        saveImage(imageFromURL, withFileName: "\(currentInfo.InfoID)", imageType: "jpg", directoryPath: documentPath)
+        
+         //Load Image From Directory
+        var imageFromWeb = loadImage("\(currentInfo.InfoID)", oftype: "jpg", directoryPath: documentPath)
+        
+       
+        
+        
+        var publishContent = ShareSDK.content(currentInfo.Title, defaultContent: currentInfo.Introduction, image:ShareSDK.imageWithPath(imageFromWeb), title: currentInfo.Title, url:"http://apk.zdomo.com/frontpage/?id=\(currentInfo.InfoID)", description: currentInfo.Content, mediaType: SSPublishContentMediaTypeNews)
         
         
         ShareSDK.showShareActionSheet(nil, shareList: nil, content: publishContent, statusBarTips: true, authOptions: nil, shareOptions: nil, result: { (shareType:ShareType, state:SSResponseState, info:ISSPlatformShareInfo!, error:ICMErrorInfo!, Bool) -> Void in
@@ -152,6 +173,30 @@ extension UIViewController{
                 NSLog("分享失败,错误码:%d,错误描述:%@",error.errorCode(),error.errorDescription())
             }})
     }
+    
+    
+    func getImageFromURL(fileURL:String)->UIImage{
+        var  data = NSData(contentsOfURL: NSURL(string: fileURL)!)
+        return UIImage(data: data!)!
+    }
+    
+    func saveImage(image:UIImage,withFileName:String,imageType:String,directoryPath:String) {
+        if imageType.lowercaseString == "png" {
+            UIImagePNGRepresentation(image).writeToFile(directoryPath.stringByAppendingFormat("\(withFileName).\(imageType)"), options: NSDataWritingOptions.AtomicWrite, error: nil)
+        } else  if imageType.lowercaseString == "jpg" {
+            UIImageJPEGRepresentation(image,1.0).writeToFile(directoryPath.stringByAppendingFormat("\(withFileName).\(imageType)"), options: NSDataWritingOptions.AtomicWrite, error: nil)
+        }else{
+            NSLog("文件后缀不认识")
+        }
+    }
+    
+    
+    func loadImage(fileName:String,oftype:String,directoryPath:String) -> String {
+        return "\(directoryPath)\(fileName).\(oftype)"
+    }
+  
+    
+  
     
     
     

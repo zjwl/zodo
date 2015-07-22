@@ -33,7 +33,7 @@
 			<string>weiboapi</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb731264100</string>
+				<string>wb-731264100</string>
 			</array>
 		</dict>
 		<dict>
@@ -43,7 +43,7 @@
 			<string>tencentopenapi</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent1150080326</string>
+				<string>wb-1150080326</string>
 			</array>
 		</dict>
 		<dict>

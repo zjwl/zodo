@@ -36,7 +36,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         
         var soapMessage = getMethodString(self.methodName)
-        println("soapMessage is:\(soapMessage)")
+        //println("soapMessage is:\(soapMessage)")
         var url = NSURL(string: urlString)
         
         var theRequest = NSMutableURLRequest(URL: url!)
@@ -137,7 +137,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     
     //all the same
     func parser(parser: NSXMLParser, foundCharacters string: String?) {
-        println("foundCharacters:\(string)")
+        //println("foundCharacters:\(string)")
         currentValue = string!
     }
     //to be override
