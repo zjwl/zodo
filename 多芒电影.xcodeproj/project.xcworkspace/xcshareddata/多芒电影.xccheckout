@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>FBB719D9-A738-41A0-9EEA-B68903F22F9A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>多芒电影</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>72A0C534D12E955DACD8D61A352019B239F50982</key>
 		<string>https://github.com/zjwl/zodo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>多芒电影.xcodeproj</string>
+	<string>多芒电影.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>72A0C534D12E955DACD8D61A352019B239F50982</key>
