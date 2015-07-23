@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
+class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate ,UIAlertViewDelegate{
     var qid:Int?
     var uid:Int?
     var sourceid:Int=0
@@ -27,8 +27,8 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
         contentTextField.layer.cornerRadius=5.0
         self.automaticallyAdjustsScrollViewInsets = false;
         
-        
     }
+    
     
     @IBAction func commitAsk(sender: AnyObject) {
         content=contentTextField.text
@@ -42,7 +42,14 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate {
         UIAlertView(title: "", message: "提交成功", delegate: self, cancelButtonTitle: "确定").show()
         isPostSuccess=true
         contentTextField.text=""
+        
+        
     }
+    
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         if isPostSuccess {
             delete?.setCallbackContent(content)
