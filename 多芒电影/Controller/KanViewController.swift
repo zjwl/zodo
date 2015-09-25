@@ -56,12 +56,12 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     func initConstraint(){
         self.view.frame=CGRectMake(0, 0, screenWidth, screenHeight)
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[scwv(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(48)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-113-[columnName(1)]", options: nil, metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[scwv(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-60-[scwv(48)]", options: [], metrics: ["screenWidth":screenWidth], views: ["scwv":self.scwv]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-113-[columnName(1)]", options: [], metrics: ["screenWidth":screenWidth], views: ["columnName":self.columnName]))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-99-[uiTableView]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-99-[uiTableView]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
     }
     
     func refreshData() {
@@ -239,7 +239,7 @@ class KanViewController: UIViewController ,UITableViewDelegate, UITableViewDataS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         var cell = uiTableView.cellForRowAtIndexPath(indexPath) as! UIControl.basicInfolistView
-        println(cell.infoID)
+        print(cell.infoID)
         currentInfo = basicList[indexPath.row]
         
         self.performSegueWithIdentifier("kanMovieSegue", sender: self)

@@ -39,8 +39,8 @@ class YuViewController: UIViewController,UITableViewDelegate, UITableViewDataSou
     func initConstraint(){
         self.view.frame=CGRectMake(0, 0, screenWidth, screenHeight)
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[uiTableView]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[uiTableView(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[uiTableView]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["uiTableView":self.uiTableView]))
     }
     
     func refreshData() {

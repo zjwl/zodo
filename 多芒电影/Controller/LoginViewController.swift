@@ -119,7 +119,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,DataDelegate {
                 self.reloadStateWithUserInfo(userinfo,whereFrom: "QQ")
                } else {
                 
-                println("\(error.errorCode()):\(error.description):\(error.errorDescription())")
+                print("\(error.errorCode()):\(error.description):\(error.errorDescription())")
             }
         }
     }

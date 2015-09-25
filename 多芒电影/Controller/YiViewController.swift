@@ -119,7 +119,7 @@ class YiViewController: UIViewController,UITableViewDelegate,UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         var cell = uiTableView.cellForRowAtIndexPath(indexPath) as! UIControl.basicInfolistView
-        println(cell.infoID)
+        print(cell.infoID)
         currentInfo = basicList[indexPath.row]
         
         self.performSegueWithIdentifier("yi2dy", sender: self)

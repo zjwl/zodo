@@ -28,7 +28,7 @@ extension UICollectionView{
 //    http://stackoverflow.com/questions/24021291/import-extension-file-in-swift
     
     func setToIndexPath (indexPath : NSIndexPath){
-        objc_setAssociatedObject(self, &kIndexPathPointer, indexPath, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &kIndexPathPointer, indexPath, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
     func toIndexPath () -> NSIndexPath {
@@ -126,7 +126,7 @@ extension UIViewController{
             userDefault.setValue(zanCollection!+String(id)+",", forKey: COLLECTION)
         }
         var tt = userDefault.stringForKey(COLLECTION)
-        println("Collection String:\(tt)")
+        print("Collection String:\(tt)")
     }
     
     //删除本地收藏信息
@@ -167,9 +167,9 @@ extension UIViewController{
         
         
         ShareSDK.showShareActionSheet(nil, shareList: nil, content: publishContent, statusBarTips: true, authOptions: nil, shareOptions: nil, result: { (shareType:ShareType, state:SSResponseState, info:ISSPlatformShareInfo!, error:ICMErrorInfo!, Bool) -> Void in
-            if state.value == SSResponseStateSuccess.value  {
+            if state.rawValue == SSResponseStateSuccess.rawValue  {
                 NSLog("分享成功");
-            } else if state.value == SSPublishContentStateFail.value {
+            } else if state.rawValue == SSPublishContentStateFail.rawValue {
                 NSLog("分享失败,错误码:%d,错误描述:%@",error.errorCode(),error.errorDescription())
             }})
     }
@@ -182,9 +182,15 @@ extension UIViewController{
     
     func saveImage(image:UIImage,withFileName:String,imageType:String,directoryPath:String) {
         if imageType.lowercaseString == "png" {
-            UIImagePNGRepresentation(image).writeToFile(directoryPath.stringByAppendingFormat("\(withFileName).\(imageType)"), options: NSDataWritingOptions.AtomicWrite, error: nil)
+            do {
+                try UIImagePNGRepresentation(image).writeToFile(directoryPath.stringByAppendingFormat("\(withFileName).\(imageType)"), options: NSDataWritingOptions.AtomicWrite)
+            } catch _ {
+            }
         } else  if imageType.lowercaseString == "jpg" {
-            UIImageJPEGRepresentation(image,1.0).writeToFile(directoryPath.stringByAppendingFormat("\(withFileName).\(imageType)"), options: NSDataWritingOptions.AtomicWrite, error: nil)
+            do {
+                try UIImageJPEGRepresentation(image,1.0).writeToFile(directoryPath.stringByAppendingFormat("\(withFileName).\(imageType)"), options: NSDataWritingOptions.AtomicWrite)
+            } catch _ {
+            }
         }else{
             NSLog("文件后缀不认识")
         }

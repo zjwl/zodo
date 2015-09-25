@@ -20,7 +20,7 @@ class WenWenViewController: UIViewController,DataDelegate,UITextViewDelegate ,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("qid:\(qid);uid:\(uid),sourceid:\(sourceid)")
+        print("qid:\(qid);uid:\(uid),sourceid:\(sourceid)")
         contentTextField.delegate=self
         contentTextField.layer.borderWidth=1
         contentTextField.layer.borderColor=UIColor.grayColor().CGColor

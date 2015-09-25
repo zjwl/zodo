@@ -136,7 +136,7 @@ extension Model{
             
         }
         
-        required init(coder aDecoder: NSCoder){
+        required init?(coder aDecoder: NSCoder){
             self.NickName = aDecoder.decodeObjectForKey("NickName") as! String
             self.MemberID = aDecoder.decodeObjectForKey("MemberID") as! String
             self.UserName = aDecoder.decodeObjectForKey("UserName") as! String

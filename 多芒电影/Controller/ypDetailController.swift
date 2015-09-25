@@ -124,16 +124,16 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     func initConstraint(){
         self.view.frame=CGRectMake(0, 0, screenWidth, 1500)
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[mainContrainer(==rootview)]-0-|", options: nil, metrics: nil, views: ["mainContrainer":mainContrainer,"rootview":self.view]))
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[bg(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["bg":bg]))
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[webView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["webView":webView]))
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[bg(120)]", options: nil, metrics: nil, views: ["bg":bg]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[mainContrainer(==rootview)]-0-|", options: [], metrics: nil, views: ["mainContrainer":mainContrainer,"rootview":self.view]))
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[bg(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["bg":bg]))
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[webView(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["webView":webView]))
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[bg(120)]", options: [], metrics: nil, views: ["bg":bg]))
         
         
         //动态约束
-        mainScrollConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mainContrainer(==rootview)]-0-|", options: nil, metrics: nil, views: ["mainContrainer":mainContrainer,"rootview":self.view])
+        mainScrollConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mainContrainer(==rootview)]-0-|", options: [], metrics: nil, views: ["mainContrainer":mainContrainer,"rootview":self.view])
         self.view.addConstraints(mainScrollConstraintH!)
-        webviewConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-120-[webView(1000)]-0-|", options: nil, metrics: nil, views: ["bg":bg,"webView":webView])
+        webviewConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-120-[webView(1000)]-0-|", options: [], metrics: nil, views: ["bg":bg,"webView":webView])
         mainContrainer.addConstraints(webviewConstraintH!)
         
         
@@ -155,7 +155,7 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
         
         
         var metrics:Dictionary = ["webViewH":webView.scrollView.contentSize.height];
-        webviewConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-120-[webView(webViewH)]-70-|", options: nil, metrics: metrics, views: ["webView":webView])
+        webviewConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-120-[webView(webViewH)]-70-|", options: [], metrics: metrics, views: ["webView":webView])
         mainContrainer.addConstraints(webviewConstraintH!)
         
         
@@ -188,12 +188,12 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     }
     
     func doLoginActions(action:UIAlertAction!){
-        println("lgoin")
+        print("lgoin")
         self.tabBarController!.selectedIndex=2
         
     }
     func doCancelAction(action:UIAlertAction!){
-        println("cancel")
+        print("cancel")
     }
     
     @IBAction func shareFunc(sender: AnyObject) {
@@ -204,7 +204,7 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
     }
     
     @IBAction func goodFunc(sender: AnyObject) {
-        println("good")
+        print("good")
         
         if isBasicInfoZaned(currentInfo.InfoID) {
             UIAlertView(title: "", message: "已赞", delegate: nil, cancelButtonTitle: "确定").show()
@@ -222,7 +222,7 @@ class ypDetailController: UIViewController,UIWebViewDelegate,DataDelegate {
             goodTimsLbl.text = String(currentInfo.GoodTimes+1)
            saveBasicZanInfoToLocal(currentInfo.InfoID)
         }else if index==1 {
-            println("collect result is:\(result)")
+            print("collect result is:\(result)")
             isCollecting = false
             collect_0.setImage(UIImage(named: "collection_white_1.png"), forState: UIControlState.Normal)
             saveBasicCollectionInfoToLocal(currentInfo.InfoID)

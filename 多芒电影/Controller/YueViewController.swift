@@ -49,7 +49,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     func refreshData() {
         activityIndicator.startAnimating()
-        println("refreshData里加载的数据，page:：\(currentPage)")
+        print("refreshData里加载的数据，page:：\(currentPage)")
         currentPage = 0
         if reachability.isReachable(){
             CommonAccess(delegate: self,flag:"").getLlatestUpdate(栏目id: 3, 特殊标签id: 0, 每页数量: 180, 当前页码: currentPage)
@@ -97,7 +97,7 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
         let flowLayout = UICollectionViewFlowLayout()
         let itemSize  = self.navigationController!.navigationBarHidden ?
             CGSizeMake(screenWidth, screenHeight) : CGSizeMake(screenWidth, screenHeight-navigationHeaderAndStatusbarHeight)
-        println("itemSize is:\(itemSize)")
+        print("itemSize is:\(itemSize)")
         flowLayout.itemSize = itemSize
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
@@ -107,14 +107,14 @@ class YueViewController:UICollectionViewController,CHTCollectionViewDelegateWate
     
     func viewWillAppearWithPageIndex(pageIndex : NSInteger) {
         var position : UICollectionViewScrollPosition =
-        .CenteredHorizontally & .CenteredVertically
+        UICollectionViewScrollPosition.CenteredHorizontally.intersect(.CenteredVertically)
         
         var url =  self.basicList[pageIndex].PicURL.stringByReplacingOccurrencesOfString(".jpg", withString: "_133.jpg", options: NSStringCompareOptions.CaseInsensitiveSearch)
         
         
         url = url.stringByReplacingOccurrencesOfString(".png", withString: "_133.png", options: NSStringCompareOptions.CaseInsensitiveSearch)
         var imgURL = NSURL(string: url)
-        println("2加载图地址：\(url)")
+        print("2加载图地址：\(url)")
         //var imgURL = NSURL(string: self.basicList[pageIndex].PicURL)
         
         

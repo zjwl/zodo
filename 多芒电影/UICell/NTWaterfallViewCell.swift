@@ -12,7 +12,7 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
     var imageName : String?
     var imageViewContent : UIImageView = UIImageView()
     var titleLbl:UILabel=UILabel()
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override init(frame: CGRect) {

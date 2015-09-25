@@ -65,7 +65,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
             if reachability.isReachable(){
               
 
-                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: 0)
+                CommonAccess(delegate: self, flag: "refresh").getHistory(客户id: Int(user.MemberID)!, 每页数量: pageSize, 当前页码: 0)
 
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("history_0"))
@@ -143,7 +143,7 @@ class HistoryViewController:UIViewController, UITableViewDelegate, UITableViewDa
                 currentPage = currentPage + 1
                 activityIndicator.startAnimating()
                 if reachability.isReachable(){
-                    CommonAccess(delegate: self, flag: "").getHistory(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: currentPage)
+                    CommonAccess(delegate: self, flag: "").getHistory(客户id: Int(user.MemberID)!, 每页数量: pageSize, 当前页码: currentPage)
                 }
 
             }

@@ -40,7 +40,7 @@ class TingViewController:  UIViewController, UICollectionViewDelegateFlowLayout,
         collectionView.collectionViewLayout = layout
         collectionView.addSubview(refreshControl)
         
-        println(collectionView?.frame.width)
+        print(collectionView?.frame.width)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(musicCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")

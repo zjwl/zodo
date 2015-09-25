@@ -35,11 +35,11 @@ class ViewController: UIViewController,DataDelegate {
         switch index
         {
         case 0:
-            println(0)
+            print(0)
         case 1:
-            println(1)
+            print(1)
         default :
-            println(2)
+            print(2)
         }
       //  helloWorld.text = result
     }
@@ -58,7 +58,7 @@ class ViewController: UIViewController,DataDelegate {
         for item:Qask in gameList.list{
             str += item.NickName + ","
         }
-       print(str)
+       print(str, terminator: "")
     }
 
 

@@ -35,7 +35,7 @@ class PLMImageCache {
         
         //find what is inside
         let directoriesURL = NSURL.fileURLWithPath(directoryPath, isDirectory: true)!
-        let enumerator : NSDirectoryEnumerator = NSFileManager.defaultManager().enumeratorAtURL(directoriesURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions()) { (url : NSURL!, error : NSError!) -> Bool in
+        let enumerator : NSDirectoryEnumerator = NSFileManager.defaultManager().enumeratorAtURL(directoriesURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions()) { (url : NSURL, error : NSError) -> Bool in
             return true
             }!
         
@@ -44,12 +44,15 @@ class PLMImageCache {
                 var anyError: NSError?
                 var isDirectory: AnyObject?
                 
-                if url.getResourceValue(&isDirectory, forKey: NSURLIsDirectoryKey, error: &anyError) {
+                do {
+                    try url.getResourceValue(&isDirectory, forKey: NSURLIsDirectoryKey)
                     let subPath = url.path?.stringByStandardizingPath.substringFromIndex(directoryPath.stringByStandardizingPath.endIndex)
                     
                     if subPath!.hasPrefix("/resized/") {
                         self.pathToContainerDictionary[url.lastPathComponent!] = directoryPath.stringByAppendingPathComponent(subPath!)
                     }
+                } catch var error as NSError {
+                    anyError = error
                 }
             }
         }
@@ -66,23 +69,23 @@ class PLMImageCache {
                 dispatch_async(dispatch_get_main_queue()) {
                     completionHandler(image: image)
                 }
-            } else if contains(["http", "https"], url.scheme!) {
+            } else if ["http", "https"].contains((url.scheme!)) {
                 //Local data, at least original but may imply a transformation
                // println("[IMAGECACHE] - Will download image")
                 //Download original image, resize it and store it
-                NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: url), queue: self.downloadImageQueue, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: url), queue: self.downloadImageQueue, completionHandler: { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
                     if data == nil {
                         return
                     }
                     if let responseFormatted = response as? NSHTTPURLResponse {
                         let errorCode: Int = responseFormatted.statusCode
                         if 0 == data.length {
-                            println("[IMAGECACHE] - Returned Image is nil")
+                            print("[IMAGECACHE] - Returned Image is nil")
                             dispatch_async(dispatch_get_main_queue()) {
                                 completionHandler(image: nil)
                             }
                         } else if errorCode == 404 {
-                            println("[IMAGECACHE] - Image not found aka 404")
+                            print("[IMAGECACHE] - Image not found aka 404")
                             dispatch_async(dispatch_get_main_queue()) {
                                 completionHandler(image: nil)
                             }
@@ -198,16 +201,19 @@ class PLMImageCache {
         cacheExists = NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDirectory)
         if cacheExists && !isDirectory {
             // It is not a directory. Remove it
-            if !NSFileManager.defaultManager().removeItemAtPath(path, error: nil) {
-                return result
-            } else {
+            do {
+                try NSFileManager.defaultManager().removeItemAtPath(path)
                 cacheExists = false
+            } catch _ {
+                return result
             }
         }
         // Now we can safely create the cache directory if needed.
         if !cacheExists {
-            if NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: nil) {
+            do {
+                try NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
                 result = true
+            } catch _ {
             }
         } else {
             result = true

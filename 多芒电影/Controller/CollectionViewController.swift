@@ -65,7 +65,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
             activityIndicator.startAnimating()
             
             if reachability.isReachable(){
-                CommonAccess(delegate: self, flag: "refresh").getCollection(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: 0)
+                CommonAccess(delegate: self, flag: "refresh").getCollection(客户id: Int(user.MemberID)!, 每页数量: pageSize, 当前页码: 0)
             }else{
                 CommonAccess(delegate: self,flag:"").setObjectByCache(value: readObjectFromUD("collection_0"))
             }
@@ -113,7 +113,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
        // var cell: CollectionAndHistoryCell = tableView.dequeueReusableCellWithIdentifier(collectionCellIdentifier) as CollectionAndHistoryCell
         
        // var cell = CollectionAndHistoryCell(frame: tableView.frame)
-        println("Colleciton basicList count:\(basicList.count)")
+        print("Colleciton basicList count:\(basicList.count)")
         let model: Model.Collection? = basicList[indexPath.row]
         
         cell!.title = model?.Title
@@ -182,7 +182,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
                 //var  basicList1 = UTIL.getCollection(客户id: user.MemberID.toInt()!, 每页数量: 10, 当前页码: currentPage)
                 activityIndicator.startAnimating()
                 if reachability.isReachable(){
-                    CommonAccess(delegate: self, flag: "").getCollection(客户id: user.MemberID.toInt()!, 每页数量: pageSize, 当前页码: currentPage)
+                    CommonAccess(delegate: self, flag: "").getCollection(客户id: Int(user.MemberID)!, 每页数量: pageSize, 当前页码: currentPage)
                 }
             }
         }
@@ -209,7 +209,7 @@ class CollectionViewController: UIViewController,UITableViewDelegate, UITableVie
     
     
     func invoke(index:Int,StringResult result:String){
-        println("item has deleted.\(result)")
+        print("item has deleted.\(result)")
         deleteBasicCollectionInfoToLocal(currentInfo.InfoID)
     }
     func invoke(type:String,object:NSObject){

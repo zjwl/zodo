@@ -56,7 +56,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
             
             replyBtn2!.backgroundColor = UIColor.grayColor()
             replyBtn2!.setTitle("查看全部回复", forState: UIControlState.Normal)
-            println("回复的y:\(replyBtn2!.frame.origin.y)")
+            print("回复的y:\(replyBtn2!.frame.origin.y)")
             holdView.addSubview(replyBtn2!)
         }
         holdView.backgroundColor=UIColor.whiteColor()
@@ -72,8 +72,8 @@ class xbShuoCell: UITableViewCell,DataDelegate{
         var contentSize:CGSize = content.textSizeWithFont(lblContent.font, constrainedToSize: CGSizeMake(screenWidth-20,  CGFloat(MAXFLOAT)))
         
         self.frame = CGRectMake(0, 0, screenWidth, contentSize.height+91) //整个Cell的高度
-        println("content is:\(content)")
-        println("xbshuo content height:\(contentSize.height)")
+        print("content is:\(content)")
+        print("xbshuo content height:\(contentSize.height)")
         lblTitile.frame = CGRectMake(80, 10, self.frame.width - 90, 40)
         lblTime.frame  = CGRectMake(80, 50, lblTitile.frame.width, 20)
         hrView.frame = CGRectMake(10, userIcon.frame.height + userIcon.frame.origin.y+10, self.frame.width - 20, 1)
@@ -101,7 +101,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
         
         lblTime.font=UIFont(name: "ArialUnicodeMS", size: 14)
         lblTime.textColor=UIColor.lightGrayColor()
-        println("当前nickname:\(model.NickName) 的 iconFace :\(model.iconFace)")
+        print("当前nickname:\(model.NickName) 的 iconFace :\(model.iconFace)")
         var imgURL = NSURL(string: model.iconFace)
         PLMImageCache.sharedInstance.imageForUrl(imgURL!, desiredImageSize: CGSizeMake(133, 133), contentMode: UIViewContentMode.Center) { (image) -> Void in
             //use image
@@ -151,7 +151,7 @@ class xbShuoCell: UITableViewCell,DataDelegate{
     }
     
     func goodAction() {
-        println("good de id is:\(m!.QASKID)")
+        print("good de id is:\(m!.QASKID)")
         var userDefault = NSUserDefaults.standardUserDefaults()
         var zanCollection:NSString? = userDefault.stringForKey("zanCollection")
         

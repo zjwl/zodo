@@ -41,7 +41,7 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
         uiTableView.scrollEnabled = false
         uiTableView.backgroundColor = UIColor.blueColor()
         descTitleLbl.text = currentInfo.Introduction
-        println("content is :\(currentInfo.Introduction)")
+        print("content is :\(currentInfo.Introduction)")
         var content:NSString = descTitleLbl.text!
         descHeight = content.textSizeWithFont(descTitleLbl.font, constrainedToSize: CGSizeMake(screenWidth-16,  CGFloat(MAXFLOAT))).height+30
         
@@ -89,16 +89,16 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
     }
     
     func initConstraint(){
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[mainContrainer(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["mainContrainer":mainContrainer,"rootview":self.view]))
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[bg(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["bg":headerView]))
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[descView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["descView":descView]))
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tableView(screenWidth)]-0-|", options: nil, metrics: ["screenWidth":screenWidth], views: ["tableView":uiTableView]))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[mainContrainer(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["mainContrainer":mainContrainer,"rootview":self.view]))
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[bg(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["bg":headerView]))
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[descView(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["descView":descView]))
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tableView(screenWidth)]-0-|", options: [], metrics: ["screenWidth":screenWidth], views: ["tableView":uiTableView]))
         
         var tableH = musicData.count*50
         
         //one time do all
-        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[bg(120)]-0-[descView(descHeight)]-0-[uiTableView(tableH)]-70-|", options: nil, metrics: ["descHeight":descHeight,"tableH":tableH], views: ["uiTableView":uiTableView,"descView":descView,"bg":headerView]))
-        mainScrollConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mainContrainer]-0-|", options: nil, metrics: nil, views: ["mainContrainer":mainContrainer])
+        mainContrainer.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[bg(120)]-0-[descView(descHeight)]-0-[uiTableView(tableH)]-70-|", options: [], metrics: ["descHeight":descHeight,"tableH":tableH], views: ["uiTableView":uiTableView,"descView":descView,"bg":headerView]))
+        mainScrollConstraintH=NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mainContrainer]-0-|", options: [], metrics: nil, views: ["mainContrainer":mainContrainer])
         
         
         
@@ -170,12 +170,12 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
     }
     
     func doLoginActions(action:UIAlertAction!){
-        println("lgoin")
+        print("lgoin")
         self.tabBarController!.selectedIndex=2
         
     }
     func doCancelAction(action:UIAlertAction!){
-        println("cancel")
+        print("cancel")
     }
     
     @IBAction func shareFunc(sender: AnyObject) {
@@ -186,7 +186,7 @@ class musicDetailController:  UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func goodFunc(sender: AnyObject) {
-        println("good")
+        print("good")
         
         if isBasicInfoZaned(currentInfo.InfoID) {
             UIAlertView(title: "", message: "已赞", delegate: nil, cancelButtonTitle: "确定").show()

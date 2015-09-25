@@ -27,7 +27,7 @@ class SaveFile: BaseAccess {
         
         var theRequest = NSMutableURLRequest(URL: url!)
         
-        var msgLength = String(count(soapMessage))
+        var msgLength = String(soapMessage.characters.count)
         theRequest.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         theRequest.addValue(msgLength, forHTTPHeaderField: "Content-Length")
         theRequest.HTTPMethod = "POST"

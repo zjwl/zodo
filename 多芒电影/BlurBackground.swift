@@ -16,11 +16,11 @@ class BlurBackground: UIView {
     
     
     // returns simple Blur cell of specified blur type
-    func setUpCell(#frame : CGRect,urStyle : UIBlurEffectStyle)
+    func setUpCell(frame frame : CGRect,urStyle : UIBlurEffectStyle)
     {
         if (self.blurView == nil)
         {
-            var blurView : UIVisualEffectView = blurEffectViewWithBlurSTyle(blurStyle)
+            let blurView : UIVisualEffectView = blurEffectViewWithBlurSTyle(blurStyle)
             self.BlurContentView = UIView(frame: CGRectMake(0,0,frame.width,frame.height))
             blurView.frame = self.BlurContentView!.bounds
             self.BlurContentView!.addSubview(blurView);
@@ -31,11 +31,11 @@ class BlurBackground: UIView {
     
     
     // returns blur cell of specified blur type with Vibrancyview for displaying label on top of blurView
-    func setUpCellWithVibrancy(#frame : CGRect,blurStyle : UIBlurEffectStyle)
+    func setUpCellWithVibrancy(frame frame : CGRect,blurStyle : UIBlurEffectStyle)
     {
         if (self.blurView == nil)
         {
-            var blurView : UIVisualEffectView = blurEffectViewWithBlurSTyle(blurStyle)
+            let blurView : UIVisualEffectView = blurEffectViewWithBlurSTyle(blurStyle)
             self.BlurContentView = UIView(frame: CGRectMake(0,0,frame.width,frame.height))
             blurView.frame = self.BlurContentView!.bounds
             self.BlurContentView!.addSubview(blurView);
@@ -45,7 +45,7 @@ class BlurBackground: UIView {
             let vibrancy = UIVibrancyEffect(forBlurEffect: blurView.effect as! UIBlurEffect)
             let vibrancyView = UIVisualEffectView(effect: vibrancy)
             vibrancyView.frame = blurView.bounds
-            vibrancyView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+            vibrancyView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             blurView.contentView.addSubview(vibrancyView)
             
             self.blurView = blurView;
@@ -57,7 +57,7 @@ class BlurBackground: UIView {
     {
         let blurEffect = UIBlurEffect(style:blurStyle)
         let blurView : UIVisualEffectView = UIVisualEffectView(effect: blurEffect)
-        blurView.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin
+        blurView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin]
         return blurView
     }
     

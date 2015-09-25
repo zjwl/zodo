@@ -15,7 +15,7 @@ let animationScale = screenWidth/gridWidth // screenWidth / the width of waterfa
 class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
     var presenting = false
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval{
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval{
         return animationDuration
     }
     

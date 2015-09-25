@@ -44,7 +44,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
             var baseURL:NSURL
             if webAddress.length() == 7 {
                 var filepath = NSBundle.mainBundle().pathForResource(webAddress, ofType: "html")
-                var htmlstring = NSString(contentsOfFile: filepath!, encoding: NSUTF8StringEncoding, error: nil)
+                var htmlstring = try? NSString(contentsOfFile: filepath!, encoding: NSUTF8StringEncoding)
                 var url = NSURL(fileURLWithPath: filepath!)
                 var request  = NSURLRequest(URL: url!)
                 var path = NSBundle.mainBundle().bundlePath
@@ -120,7 +120,7 @@ class LoadWebViewController: UIViewController,UIWebViewDelegate {
     
     
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         
         if firstLoadTime == 0{
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false

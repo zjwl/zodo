@@ -393,62 +393,62 @@ class CommonAccess: NSObject, NSURLConnectionDataDelegate {
     private func setValueByMethodName(value data:NSMutableData){
         switch methodName {
         case "getLlatestUpdate":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setBasicList(arrayData)
         case "getApiAD":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setADlist(arrayData)
         case "getBasicInfo":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var jsonData = json as! NSDictionary
             setBasicInfo(jsonData)
         case "getUpdateCount","getCollectionIDS":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             self.delegate.setCallbackObject(flag, object: json as! NSObject)
         case "getCollection":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setCollectionList(arrayData)
         case "getFilmAlbum":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setFilmAlbum(arrayData)
         case "getFilmAlbumDetail":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setFilmAlbumDetail(arrayData)
         case "getGameList":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setGameList(arrayData)
         case "getHistory":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setHistory(arrayData)
         case "getSpecilLabel":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setSpecilLabel(arrayData)
         case "getEveryoneSayList":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setEveryoneSayList(arrayData)
         case "getQASKList":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setQASKList(arrayData)
         case "getQASKInfo":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setQASKInfo(arrayData)
         case "getQASKParticipant":
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setQASKParticipant(arrayData)
         default:
-            var json:AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)!
+            var json:AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
             var arrayData = json as! NSArray
             setBasicList(arrayData)
         }

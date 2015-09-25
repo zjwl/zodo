@@ -60,9 +60,9 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
             
             
             ShareSDK.showShareActionSheet(nil, shareList: nil, content: publishContent, statusBarTips: true, authOptions: nil, shareOptions: nil, result: { (shareType:ShareType, state:SSResponseState, info:ISSPlatformShareInfo!, error:ICMErrorInfo!, Bool) -> Void in
-                if state.value == SSResponseStateSuccess.value  {
+                if state.rawValue == SSResponseStateSuccess.rawValue  {
                     NSLog("分享成功");
-                } else if state.value == SSPublishContentStateFail.value {
+                } else if state.rawValue == SSPublishContentStateFail.rawValue {
                     NSLog("分享失败,错误码:%d,错误描述:%@",error.errorCode(),error.errorDescription())
                 }})
             
@@ -74,7 +74,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
                 
                 var tempString = item as! String
                 if (tempString.has("basic") || tempString.has("collection") || tempString.has("history") || tempString.has("ad") || tempString.has("filmalbum") || tempString.has("game") || tempString.has("basic")) {
-                    println("item key has removed:\(item)")
+                    print("item key has removed:\(item)")
                     ud.removeObjectForKey(tempString)
                 }
             }
@@ -96,7 +96,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
             }
             
             var okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.Default) {
-                (action: UIAlertAction!) -> Void in
+                (action: UIAlertAction) -> Void in
                 var login = alertController.textFields?.first as! UITextField
                 API().exec(self, invokeIndex: 0, invokeType: "qList", methodName: "SendFeedBack", params:login.text).loadData()
             }
@@ -132,7 +132,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
             loadWebController.webAddress  = "mianzhe"
             self.navigationController?.pushViewController(loadWebController, animated: true)
         default:
-            println(indexPath.row)
+            print(indexPath.row)
             
             
         }
@@ -142,7 +142,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
 
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
-        println("buttonIndex is:\(buttonIndex)")
+        print("buttonIndex is:\(buttonIndex)")
         var config = NSUserDefaults.standardUserDefaults()
         
         switch buttonIndex {
@@ -156,7 +156,7 @@ class SettingCntainerTableViewController: UITableViewController,UIAlertViewDeleg
             config.setInteger(1, forKey: "fontSize")
         }
         var fontSize = config.integerForKey("fontSize")
-        println("font size value is:\(fontSize)")
+        print("font size value is:\(fontSize)")
     }
     func invoke(index:Int,StringResult result:String){
         

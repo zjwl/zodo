@@ -52,7 +52,7 @@ func buildSwiftly(theViewController:UIViewController,indexHTMLPath:String?, webF
 //                indexHTMLPath = foundIndexPath
 //            }
 //        }
-        println(indexHTMLPath!)
+        print(indexHTMLPath!)
         var theConfiguration = WKWebViewConfiguration()
         theConfiguration.userContentController.addScriptMessageHandler(messageHandler, name: "interOp")
         
@@ -79,7 +79,7 @@ internal func moveWebFiles(movableFileTypes:[String])->(String?, String?){
     let resourcesPath = NSBundle.mainBundle().resourcePath
     let tempPath = NSTemporaryDirectory()
     var anError:NSError?
-    let resourcesList = fileManager.contentsOfDirectoryAtPath(resourcesPath!, error: &anError) as! [String]
+    let resourcesList = (try! fileManager.contentsOfDirectoryAtPath(resourcesPath!)) as! [String]
     for resourceName in resourcesList{
         var isMovableType = false
         for fileType in movableFileTypes{
@@ -93,14 +93,22 @@ internal func moveWebFiles(movableFileTypes:[String])->(String?, String?){
             let destinationPath = tempPath.stringByAppendingPathComponent(resourceName)
             if fileManager.fileExistsAtPath(destinationPath){
                 var removeError:NSError?
-                fileManager.removeItemAtPath(destinationPath, error:&removeError)
+                do {
+                    try fileManager.removeItemAtPath(destinationPath)
+                } catch var error as NSError {
+                    removeError = error
+                }
                 if let errorDescription = removeError?.description{
                     return (nil,errorDescription)
                 }
             }
             let resourcePath = resourcesPath!.stringByAppendingPathComponent(resourceName)
             var copyError:NSError?
-            fileManager.copyItemAtPath(resourcePath, toPath: destinationPath, error: &copyError)
+            do {
+                try fileManager.copyItemAtPath(resourcePath, toPath: destinationPath)
+            } catch var error as NSError {
+                copyError = error
+            }
             if let errorDescription = copyError?.description{
                 return (nil, errorDescription)
             }
@@ -122,7 +130,7 @@ internal func moveDirectories(var searchForIndexHTML:Bool) -> (String?, String?)
 
     var anError:NSError?
     let fileManager = NSFileManager.defaultManager()
-    let resourcesList = fileManager.contentsOfDirectoryAtPath(bundlePath!, error: &anError) as! [String]
+    let resourcesList = (try! fileManager.contentsOfDirectoryAtPath(bundlePath!)) as! [String]
     for resourceName in resourcesList{
         var isDirectoryType:ObjCBool = false
         let resourcePath = bundlePath?.stringByAppendingPathComponent(resourceName)
@@ -134,20 +142,28 @@ internal func moveDirectories(var searchForIndexHTML:Bool) -> (String?, String?)
                                 let destinationPath = tempPath.stringByAppendingPathComponent(resourceName)
                                 if fileManager.fileExistsAtPath(destinationPath){
                                     var removeError:NSError?
-                                    fileManager.removeItemAtPath(destinationPath, error:&removeError)
+                                    do {
+                                        try fileManager.removeItemAtPath(destinationPath)
+                                    } catch var error as NSError {
+                                        removeError = error
+                                    }
                                     if let errorDescription = removeError?.description{
                                         return (nil,errorDescription)
                                     }
                                 }
                                 var copyError:NSError?
-                                fileManager.copyItemAtPath(resourcePath!, toPath: destinationPath, error: &copyError)
+                                do {
+                                    try fileManager.copyItemAtPath(resourcePath!, toPath: destinationPath)
+                                } catch var error as NSError {
+                                    copyError = error
+                                }
                                 if let errorDescription = copyError?.description{
                                     return (nil, errorDescription)
                                 }
                                 else if searchForIndexHTML{
                                     var resources = [[String]]()
                                     var contentsError:NSError?
-                                    let childResourcesList = fileManager.contentsOfDirectoryAtPath(destinationPath, error: &contentsError) as! [String]
+                                    let childResourcesList = (try! fileManager.contentsOfDirectoryAtPath(destinationPath)) as! [String]
                                     if contentsError != nil{
                                         continue
                                     }
@@ -182,7 +198,7 @@ internal func searchForIndexHTMLFile(var resources:[[String]], curIndex:Int, fil
         var isDirectoryType:ObjCBool = false
         fileManager.fileExistsAtPath(resourcePath, isDirectory: &isDirectoryType)
         if isDirectoryType{
-            let resourcesList = fileManager.contentsOfDirectoryAtPath(resourcePath, error: &anError) as! [String]
+            let resourcesList = (try! fileManager.contentsOfDirectoryAtPath(resourcePath)) as! [String]
             if anError != nil{
                 return (nil,anError)
             }

@@ -18,7 +18,7 @@ extension String{
     func split(s:String)->[String]{
         if s.isEmpty{
             var x=[String]()
-            for y in self{
+            for y in self.characters{
                 x.append(String(y))
             }
             return x
@@ -55,15 +55,15 @@ extension String{
     }
     //统计长度
     func length()->Int{
-        return count(self)
+        return self.characters.count
     }
     //统计长度(别名)
     func size()->Int{
-        return count(self)
+        return self.characters.count
     }
     
     //重复字符串
-    func repeat(times: Int) -> String{
+    func `repeat`(times: Int) -> String{
         var result = ""
         for i in 0...times {
             result += self
@@ -72,7 +72,7 @@ extension String{
     }
     //反转
     func reverse()-> String{
-        var s=self.split("").reverse()
+        var s=Array(self.split("").reverse())
         var x=""
         for y in s{
             x+=y

@@ -76,7 +76,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         var image:UIImage
         for item in info {
             if item.0 == UIImagePickerControllerOriginalImage {
@@ -143,7 +143,7 @@ class LoginThirdViewController: UIViewController,DataDelegate,UIImagePickerContr
             //println("LastVisitTime id is :\(user.LastVisitTime)")
              API().exec(self, invokeIndex:1, invokeType: "", methodName: "UpdateUserInfo", params: user.MemberID,user.NickName,user.UserName,user.Password,user.WhereFrom,user.Mail,user.Identity,user.HeadPhotoURL,user.IsUsed,user.IsActivation,user.registrationTime,user.LastVisitTime).loadData()
         default:
-            println("i am here")
+            print("i am here")
         }
         
        

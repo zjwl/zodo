@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //shareSDK key :e29f62efd4b
      
         //QQ空间
-       ShareSDK.connectQZoneWithAppKey("1150080326", appSecret:"da0efeea8fa6fcc79d8532259cd6d0c", qqApiInterfaceCls: QQApiInterface.classForCoder(), tencentOAuthCls: TencentOAuth.classForCoder())
+       ShareSDK.connectQZoneWithAppKey("1150080326", appSecret:"da0efeea8fa6fcc79d8532259cd6d0cf", qqApiInterfaceCls: QQApiInterface.classForCoder(), tencentOAuthCls: TencentOAuth.classForCoder())
         
         var app:ISSQZoneApp = ShareSDK.getClientWithType(ShareTypeQQSpace) as! ISSQZoneApp
         app.setIsAllowWebAuthorize(true)
@@ -169,13 +169,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return ShareSDK.handleOpenURL(url,wxDelegate:self)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return ShareSDK.handleOpenURL(url,sourceApplication:sourceApplication,annotation:annotation,wxDelegate:self)
     }
     
     
     
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
         if isFull    {
             return UIInterfaceOrientationMask.All.rawValue.hashValue
         } else {

@@ -41,7 +41,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
         
         var theRequest = NSMutableURLRequest(URL: url!)
         
-        var msgLength = String(count(soapMessage))
+        var msgLength = String(soapMessage.characters.count)
         
         theRequest.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         theRequest.addValue(msgLength, forHTTPHeaderField: "Content-Length")
@@ -130,7 +130,7 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     // NSXMLParserDelegate
     
     //not use for now
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]){
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]){
         //println("elementName:"+elementName)
     }
     
@@ -156,6 +156,6 @@ class BaseAccess : NSObject, NSURLConnectionDelegate, NSXMLParserDelegate{
     }
     //all the same
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
-        println(parseError.description)
+        print(parseError.description)
     }
 }

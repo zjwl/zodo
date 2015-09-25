@@ -406,7 +406,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         var now = NSDate()
-        var comps =  calendar?.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday, fromDate: now)
+        var comps =  calendar?.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday], fromDate: now)
         year = comps!.year
         week = comps!.weekday
         month = comps!.month
@@ -555,12 +555,12 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         var alertController = UIAlertController(title: "免责声明", message: "你将开始使用多芒电影的服务，继续使用表明您同意关于多芒电影功能的相关声明。", preferredStyle: UIAlertControllerStyle.Alert)
         
         var okAction = UIAlertAction(title: "同意", style: UIAlertActionStyle.Default) {
-            (action: UIAlertAction!) -> Void in
+            (action: UIAlertAction) -> Void in
             userDefaults.setBool(true, forKey: "mianzhe")
         }
         
         var seeAction = UIAlertAction(title: "查看声明", style: UIAlertActionStyle.Default) {
-            (action: UIAlertAction!) -> Void in
+            (action: UIAlertAction) -> Void in
             var loadWebController = LoadWebViewController()
             loadWebController.titleText = "免责声明"
             loadWebController.webAddress  = "mianzhe"

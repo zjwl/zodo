@@ -44,7 +44,7 @@ class daJiaShuoCellCode: UITableViewCell,DataDelegate {
     }
     
     func goodAction() {
-        println("good de id is:\(m!.QASKID)")
+        print("good de id is:\(m!.QASKID)")
         var userDefault = NSUserDefaults.standardUserDefaults()
         var zanCollection:NSString? = userDefault.stringForKey("zanCollection")
         

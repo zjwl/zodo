@@ -19,7 +19,7 @@ class QaskDetailController: UIViewController, WKScriptMessageHandler,QaskCallbac
         super.viewDidLoad()
         let (theWebView,errorOptional) = buildSwiftly(self,"http://apk.zdomo.com/ios/xbshuodetail.html?id=\(tempreplyQasid)&senderid=\(user.MemberID)" ,["js","css","html","png","jpg","gif"])
         if let errorDescription = errorOptional?.description{
-            println(errorDescription)
+            print(errorDescription)
         }
         else{
             appWebView = theWebView
@@ -61,13 +61,13 @@ class QaskDetailController: UIViewController, WKScriptMessageHandler,QaskCallbac
             //If there is an error calling the JavaScript, that error is passed as the second parameter.
             appWebView!.evaluateJavaScript("updateCount({id:\(tempreplyQasid)})"){(JSReturnValue:AnyObject?, error:NSError?) in
                 if let errorDescription = error?.description{
-                    println("returned value: \(errorDescription)")
+                    print("returned value: \(errorDescription)")
                 }
                 else if JSReturnValue != nil{
-                    println("returned value: \(JSReturnValue!)")
+                    print("returned value: \(JSReturnValue!)")
                 }
                 else{
-                    println("no return from JS")
+                    print("no return from JS")
                 }
             }
             
@@ -82,7 +82,7 @@ class QaskDetailController: UIViewController, WKScriptMessageHandler,QaskCallbac
     
     func setCallbackContent(content:String){
         //http://ww1.sinaimg.cn/crop.160.347.338.338.1024/86961b4ejw8esta6jwx79j20ia0wigm1.jpg
-        println("the return content is:\(content)")
+        print("the return content is:\(content)")
         var timeFormat = NSDateFormatter()
         timeFormat.dateFormat = "yyyy-MM-dd HH:mm"
         var nowtime = timeFormat.stringFromDate(NSDate())
@@ -90,13 +90,13 @@ class QaskDetailController: UIViewController, WKScriptMessageHandler,QaskCallbac
         
         appWebView!.evaluateJavaScript("updateItem({QASKID:\(tempreplyQasid),Content:'\(content)',iconFace:'\(user.HeadPhotoURL)',NickName:'\(user.NickName)',AddTmie:'\(nowtime)',AuditID:0})"){(JSReturnValue:AnyObject?, error:NSError?) in
             if let errorDescription = error?.description{
-                println("returned value: \(errorDescription)")
+                print("returned value: \(errorDescription)")
             }
             else if JSReturnValue != nil{
-                println("returned value: \(JSReturnValue!)")
+                print("returned value: \(JSReturnValue!)")
             }
             else{
-                println("no return from JS")
+                print("no return from JS")
             }
         }
     }
@@ -138,19 +138,19 @@ class QaskDetailController: UIViewController, WKScriptMessageHandler,QaskCallbac
         var dele = UIApplication.sharedApplication().delegate as! AppDelegate
         var user=dele.user
         if user != nil {
-            theSegue.uid = user!.MemberID.toInt()
+            theSegue.uid = Int(user!.MemberID)
         }
         theSegue.delete=self
         theSegue.qid = tempreplyQasid
         theSegue.sourceid=tempreplyQasid
     }
     func doLoginActions(action:UIAlertAction!){
-        println("lgoin")
+        print("lgoin")
         self.tabBarController!.selectedIndex=2
         
     }
     func doCancelAction(action:UIAlertAction!){
-        println("cancel")
+        print("cancel")
     }
 
 }

@@ -132,7 +132,7 @@ class HeJiFirstViewController: UIViewController, UITableViewDataSource, UITableV
             if reachability.isReachable() {
                 CommonAccess(delegate: self, flag: "").getFilmAlbum(每页数量: 10, 当前页码: currentPage++)
             }
-            println("加载的当前页是：\(currentPage)")
+            print("加载的当前页是：\(currentPage)")
         }
     }
     

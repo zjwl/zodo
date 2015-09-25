@@ -18,7 +18,7 @@ class NTTableViewCell : UITableViewCell{
         self.textLabel?.font = UIFont.systemFontOfSize(13)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -82,7 +82,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
     }
     
     func saveImage(){
-        println("image saved")
+        print("image saved")
         //UIImageWriteToSavedPhotosAlbum
         
         
@@ -104,7 +104,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
 
     
     func saveInfo(){
-        println("really save...")
+        print("really save...")
     }
     
     func configCell(){
@@ -131,7 +131,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell,UIScrollViewDelegate{
         }
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
